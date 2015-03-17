@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="16267154-442e-45a5-8ec2-ce5267f53aef" name="NormalUser" linkedPackageId="b92b8a7b-c4a1-43a3-b161-44a3e4bb18c1" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="9f31e421-9344-4d44-a3f7-d6f02d9bc6ce">
+      <profileInstance Id="de69a437-774f-4c74-bc53-b8293f78e473" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="f393fd9d-c2c5-4170-93e8-0ea88a445148">
+      <profileInstance Id="fe08fd9f-b22a-444b-9bd2-e9271666dfdf" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="3bab052e-ed05-4886-8d9b-c3a8db98f655" name="普通用户" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="05c94abf-b732-4326-af04-13f7c73cc5a9" />
+        <targetEnds>
+          <association Id="94f997fb-376d-477a-8570-d6f641b83430" isDerived="false" sourceEndRoleName="Normal User" targetEndRoleName="Login" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="09b8bb34-7062-4a52-84be-e0ea0963ff4e" LastKnownName="登陆" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ca40c382-4415-4d8b-96b6-d79c65e3f9a9" name="Normal User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="75afc662-7840-4223-9189-2805493d710f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2aa7c469-c82a-4153-9d2f-0e4fff71153f" name="Login" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7d1fd557-5aba-4dc7-b3fc-84ae57546c37" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="4a76b282-4089-4156-816e-baed7b41af44" />
+          </association>
+          <association Id="52c695ad-38ce-48ca-aeb0-741c27ef80c4" isDerived="false" sourceEndRoleName="Normal User" targetEndRoleName="Register" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="2c4c0e1e-ca99-4803-82a3-e6975a9f1043" LastKnownName="注册" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1e36bb69-bffa-4aae-bf3b-48865e9be734" name="Normal User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7f7eb7d2-4563-4804-9f99-5b65fe73adac" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="64196954-5506-42d4-9cc7-e035933d4083" name="Register" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="6964ed2b-8456-4e29-b9d5-59b3fd7c7aec" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="92832e80-bf64-4fc8-8ac6-d2655f6270e1" />
+          </association>
+          <association Id="f5362a9b-a928-4758-9859-88f25769d5b9" isDerived="false" sourceEndRoleName="普通用户" targetEndRoleName="管理账户" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="30aa61ef-c200-4da1-ae26-d99278baf50f" LastKnownName="捐款" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="74c88089-4d38-4afa-888b-6d9a52a85388" name="普通用户" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="fc5f395c-216d-4dc6-b7d7-3ee6c3d3424d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="34d2f0b6-867a-4759-8f00-1070b5c90fca" name="管理账户" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="9e41e7c1-f57c-4c79-8d36-9508a98aba1a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="48dc7167-10ff-4fda-814f-6caa0d96430f" />
+          </association>
+          <association Id="f538c87b-9cff-4b2b-a0b8-b5a6dd7052fe" isDerived="false" sourceEndRoleName="普通用户" targetEndRoleName="评价项目" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="2c207d9c-b87a-4cb1-8b21-ac2dc5c02a7a" LastKnownName="评价项目" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8194a7e4-1271-4c15-82e2-4a90a8a86891" name="普通用户" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="12f24961-7a72-4979-9c86-7cdccc1ab0f7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="146e56da-dca8-4029-ab3a-cfd9059df96b" name="评价项目" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="473a7b13-cabc-4f7a-bf0e-b6c5f35b9b48" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c86b0972-fbd7-4a88-8324-cca1fd02b2b3" />
+          </association>
+          <association Id="b2de8925-eb02-4183-bfd8-b45aa122e757" isDerived="false" sourceEndRoleName="普通用户" targetEndRoleName="账户管理" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="7b832b6f-3920-4903-8907-4a50e0776d9c" LastKnownName="账户管理" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="24569ed3-faf6-4cbe-b720-02b56015d175" name="普通用户" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="781bbaf1-dbae-46c4-94e8-3d041e32fc92" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7c60d43a-ebdd-4ab0-800c-016d1382dcf2" name="账户管理" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c7046f9e-e06a-4280-9b54-21832947cef7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="edc18520-7f87-47aa-8f74-9b89b0c605af" />
+          </association>
+          <association Id="f4c366ff-d711-412f-b7d2-4ac24af30126" isDerived="false" sourceEndRoleName="普通用户" targetEndRoleName="浏览项目" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="d7d0d337-c7f6-4f0a-83dd-0202b65830b1" LastKnownName="浏览项目" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="96f53c7a-7a55-470f-8c01-61d23e685cfb" name="普通用户" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="d0a39ff9-10e3-4379-9ba6-c8e56214e222" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e0a8cad7-fc1e-4f07-aa7f-396c9be0885b" name="浏览项目" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="1b3b9b4e-69f6-4e2d-9ba8-073a595ae312" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="a5066ef0-7432-4736-bc69-611d46efe1c4" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="09b8bb34-7062-4a52-84be-e0ea0963ff4e" name="登陆" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a924f670-f26a-40e2-be40-d2025953cce7" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="2c4c0e1e-ca99-4803-82a3-e6975a9f1043" name="注册" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="29b8e4fa-0f60-441b-ab80-7fac5122248a" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="30aa61ef-c200-4da1-ae26-d99278baf50f" name="捐款" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9938e709-23f3-4da6-89f0-010381e91b12" />
+        <additions>
+          <include Id="c263e96c-d279-4bd2-b3e1-6b35e15b0f9a">
+            <useCaseMoniker Id="8d4bb069-8425-4086-8adc-da819eecf1d9" LastKnownName="定向捐款" />
+            <elementDefinition Id="7cb46440-3581-4eba-815f-647b36da4b0f" />
+          </include>
+          <include Id="b9b00b96-92b1-44e1-83fc-69bd9eaa78f7">
+            <useCaseMoniker Id="404fb745-5cee-46b8-9ba3-0c2730b2d0ea" LastKnownName="非定向捐款" />
+            <elementDefinition Id="df02fbff-329a-494a-9120-6c0bd114073b" />
+          </include>
+        </additions>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="2c207d9c-b87a-4cb1-8b21-ac2dc5c02a7a" name="评价项目" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="91493de3-3285-4422-ad7b-41a83531215f" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="8d4bb069-8425-4086-8adc-da819eecf1d9" name="定向捐款" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="55c11a19-a108-4eea-8adc-8864ad553d32" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="404fb745-5cee-46b8-9ba3-0c2730b2d0ea" name="非定向捐款" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4cad02a2-e437-4cc5-9de7-ed9b35753280" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="7b832b6f-3920-4903-8907-4a50e0776d9c" name="账户管理" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="67ce1a7c-433a-45f0-94bf-4360a7b9af33" />
+        <additions>
+          <include Id="6e1430aa-8de1-4efb-a7af-5a35ebf1b668">
+            <useCaseMoniker Id="ce5cf969-7ae3-495a-b6d7-d77166e1848f" LastKnownName="专属基金管理" />
+            <elementDefinition Id="2210a9b9-86e4-4073-a6aa-dd2d1e06aba9" />
+          </include>
+          <include Id="d985b591-a5a0-44a8-b523-11cced2d1789">
+            <useCaseMoniker Id="4ef15dd8-d53f-46be-8b8f-e852d58f68bc" LastKnownName="子账户管理" />
+            <elementDefinition Id="4e9de283-bbd0-4f53-a278-3d8ab6755704" />
+          </include>
+        </additions>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="ce5cf969-7ae3-495a-b6d7-d77166e1848f" name="专属基金管理" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9b023be9-6e0e-4955-a30a-dc904a5b947b" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="4ef15dd8-d53f-46be-8b8f-e852d58f68bc" name="子账户管理" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b8e0d201-3d6f-4b0e-bdc2-0257df2cc484" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="7d17f436-443e-44f5-aecc-36d438920d09" name="合作伙伴" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="1e68291e-fe42-4b98-ace9-67f6ef9a4a5f" />
+        <targetEnds>
+          <association Id="6878136c-b3d1-40ba-a2e2-a75ff2ede1b2" isDerived="false" sourceEndRoleName="合作伙伴" targetEndRoleName="登陆" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="30143182-79cd-44f2-bdfa-01ea66e5eed3" LastKnownName="登陆" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c30b7345-7985-47e8-ad0b-324ee32370fd" name="合作伙伴" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c21d6835-b4be-4b96-8a3d-0e774917d397" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="708cee79-6e80-4448-b054-b936a011dcf4" name="登陆" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="52bcc553-75e3-490e-8ba6-b8e380732960" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="826c41f6-f26e-47aa-88e8-76849a087dc5" />
+          </association>
+          <association Id="9c8bb973-96fe-4c16-b571-a0a9a69046bd" isDerived="false" sourceEndRoleName="合作伙伴" targetEndRoleName="注册" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="fd8f54a9-a825-450a-b0c5-36ed180e5645" LastKnownName="注册" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5519e291-1a79-422e-b941-a316b33dea60" name="合作伙伴" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="005118e6-9393-4eff-96ad-16aa26543794" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a1f72721-ed5e-4d7f-99a6-e08c7e311a0c" name="注册" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="f9c085db-69aa-4dd8-ae77-0f06ec9c4adf" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="7bb42108-8bcc-4eb3-9272-8d5a9bc0b2ee" />
+          </association>
+          <association Id="fed80e20-a8a1-4a05-b633-76d4b0c94c64" isDerived="false" sourceEndRoleName="合作伙伴" targetEndRoleName="发布项目" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="dc8b3729-9547-40cc-88ec-20132523b701" LastKnownName="发布项目" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f5e4c7df-c766-474f-a3f9-c89a7becb3d2" name="合作伙伴" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="e8881d17-76b2-4a6c-bf63-7ae7bda743cd" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b66439d0-8182-4552-a13d-119bdf1ccf25" name="发布项目" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="eefde4b8-5e61-4a5c-a106-cf12c5f58e07" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="dcd4e736-a876-49ba-8bd3-d560b6e79087" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="30143182-79cd-44f2-bdfa-01ea66e5eed3" name="登陆" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0568a276-7627-4ac7-b27d-0887f092da4a" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="fd8f54a9-a825-450a-b0c5-36ed180e5645" name="注册" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a2f9a080-de82-4273-9cbb-629cedafe971" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="dc8b3729-9547-40cc-88ec-20132523b701" name="发布项目" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="1f6f2f31-bb84-459d-8a80-a8b436b31456" />
+        <additions>
+          <include Id="d2d42abf-9a96-4657-a003-2ffcc60655e7">
+            <useCaseMoniker Id="41ee5686-11c2-4c66-b198-224e5154b05b" LastKnownName="项目申请" />
+            <elementDefinition Id="f77a617b-6a81-44ab-8e2e-0e59e7cbc630" />
+          </include>
+          <include Id="140864ca-70a1-4088-bed2-94a0903034e6">
+            <useCaseMoniker Id="2a6b5eae-7ef3-4ebc-95fc-0c18b728ef44" LastKnownName="更新项目状态信息" />
+            <elementDefinition Id="1003d1cf-1be1-4903-bced-8002b438bc0f" />
+          </include>
+        </additions>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="41ee5686-11c2-4c66-b198-224e5154b05b" name="项目申请" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="394a5375-110c-42ad-a3b4-a2ac7e31985a" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="2a6b5eae-7ef3-4ebc-95fc-0c18b728ef44" name="更新项目状态信息" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b1e70d81-fd86-411d-982f-1685cd581d61" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="d7d0d337-c7f6-4f0a-83dd-0202b65830b1" name="浏览项目" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="86e76f5a-6de4-4d4f-bd88-3e0e561e060e" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="7fdbf919-830b-4559-a545-30460fd420f5" name="基金会管理员" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5d1429db-c708-4399-9617-b40a4534c3e2" />
+        <targetEnds>
+          <association Id="ae5919a3-727c-45cd-9bf6-71c5d7aa79e2" isDerived="false" sourceEndRoleName="基金会管理员" targetEndRoleName="审核合作伙伴注册信息" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="328cd0ab-15f7-4ea0-bf84-8fce7b960472" LastKnownName="审核合作伙伴注册信息" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ff7bf4bf-2eb4-443b-bc83-83be944bbcb7" name="基金会管理员" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="87c417ad-9ffe-4bac-bbda-ad6cbef27cf7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ae7fca59-2292-48cf-9f32-25cdcb3e2bf1" name="审核合作伙伴注册信息" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="628ba848-6c62-4424-b856-f5d7fd4e8025" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="114f7880-3a58-40f7-89aa-242421377fcd" />
+          </association>
+          <association Id="8987bb9a-d7ab-4a63-a84c-f563906929e7" isDerived="false" sourceEndRoleName="基金会管理员" targetEndRoleName="审核项目" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="1079e947-a5d1-4a22-ad54-8e5e33a508b2" LastKnownName="审核项目" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="668b2ca7-3458-4674-9ea7-9efe516470f9" name="基金会管理员" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="3706c915-50e5-47d2-b2ce-81808201de72" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="94dc74b5-bb53-4744-b167-e5d856262838" name="审核项目" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="54b6d839-ad3d-48e4-aa0e-86504e164579" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c4dab1f7-05f4-4aaa-b858-1208c4cb6f36" />
+          </association>
+          <association Id="53b1a0c9-d3a1-40d3-bf25-c2c8d65c3666" isDerived="false" sourceEndRoleName="基金会管理员" targetEndRoleName="发布项目" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="1737d417-746c-4b07-8086-b8a9c9b2de43" LastKnownName="发布项目" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d5bd7df2-8e9a-493c-858e-4e8a608ce1be" name="基金会管理员" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6ee06675-5078-47f9-b800-9a5afbc6f14c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a9d6f657-4e1a-454b-a34d-15cd48952cd0" name="发布项目" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="550817b1-b344-4594-907d-ca47a982bc62" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="9105a825-73ed-4386-8dbd-9651da1d450c" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="328cd0ab-15f7-4ea0-bf84-8fce7b960472" name="审核合作伙伴注册信息" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7e814ed6-9b27-47db-9965-607cd3677d1b" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="1079e947-a5d1-4a22-ad54-8e5e33a508b2" name="审核项目" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="dbfd27b5-f423-489a-a51a-fd6e0b1f754c" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="1737d417-746c-4b07-8086-b8a9c9b2de43" name="发布项目" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2155ceac-5bc5-471a-a2d4-76c934228eeb" />
+        <additions>
+          <include Id="5eccd428-5532-4cc5-9b39-e8f2d509145e">
+            <useCaseMoniker Id="bc2274d9-b6fd-4684-bf8a-7361f4ad9c28" LastKnownName="更新项目状态信息" />
+            <elementDefinition Id="ea5ff9c7-c246-4014-bd39-e4f8d66912e9" />
+          </include>
+          <include Id="bac6717b-e0f0-4114-9c3f-886137967bef">
+            <useCaseMoniker Id="69359857-e172-4e51-abc0-ff415851e50a" LastKnownName="项目申请" />
+            <elementDefinition Id="8a3af029-3499-48d3-8ffd-24307cb13c6d" />
+          </include>
+        </additions>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="bc2274d9-b6fd-4684-bf8a-7361f4ad9c28" name="更新项目状态信息" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="97f2c438-7032-45b1-af54-f0e6f910d116" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="69359857-e172-4e51-abc0-ff415851e50a" name="项目申请" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e3bb2f20-6f13-4f3a-b923-637a456d475f" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="13665681-5c44-47c6-926b-09c6f2002748" name="系统管理员" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="908d73cd-2c77-475f-8100-3524af0e51a9" />
+        <targetEnds>
+          <association Id="d0da84de-a70b-4fdb-a798-79868368b3c9" isDerived="false" sourceEndRoleName="系统管理员" targetEndRoleName="角色管理" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="9d4c246b-ad89-4739-ab4a-49e9ad946395" LastKnownName="角色管理" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6d097917-8bac-4f3b-8758-891c6bd3834a" name="系统管理员" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1b14ebf8-4894-494c-ae45-87f98a412c0e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8e8c5868-a483-49a1-af83-b47ba3828622" name="角色管理" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c0082c6b-61f0-41bd-89ed-a821b72d13b4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="21621fc1-6dd3-4f62-85ec-4a970675da52" />
+          </association>
+          <association Id="a6acd66d-abc1-4eeb-82c5-62d71364c3f5" isDerived="false" sourceEndRoleName="系统管理员" targetEndRoleName="权限管理" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="0335f564-cad5-416e-8e49-8abbcca2ce00" LastKnownName="权限管理" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6f3a70cf-279b-48f3-883d-0a9bfa442b82" name="系统管理员" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6698b914-630d-4cfc-b4ae-b56f954a009b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6b6e4f43-ac4e-4989-970c-1eb6b252e35a" name="权限管理" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="52d96cea-dc54-4fa5-96ba-d9ece162998f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="beeeec07-87f7-4ee3-821c-9f9a4e426e7a" />
+          </association>
+          <association Id="a9af4755-5d20-4d4f-9126-01d200645180" isDerived="false" sourceEndRoleName="系统管理员" targetEndRoleName="日志管理" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="5e01919c-fe1c-4994-8179-768555a289e1" LastKnownName="日志管理" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3a5660d8-b983-432c-9b5c-e12fccf54aa2" name="系统管理员" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="9ee5f9f3-ea8e-4eeb-9d71-b54c89f18090" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="95eadaa9-1231-4978-b435-4ec736a57e2c" name="日志管理" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="17675c0e-9c45-4219-906b-e6c452832f07" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="006d153d-32de-4519-aa1e-24db4567f46c" />
+          </association>
+          <association Id="7a306fac-300f-44d0-abfc-a1f4c6ea647e" isDerived="false" sourceEndRoleName="系统管理员" targetEndRoleName="系统配置" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="8d2b65dc-696b-4b0c-a2bf-dcd18804c398" LastKnownName="系统配置" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="de22fc43-0eb5-41ce-b930-2ecbdb7c7bb3" name="系统管理员" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6783b78a-4278-45fd-b5ff-110383cf3783" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3f87e946-70c8-4a24-bb0a-47793ead5e70" name="系统配置" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="0b12e20c-2ff1-4014-af05-4e943946a07a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="eb0cfca9-02d5-40da-8bce-1e0931575501" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="9d4c246b-ad89-4739-ab4a-49e9ad946395" name="角色管理" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d7f5cefc-21a3-4ec6-b63e-1dc748e43afc" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="0335f564-cad5-416e-8e49-8abbcca2ce00" name="权限管理" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9a677121-ad41-4526-8e95-021a3a4490ab" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="5e01919c-fe1c-4994-8179-768555a289e1" name="日志管理" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7d7f717d-7c61-43b2-8795-d87f8cb0262b" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="8d2b65dc-696b-4b0c-a2bf-dcd18804c398" name="系统配置" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="83e7e28e-98f7-4102-a976-623e3cb0a3ca" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="b92b8a7b-c4a1-43a3-b161-44a3e4bb18c1" name="Modeling">
+    <elementDefinition Id="334cae66-17a5-465e-bcf9-0443e3f0fd4c" />
+  </package>
+</useCaseModelRoot>
