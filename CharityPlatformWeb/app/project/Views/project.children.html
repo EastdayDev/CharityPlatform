@@ -1,0 +1,87 @@
+﻿<div class="row">
+    <div class="col-md-12" style="margin-top:0.5em;">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-hover" >
+                    <thead>
+                        <tr style="background-color: #8b427a;border-bottom: 5px #733c76 solid;">
+                            <th class="epCaption" style="width:23%;">项目名称</th>
+                            <th class="epCaption" style="width:7%">流水号</th>
+                            <th class="epCaption" style="width:8%">创建日期</th> 
+                            <th class="epCaption" style="width:12%">流转单编号</th>
+                            <th class="epCaption" style="width:8%">状态</th>
+                            <th class="epCaption" style="width:13%">创建人</th>
+                            <th class="epCaption" style="width:16%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="epRowItem" ng-bind="item.C_Title"></td>
+                            <td class="epRowItem" ng-bind="item.Id"></td>
+                            <td class="epRowItem" ng-bind="item.D_Create | date : 'yyyy-MM-dd'"></td> 
+                            <td class="epRowItem" ng-bind="item.C_FlowNumber | FlowNumber"></td>
+                            <td class="epRowItem" ng-class="item.I_State | FlowStyle" style="padding-left:35px;" title="{{item.I_State | FlowState}}"></td>
+                            <td class="epRowItem" style="font-size:1em;">{{item.uName}}<br /> {{item.dName}}</td>
+                            <td>
+                                <ep-list-option item="item"
+                                                edit-func="10900"
+                                                on-edit="navToEdit(item)"
+                                                on-del="navToDel(item)"
+                                                on-submit="navToSubmit(item)"
+                                                on-detail="navToDetail(item)"
+                                                on-upload="navToUpload(item)">
+                                </ep-list-option>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+        
+        <div class="row" style="margin-left: 0.2em; background-color: #515151;">
+            <div class="col-sm-2 col-md-2">
+                <div class="row" style="line-height:39px;">
+                    <div class="col-sm-12 col-md-12 detailProject">
+                        <a style="color:#fff;font-size:14px;font-family:微软雅黑;">项目管理</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12" ng-class="{detailOff:DetailSelected!=3,detailOn:DetailSelected==3}">
+                        <a ui-sref="projectChildren.contractList({projectId: projectId, category:3})" style="cursor:pointer;color:#fff;font-size:14px;font-family:微软雅黑;">合 同</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12" ng-class="{detailOff:DetailSelected!=2,detailOn:DetailSelected==2}">
+                        <a ui-sref="projectChildren.budgetList({projectId: projectId, category:2})" style="cursor:pointer;color:#fff;font-size:14px;font-family:微软雅黑;">预 算</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12" ng-class="{detailOff:DetailSelected!=4,detailOn:DetailSelected==4}">
+                        <a ui-sref="projectChildren.expenseList({projectId: projectId, category:4})" style="cursor:pointer;color:#fff;font-size:14px;font-family:微软雅黑;">报 销</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12" ng-class="{detailOff:DetailSelected!=5,detailOn:DetailSelected==5}">
+                        <a ui-sref="projectChildren.receiptList({projectId: projectId, category:5})" style="cursor:pointer;color:#fff;font-size:14px;font-family:微软雅黑;">发 票</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12" ng-class="{detailOff:DetailSelected!=6,detailOn:DetailSelected==6}">
+                        <a ui-sref="projectChildren.workList({projectId: projectId, category:6})" style="cursor:pointer;color:#fff;font-size:14px;font-family:微软雅黑;">工 单</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10 col-md-10" style="margin-top:-15px;background-color:#fff">
+                <div class="row">
+                    <div ui-view class="col-sm-12 col-md-12"> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5 col-md-5 col-sm-offset-4 col-md-offset-4" ng-class="{hiddenExist: HiddenPage}">
+                        <ep-pager index="hold.page.index" total="hold.page.total" ng-show="hold.page.total > 1" ></ep-pager>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

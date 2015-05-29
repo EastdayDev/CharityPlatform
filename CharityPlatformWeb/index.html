@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:ng="http://angularjs.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title ng-bind="title">东方网项目管理系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="东方网项目管理系统">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link href="/frameworks/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/frameworks/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="/frameworks/idcode/jquery.idcode.css" rel="stylesheet" />
+    <link href="/frameworks/datepicker/css/datepicker3.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="/frameworks/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/frameworks/angular/angular.js"></script>
+    <script type="text/javascript" src="/frameworks/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="/frameworks/angular-cookies/angular-cookies.js"></script>
+    <script type="text/javascript" src="/frameworks/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="/frameworks/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="/frameworks/angular-bootstrap/ui-bootstrap.js"></script>
+
+    <script type="text/javascript" src="/frameworks/datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/frameworks/datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="frameworks/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="/frameworks/idcode/jquery.idcode.js"></script>
+    <script type="text/javascript" src="/frameworks/lodop/LodopFuncs.js"></script>
+    <script type="text/javascript" src="/frameworks/check-list/checklist-model.js"></script>
+    <script type="text/javascript" src="/app/module.js"></script>
+    <script type="text/javascript" src="/app/helper.js"></script>
+
+    <!--***********************       Common        ***************************************-->
+    <script type="text/javascript" src="/common/prototype.func.js"></script>
+    <script type="text/javascript" src="/common/common.service.js"></script>
+    <script type="text/javascript" src="/common/cookie.service.js"></script>
+
+
+    <!--***********************       Components    ***************************************-->
+    <script type="text/javascript" src="/components/js/component.datepicker.js"></script>
+    <script type="text/javascript" src="/components/js/component.mainMenu.js"></script>
+    <script type="text/javascript" src="/components/js/component.floatMenu.js"></script>
+    <script type="text/javascript" src="/components/js/component.feedBackList.js"></script>
+    <script type="text/javascript" src="/components/js/component.pager.js"></script>
+    <script type="text/javascript" src="/components/js/component.listOption.js"></script>
+    <script type="text/javascript" src="/components/js/component.fileList.js"></script>
+    <script type="text/javascript" src="/components/js/component.modal.js"></script>
+    <script type="text/javascript" src="/components/js/component.dept.person.js"></script>
+
+    <!--***********************       Auth       ***************************************-->
+    <script type="text/javascript" src="/app/authority/auth.services.js"></script>
+
+    <!--***********************       Audit      ***************************************-->
+    <script type="text/javascript" src="/app/audit/services/audit.access.service.js"></script>
+    <script type="text/javascript" src="/app/audit/services/audit.internal.budget.service.js"></script>
+    <script type="text/javascript" src="/app/audit/filters/audit.filters.js"></script>
+    <script type="text/javascript" src="/app/audit/directives/js/audit.directives.js"></script>
+    <script type="text/javascript" src="/app/audit/controllers/audit.submit.controller.js"></script>
+    <script type="text/javascript" src="/app/audit/controllers/audit.list.controller.js"></script>
+    <script type="text/javascript" src="/app/audit/controllers/audit.over.controller.js"></script>
+    <script type="text/javascript" src="/app/audit/controllers/audit.start.controller.js"></script>
+    <script type="text/javascript" src="/app/audit/controllers/audit.internal.budget.controller.js"></script>
+    <script type="text/javascript" src="/app/audit/audit.routes.js"></script>
+
+    <!--***********************       Flow       ***************************************-->
+    <script type="text/javascript" src="/app/flow/services/flow.access.services.js"></script>
+    <script type="text/javascript" src="/app/flow/directives/js/flow.directives.js"></script>
+    <script type="text/javascript" src="/app/flow/filters/flow.filters.js"></script>
+
+    <!--***********************       User        ***************************************-->
+    <script type="text/javascript" src="/app/user/services/user.access.service.js"></script>
+    <script type="text/javascript" src="/app/user/controllers/user.login.controller.js"></script>
+    <script type="text/javascript" src="/app/user/controllers/user.passwd.controller.js"></script>
+    <script type="text/javascript" src="/app/user/controllers/user.list.controller.js"></script>
+    <script type="text/javascript" src="/app/user/controllers/user.edit.controller.js"></script>
+    <script type="text/javascript" src="/app/user/user.routes.js"></script>
+
+    <!--***********************       Customer        ***************************************-->
+    <script type="text/javascript" src="/app/customer/services/customer.access.service.js"></script>
+
+    <!--***********************       Project     ***************************************-->
+    <script type="text/javascript" src="/app/project/project.routes.js"></script>
+    <script type="text/javascript" src="/app/project/filters/project.filters.js"></script>
+    <script type="text/javascript" src="/app/project/directives/js/project.directives.js"></script>
+    <script type="text/javascript" src="/app/project/services/project.access.service.js"></script>
+    <script type="text/javascript" src="/app/project/services/project.hold.service.js"></script>
+    <script type="text/javascript" src="/app/project/controllers/project.list.controller.js"></script>
+    <script type="text/javascript" src="/app/project/controllers/project.edit.controller.js"></script>
+    <script type="text/javascript" src="/app/project/controllers/project.view.controller.js"></script>
+    <script type="text/javascript" src="/app/project/controllers/project.children.controller.js"></script>
+    <script type="text/javascript" src="/app/project/controllers/project.virtual.controller.js"></script>
+
+       <!--***********************      File        ***************************************-->
+    <script type="text/javascript" src="/app/file/services/file.access.services.js"></script>
+    <script type="text/javascript" src="/app/file/filters/file.filters.js"></script>
+    <script type="text/javascript" src="/app/file/directives/file.directives.js"></script>
+    <script type="text/javascript" src="/app/file/controllers/file.upload.controller.js"></script>
+    <script type="text/javascript" src="/app/file/file.routes.js"></script>
+
+    <!--***********************      Global        ***************************************-->
+    <script type="text/javascript" src="/app/global/services/global.access.service.js"></script>
+    <script type="text/javascript" src="/app/global/filters/global.filters.js"></script>
+    <script type="text/javascript" src="/app/global/global.routes.js"></script>
+    <script type="text/javascript" src="/app/global/controllers/global.list.controller.js"></script>
+
+    <script type="text/javascript" src="/app/app.js"></script>
+</head>
+<body ng-app="app">
+    <!--[if lt IE 9]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="container-fluid" style="width:95%;margin-top:0.5em;">
+        <div class="row" ng-show="hasLayout">
+            <div class="col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2" style="height:76px; background-image:url('/images/1.jpg');background-repeat:no-repeat;background-size:216px 76px;">
+                    </div>
+
+                    <div class="col-md-5 col-sm-5" style="background:url('/images/2.jpg') no-repeat 12px 7px;background-color:#434a54;height:76px; cursor:pointer;">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3" style="padding-left:5.2em;padding-top:2.3em;" ui-sref="changepwd">
+                                <a ui-sref="auditlist" ng-show="epHeader.auditCount>0">
+                                    <span class="badge" ng-click="epHeader.stopPropagation($event);" style="background-color: #D60606; font-size:1.2em;" ng-bind="epHeader.auditCount">
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-sm-3" style="color: #fff; font-family: 微软雅黑; font-size: 14px; padding-top: 2.3em; margin-left: -1.5em;">
+                                <a ui-sref="list" style="color:#fff" ng-bind="epHeader.epUser.user.C_Name"></a>
+                            </div>
+                            <div class="col-md-6 col-sm-6" style="padding-top:1.5em;">
+                                <!--<div class="input-group">
+                                    <input type="text" class="form-control" ng-model="filterValue" id="filterValue" ng-keydown="keydown($event,filterValue)" placeholder="全局搜索 条码扫描">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ui-sref="globalSearch({filterValue:filterValue})">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>-->
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{epHeader.globalPicker.Name}}<span class="caret"></span></button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li ng-repeat="item in epHeader.globalItems"><a ng-click="epHeader.globalPicker=item" ng-bind="item.Name"></a></li>
+                                            <!--<li class="divider"></li>-->
+                                        </ul>
+                                    </div><!-- /btn-group -->
+                                    <input type="text" class="form-control" aria-label="..." placeholder="搜索 条码扫描" ng-keydown="epHeader.keydown($event)" ng-model="epHeader.filterValue">
+                                    <span class="input-group-btn">
+                                        <button class="btn" type="button" ng-click="epHeader.globalFilter();">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div><!-- /input-group -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <ep-main-menu message-count="msgCount"
+                                  on-show-expense="true"
+                                  on-show-receipt="true"
+                                  on-show-contract="true">
+
+                    </ep-main-menu>
+                </div>  <!-- end top row -->
+            </div>
+
+            <ep-float-menu on-audit="floatMenu.audit()"
+                           on-submit="floatMenu.submit()"
+                           on-edit="floatMenu.edit()"
+                           on-feed="floatMenu.feed()"
+                           can-audit="floatMenu.canAudit"
+                           can-edit="floatMenu.canEdit"
+                           can-submit="floatMenu.canSubmit"
+                           can-feed="floatMenu.canFeed">
+            </ep-float-menu>
+
+            <!--<div id="fullbg"></div>-->
+            <!--<div id="dialog">-->
+            <!--<img src="/images/loading.gif" />-->
+            <!--</div>-->
+        </div>
+        <div class="row">
+            <div class="col-md-12" ui-view>
+            </div>
+        </div>
+    </div>
+
+    <feed-back fb-items="Fbitems"
+               fb-index="FbIndex"
+               fb-all-page="Fballpage"
+               on-fb-previous="FbPrevious()"
+               on-fb-next="FbNext()">
+    </feed-back>
+
+</body>
+</html>

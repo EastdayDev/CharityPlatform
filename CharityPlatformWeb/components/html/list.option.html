@@ -1,0 +1,9 @@
+<div>
+    <a ng-click="onFire('onFireEdit', item)" ng-hide="disableEdit" ng-class="{'forbidden': !epAuth.CanEdit(item.I_Creater, item.FlowState, item.I_Category)}">修改</a>
+    <a ng-click="onFire('onFireRemove', item)" ng-hide="disableRemove" ng-class="{'forbidden': !epAuth.CanDel(item.I_Creater, item.FlowState)}">删除</a>
+    <a ng-click="onFire('onFireSubmit', item)" ng-hide="disableSubmit" ng-class="{'forbidden': !epAuth.CanSubmit(item.I_Creater,item.FlowState)}">提交</a>
+    <a ng-click="onFire('onFireDetail', item)">查看</a><br/>
+    <a ng-click="onFire('onFireUpload', item)" ng-hide="disableUpload">上传</a>
+    <a ng-click="showFeedBack(item)" ng-hide="disableFeedBack">意见</a>
+    <a ng-click="onFire('onFirePrint', item)" ng-hide="disablePrint" ng-class="{'forbidden':!(item.FlowState!=1 && item.FlowState!=3)}">打印</a>
+</div>

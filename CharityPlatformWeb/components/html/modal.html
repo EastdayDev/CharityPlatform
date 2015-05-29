@@ -1,0 +1,11 @@
+﻿<div> 
+    <div class="modal-header">
+        <h3 class="modal-title" ng-bind="title" style="font-family:'Microsoft YaHei';"></h3>
+    </div>
+    <div class="modal-body" ng-bind="epModal.msg" style="font-family:'Microsoft YaHei'; font-size:medium;"> 
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">确 定</button>
+        <button class="btn btn-default" ng-click="cancel()" ng-hide="disabledCancel">取 消</button>
+    </div>
+</div>

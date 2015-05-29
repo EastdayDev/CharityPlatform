@@ -1,0 +1,142 @@
+﻿<div class="row" ng-form="project">
+    <div class="col-md-12" style="margin-top:1em;">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" role="form" ng-submit="Save(project);">
+                    <div class="blank10"></div>
+                    <div class="ck1">{{title}}</div>
+                    <div class="blank15"></div>
+                    <div class="form-group" style="margin-top:20px;" ng-show="IsNewProject">
+                        <label class="col-sm-3 control-label">建项部门</label>
+                        <div class="col-sm-3">
+                            <select ng-model="project.I_Creater" class="form-control" ng-change="ChangeFlowType(project.I_Creater)">
+                                <option ng-repeat="item in depts" value="{{item.Uid}}">{{item.DepName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top:20px;" ng-show="Isflowshow">
+                        <label class="col-sm-3 control-label">项目流程</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="project.I_FlowType" ng-change="flowRemark(project.I_FlowType)" ng-options="item.C_Name group by item.C_ParentName for item in businessKinds|FilterParentId:0"></select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="remark.length>0">
+                        <label class="col-sm-3 control-label"></label>
+                        <div class="col-sm-7" style="color:red;font-size:14px;">
+                            {{remark}}
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top:20px;">
+                        <label class="col-sm-3 control-label">项目类型</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" name="projectType" ng-model="project.I_ProType">
+                                <option value="0">创收项目</option>
+                                <option value="1">成本项目</option>
+                                <option value="2">合作项目</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">客户</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="project.I_Custom" ng-options="item.C_Name for item in Customerlist" required></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <input maxlength="50" type="text" ng-model="customFilterValue" placeholder="搜索客户信息" class="form-control" ng-keyup="filterCustom()" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">项目名称</label>
+                        <div class="col-sm-6">
+                            <input name="projectName" maxlength="50" class="form-control" type="text" ng-model="project.C_Title" id="title" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">起始/结束日期</label>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <ep-date-range-picker start-date="project.D_Start" end-date="project.D_End"></ep-date-range-picker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">项目内容</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control text-area-edit" wrap="hard" maxlength="2000" placeholder="请详细准确描述项目" ng-model="project.T_Content"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">项目备注</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control text-area-edit" wrap="hard" maxlength="2000" ng-model="project.C_Remark"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="IsSonCompany">
+                        <label class="col-sm-3 control-label">项目属性</label>
+                        <div class="col-sm-9">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="1" ng-model="project.I_Support">内部支持
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="1" ng-model="project.I_OutSourcing">外包
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="1" ng-model="project.I_Introduction">领导介绍
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="1" ng-model="project.I_Effect">基于影响力而开展活动的创收
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="1" ng-model="project.I_Sales">特价销售
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="Cooperation">
+                        <label class="col-sm-3 control-label">收款类型</label>
+                        <div class="col-sm-9">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" checklist-value="1" checklist-model="HeringTypeItem.Items">现金
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" checklist-value="2" checklist-model="HeringTypeItem.Items">实物
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="Cooperation">
+                        <label class="col-sm-3 control-label">业务类型</label>
+                        <div class="col-sm-7" style="text-align:left;">
+                            <label class="checkbox-inline" ng-repeat="item in busunesslist" style="width:20em;" ng-class="{'audit-method-margin-left': $index===0}">
+                                <input type="checkbox" checklist-value=item.Id checklist-model="BusinessTypeItem.Items">{{item.C_Name}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="pay">
+                        <label class="col-sm-3 control-label">付款截止时间</label>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <ep-date-picker dt-value="project.D_Payment"></ep-date-picker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="pay">
+                        <label class="col-sm-3 control-label">付款依据</label>
+                        <div class="col-sm-3">
+                            <select name="projectType" class="form-control" ng-model="project.I_PaymentBasis">
+                                <option value="0">预算</option>
+                                <option value="1">公司批准</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">&nbsp;</label>
+                        <div class="col-sm-7" style="width:100px;">
+                            <button type="submit" tabindex="99" class="btn btn-primary">确 定</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

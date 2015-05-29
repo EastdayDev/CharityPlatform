@@ -1,0 +1,57 @@
+﻿<div class="row">
+    <div class="col-md-12" style="margin-top: 0.5em;">
+        <div class="row">
+            <div class="col-md-7">
+                <label style="color: #733c76; margin-top: 0.2em; font-size: 1.5em;" ng-bind="title"></label>
+            </div>
+            <!--<div class="col-md-5" style="padding-bottom:0.5em;">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="query" ng-keydown="filterList($event)" placeholder="名称、流水号、部门、创建人">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="Search()">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>-->
+        </div>
+        <div class="row" style="margin-top:-2em;">
+            <div class="col-sm-12">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr style="background-color: #515151; border-bottom: 5px #515151 solid; ">
+                            <th class="epCaption" style="width:25%;">名称</th>
+                            <th class="epCaption" style="width:15%">所属项目</th>
+                            <th class="epCaption" style="width:10%">类型</th>
+                            <th class="epCaption" style="width:6%">流水号</th>
+                            <th class="epCaption" style="width:4%">状态</th>
+                            <th class="epCaption" style="width:10%">创建人/部门</th>
+                            <th class="epCaption" style="width:8%">新建日期</th>
+                            <th class="epCaption" style="width:5%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="el in list">
+                            <td height="50" align="left" class="bo_r grey12 lh50 sh1" ng-bind="el.C_Title"></td>
+                            <td height="50" align="left" class="bo_r grey12 lh50 sh2"><a class="red12a" style="cursor:pointer" ui-sref="projectDetail({id:el.I_Project})" ng-bind="el.ProjectName"></a></td>
+                            <td height="50" align="center" class="bo_r grey12 lh50 sh3"><ep-category category-id="el.I_Category"></ep-category></td>
+                            <td height="50" align="center" class="bo_r grey12 lh50 sh3" ng-bind="el.Id"></td>
+                            <td class="epRowItem" style="padding-left:35px;" ng-class="el.I_State | FlowStyle" title="{{el.I_State | FlowState}}"></td>
+                            <td class="epRowItem"><ep-dept-person dept="{{el.dName}}" person="{{el.uName}}"></ep-dept-person></td>
+                            <td height="50" align="center" class="bo_r grey12 lh50 sh5" ng-bind="el.D_Create|date:'yyyy-mm-dd'"></td>
+                            <td height="50" align="center" class="sh6 grey12">
+                                <ep-list-option item="el" edit-func="13800" disable-audit="true" disable-remove="true" disable-submit="true" disable-upload="true" disable-feed-back="true" disable-print="true">
+                                </ep-list-option>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5 col-md-5 col-sm-offset-4 col-md-offset-4">
+                <ep-pager index="epAuditOver.page.index" total="epAuditOver.page.total" ng-show="epAuditOver.page.total > 1"></ep-pager>
+            </div>
+        </div>
+    </div>
+</div>

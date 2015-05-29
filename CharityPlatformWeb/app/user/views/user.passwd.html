@@ -1,0 +1,36 @@
+﻿﻿<div class="row">    
+        
+     <div class="col-sm-5 col-md-5 col-sm-offset-1 col-md-offset-1 form-box" style="margin-top:5em">
+         <form class="form-horizontal" role="form" ng-submit="ChangePwd();">
+             <div class="form-group">
+                 <label class="col-sm-2 control-label">用户名</label>
+                 <div class="col-sm-10">
+                     <p class="form-control-static" ng-bind="user.C_Name" style="font-size:15px"></p>
+                 </div>
+             </div>
+             <div class="form-group">
+                 <label class="col-sm-2 control-label">原密码</label>
+                 <div class="col-sm-8">
+                     <input type="password" class="form-control" placeholder="原密码" ng-model="user.C_OldPwd" required>
+                 </div>
+             </div>
+             <div class="form-group">
+                 <label class="col-sm-2 control-label">新密码</label>
+                 <div class="col-sm-8">
+                     <input type="password" class="form-control" placeholder="新密码 至少为8位" ng-model="user.C_NewPwd" required>
+                 </div>
+             </div>
+             <div class="form-group">
+                 <label class="col-sm-2 control-label">确认密码</label>
+                 <div class="col-sm-8">
+                     <input type="password" class="form-control" placeholder="确认密码 至少为8位" ng-model="user.C_ConfirmPwd" required>
+                 </div>
+             </div>
+             <div class="form-group">
+                 <div class="col-sm-offset-4 col-sm-10">
+                     <button class="btn btn-primary" type="submit">确 定</button>
+                 </div>
+             </div>
+         </form>
+     </div>
+</div>

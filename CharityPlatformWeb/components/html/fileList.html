@@ -1,0 +1,81 @@
+﻿<div class="row">
+    <div class="col-sm-12 col-md-12" style="margin-bottom:1em;">
+        <div class="row ck10">
+            <div class="col-sm-11 col-md-11 white18a">
+                {{category | Category}}文件
+            </div>
+            <div class="col-sm-1 col-md-1" style="text-align:right;">
+                <a style="line-height:25px;" ng-click="detailSwitch('#newPrjFile');">
+                    <img src="../../images/8.jpg">
+                </a>
+            </div>
+        </div>
+        <div id="newPrjFile" class="row" style="margin-left:-2.5em;margin-right:-2.5em;">
+            <div class="col-sm-12 col-md-12 white18a">
+                <table class="table">
+                    <tbody>
+                        <tr style="background-color:#5591c2">
+                            <td class="pad1 white14 fl" style="width: 25%">名称</td>
+                            <td class="white14 fl" style="width: 20%">文件所属</td>
+                            <td class="white14 fl" style="width: 15%">上传人</td>
+                            <td class="white14 fl" style="width: 15%">上传时间</td>
+                            <td class="white14 fl" style="width: 15%">附件说明</td>
+                            <td class="white14 fl" style="width: 15%"></td>
+                        </tr>
+                        <tr ng-repeat="file in items | FileFilter:1">
+                            <td class="ck10_1">{{file.C_Title}}</td>
+                            <td class="ck9_text">{{file.I_Category | Category}}：{{file.C_Owner}}</td>
+                            <td class="ck9_text">{{file.C_Creater}}</td>
+                            <td class="ck9_text">{{file.D_Upload | date : 'yyyy-MM-dd'}}</td>
+                            <td class="ck9_text">{{file.C_Remark}}</td>
+                            <td class="ck9_text" style="border-right:0;">
+                                <a style="cursor:pointer;" ng-click="delete(file.Id)" class="grey12">删除</a>
+                                <a target="_blank" href="/Files/DownFile.aspx?type={{file.I_Category}}&fullName={{file.C_FullName}}&originalName={{file.C_OriginalName}}" class="grey12">下载</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12" style="margin-bottom:1em;">
+        <div class="row sc8">
+            <div class="col-sm-11 col-md-11 white18a">
+                旧版文件
+            </div>
+            <div class="col-sm-1 col-md-1" style="text-align:right;">
+                <a style="line-height:25px;" ng-click="detailSwitch('#oldPrjFile');">
+                    <img src="../../images/8.jpg">
+                </a>
+            </div>
+        </div>
+        <div id="oldPrjFile" class="row" style="margin-left:-2.5em;margin-right:-2.5em;">
+            <div class="col-sm-12 col-md-12 white18a">
+                <table class="table">
+                    <tbody>
+                        <tr style="background-color:#b1b1b1">
+                            <td class="pad1 white14 fl" style="width: 25%">名称</td>
+                            <td class="white14 fl" style="width: 20%">文件所属</td>
+                            <td class="white14 fl" style="width: 15%">上传人</td>
+                            <td class="white14 fl" style="width: 15%">上传时间</td>
+                            <td class="white14 fl" style="width: 15%">附件说明</td>
+                            <td class="white14 fl" style="width: 15%"></td>
+                        </tr>
+                        <tr ng-repeat="file in items | FileFilter:0">
+                            <td class="ck10_1">{{file.C_Title}}</td>
+                            <td class="ck9_text">{{file.I_Category | Category}}：{{file.C_Owner}}</td>
+                            <td class="ck9_text">{{file.C_Creater}}</td>
+                            <td class="ck9_text">{{file.D_Upload | date : 'yyyy-MM-dd'}}</td>
+                            <td class="ck9_text">{{file.C_Remark}}</td>
+                            <td class="ck9_text" style="border-right:0;">
+                                <a target="_blank" href="/Files/DownFile.aspx?type={{file.I_Category}}&fullName={{file.C_FullName}}&originalName={{file.C_OriginalName}}" class="grey12">下载</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

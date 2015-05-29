@@ -1,0 +1,12 @@
+﻿<div class="input-group">
+    <input type="text" class="input-md form-control"
+           ng-click="open($event)"
+           datepicker-popup="yyyy-MM-dd"
+           datepicker-options="dateOptions" 
+           ng-model="dtValue"
+           is-open="opened"
+           current-text="今天" close-text="关闭" clear-text="清除" />
+    <span class="input-group-btn" ng-hide="hideLeftButton">
+        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+</div>

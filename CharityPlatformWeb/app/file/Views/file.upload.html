@@ -1,0 +1,136 @@
+﻿
+<iframe src="" width="0" height="0" id="myIframe" name="myIframe"></iframe>
+<div class="row" style="margin-top:0.5em;margin-left:2.5em;margin-right:-0.2em;">
+    <div class="col-sm-12 col-md-12" style="margin-top:1em;">
+        <div class="row">
+            <div class="ck1 col-sm-11 col-md-11">项目文件</div>
+        </div>
+        <div class="row" style="margin-top: 1em;">
+            <div class="col-sm-11 col-md-11">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 col-md-3 control-label">相关附件</label>
+                        <div class="col-sm-4 col-md-4" style="margin-top: 0.2em;">
+                            <file-uploader files="files" file-title="OwnerObject.FileTitle"></file-uploader>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <p style="font-size: 16px; font-weight: bold; margin-top:5px; color:#ff0000">建议文件大小控制在20M以内</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-md-3 control-label">名称</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input type="text" maxlength="50" ng-model="OwnerObject.FileTitle" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-md-3 control-label">文件所属</label>
+                        <div class="col-sm-4 col-md-4">
+                            <select class="form-control" ng-model="belong" ng-options="GetCategoryByFile(item.I_Category,item.C_Title) for item in array"></select>                            
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <p style="font-size: 16px; font-weight: bold; margin-top:5px; color:#ff0000">请选择该文件上传到哪里</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-md-3 control-label">附件说明</label>
+                        <div class="col-sm-5 col-md-5">
+                            <textarea class="form-control" rows="6" maxlength="2000" ng-model="OwnerObject.Remark" style='overflow-y: hidden; height: 32px' onpropertychange="this.style.height = this.scrollHeight + 'px';" oninput="this.style.height = this.scrollHeight + 'px';"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">&nbsp;</label>
+                        <div class="col-sm-7" style="width:100px;">
+                            <input type="button" ng-click="uploadfiles(files, OwnerObject)" class="btn btn-default sc3 pur fc lh24 white14" value="上 传" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-sm-11 col-md-11" style="margin-bottom:1em;">
+                <div class="row ck10">
+                    <div class="col-sm-11 col-md-11 white18a">
+                        新版文件
+                    </div>
+                    <div class="col-sm-1 col-md-1" style="text-align:right;">
+                        <a style="line-height:25px;" ng-click="detailSwitch('#newPrjFile');">
+                            <img src="../../images/8.jpg">
+                        </a>
+                    </div>
+                </div>
+                <div id="newPrjFile" class="row" style="margin-left:-2.5em;margin-right:-2.5em;">
+                    <div class="col-sm-12 col-md-12 white18a">
+                        <table class="table">
+                            <tbody>
+                                <tr style="background-color:#5591c2">
+                                    <td class="pad1 white14 fl" style="width: 25%">名称</td>
+                                    <td class="white14 fl" style="width: 20%">文件所属</td>
+                                    <td class="white14 fl" style="width: 15%">上传人</td>
+                                    <td class="white14 fl" style="width: 15%">上传时间</td>
+                                    <td class="white14 fl" style="width: 15%">附件说明</td>
+                                    <td class="white14 fl" style="width: 15%"></td>
+                                </tr>
+                                <tr ng-repeat="file in items | FileFilter:1">
+                                    <td class="ck10_1" ng-bind="file.C_Title"></td>
+                                    <td class="ck9_text">{{file.I_Category | Category}}：{{file.C_Owner}}</td>
+                                    <td class="ck9_text" ng-bind="file.C_Creater"></td>
+                                    <td class="ck9_text" ng-bind="file.D_Upload | date : 'yyyy-MM-dd'"></td>
+                                    <td class="ck9_text" ng-bind="file.C_Remark"></td>
+                                    <td class="ck9_text" style="border-right:0;">
+                                        <a style="cursor:pointer;" ng-click="delete(file.Id)" class="grey12">删除</a>
+                                        <a target="_blank" ng-click="Download(file.I_Category,file.C_FullName,file.C_OriginalName)" class="grey12">下载</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-11 col-md-11" style="margin-bottom:1em;">
+                <div class="row sc8">
+                    <div class="col-sm-11 col-md-11 white18a">
+                        旧版文件
+                    </div>
+                    <div class="col-sm-1 col-md-1" style="text-align:right;">
+                        <a style="line-height:25px;" ng-click="detailSwitch('#oldPrjFile');">
+                            <img src="../../images/8.jpg">
+                        </a>
+                    </div>
+                </div>
+                <div id="oldPrjFile" class="row" style="margin-left:-2.5em;margin-right:-2.5em;">
+                    <div class="col-sm-12 col-md-12 white18a">
+                        <table class="table">
+                            <tbody>
+                                <tr style="background-color:#b1b1b1">
+                                    <td class="pad1 white14 fl" style="width: 25%">名称</td>
+                                    <td class="white14 fl" style="width: 20%">文件所属</td>
+                                    <td class="white14 fl" style="width: 15%">上传人</td>
+                                    <td class="white14 fl" style="width: 15%">上传时间</td>
+                                    <td class="white14 fl" style="width: 15%">附件说明</td>
+                                    <td class="white14 fl" style="width: 15%"></td>
+                                </tr>
+                                <tr ng-repeat="file in items | FileFilter:0">
+                                    <td class="ck10_1" ng-bind="file.C_Title">{{file.C_Title}}</td>
+                                    <td class="ck9_text">{{file.I_Category | Category}}：{{file.C_Owner}}</td>
+                                    <td class="ck9_text" ng-bind="file.C_Creater"></td>
+                                    <td class="ck9_text" ng-bind="file.D_Upload | date : 'yyyy-MM-dd'"></td>
+                                    <td class="ck9_text" ng-bind="file.C_Remark"></td>
+                                    <td class="ck9_text" style="border-right:0;">
+                                        <a target="_blank" href="/Files/DownFile.aspx?type={{file.I_Category}}&fullName={{file.C_FullName}}&originalName={{file.C_OriginalName}}" class="grey12">下载</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

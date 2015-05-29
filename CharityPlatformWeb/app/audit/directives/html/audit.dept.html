@@ -1,0 +1,16 @@
+﻿<div>
+    <p class="tj3_1" style="text-align:center;color:#fff;font-size:14px;font-family:微软雅黑;">东方网组织结构</p>
+    <div class="tj3_2" style="margin-top:-0.9em;" ng-repeat="item in items | FilterParent:-1">
+        <p class=" black14 tj4" ng-bind="item.Name"></p>
+        <ul class="newlist1" style="list-style-type:none;">
+            <li ng-repeat="item2 in items | FilterParent:item.Id">
+                <div class="pur" ng-class="{tj5: !hasChildren(item2), tj6: hasChildren(item2)}" ng-click="changeSelected(item2)" ng-dblclick="moveRight(item2)" ng-bind="item2.Name"></div>
+                <ul class="newlist2" id="qs_1" ng-class="{showChild: selectedItem.Id== item2.Id, hideChild: selectedItem.Id != item2.Id}" style="list-style-type:none;">
+                    <li ng-repeat="item3 in items | FilterParent:item2.Id">
+                        <div class="tj5 black14 pur" ng-dblclick="moveRight(item3)" ng-bind="item3.Name"></div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div> 

@@ -1,0 +1,253 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12" style="background-color: #fff;">
+                <label style="color: #733c76;  font-size: 1.5em;">{{title}}</label>
+            </div>
+        </div>
+        <!-- 项目详情			 -->
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom:1em;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row ck2">
+                            <div class="col-md-11 white18a" ng-bind="item.C_Title">
+                            </div>
+                            <div class="col-sm-1 col-md-1" style="text-align:right;">
+                                <a style="line-height:25px;" ng-click="detailSwitch('#prjDetail');">
+                                    <img ng-src="/images/{{Img('prjDetail')}}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="prjDetail" class="row" style="margin-left:-2.5em;margin-right:-2.5em;margin-top:-2.8em;">
+                    <div class="col-md-12">
+                        <table class="table" style="table-layout: fixed">
+                            <tbody>
+                                <tr>
+                                    <td align="right" class="ck_name fl" style="width:20%;">项目流程</td>
+                                    <td align="left" class="ck_text fl" style="width:30%;">{{item.FlowPName}} {{item.FlowName}}</td>
+                                    <td align="right" class="ck_name fl" style="width:20%;">项目类型</td>
+                                    <td align="left" class="ck_text fl" style="width:30%;" ng-bind="item.I_ProType | ProjectType"></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="ck_name fl">创建人</td>
+                                    <td align="left" class="ck_text fl"><ep-dept-person dept="{{item.dName}}" person="{{item.uName}}"></ep-dept-person></td>
+                                    <td align="right" class="ck_name fl">流水号</td>
+                                    <td align="left" class="ck_text fl" ng-bind="item.Id"></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="ck_name fl">创建日期</td>
+                                    <td align="left" class="ck_text fl" ng-bind="item.D_Create| date : 'yyyy-MM-dd'"></td>
+                                    <td align="right" class="ck_name fl">定审日期</td>
+                                    <td align="left" class="ck_text fl" ng-bind="item.D_Confirm| date : 'yyyy-MM-dd'"></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="ck_name fl">起始日期</td>
+                                    <td align="left" class="ck_text fl" ng-bind="item.D_Start"></td>
+                                    <td align="right" class="ck_name fl">结束日期</td>
+                                    <td align="left" class="ck_text fl" ng-bind="item.D_End"></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="ck_name fl">客户</td>
+                                    <td align="left" class="ck_text fl" ng-bind="item.CustomName"></td>
+                                    <td align="right" class="ck_name fl">流转单编号</td>
+                                    <td align="left" class="ck_text fl" ng-bind="item.C_FlowNumber"></td>
+                                </tr>
+                                <tr ng-show="PropertyShow">
+                                    <td align="right" class="ck_name fl">项目属性</td>
+                                    <td align="left" class="ck_text fl" colspan="3">{{item.I_Support | I_SupportString}} {{item.I_OutSourcing |I_OutSourcingString}} {{item.I_Introduction|I_IntroductionString}} {{item.I_Effect|I_EffectString}} {{item.I_Sales|I_SalesString}}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="ck_name fl">业务类型</td>
+                                    <td align="left" class="ck_text fl" colspan="3" ng-bind="BusinessString"></td>
+                                </tr>
+                                <tr ng-show="Chuangshou">
+                                    <td align="right" class="ck_name fl">收款类型</td>
+                                    <td align="left" class="ck_text fl" colspan="3" ng-bind="item.I_GatheringTypeString"></td>
+                                </tr>
+                                <tr ng-show="Cost">
+                                    <td align="right" class="ck_name fl">付款截止时间</td>
+                                    <td align="left" class="ck_text fl" ng-bind="item.D_Payment"></td>
+                                    <td align="right" class="ck_name fl">付款依据</td>
+                                    <td align="left" class="ck_text fl" ng-bind="item.I_PaymentBasis"></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" valign="top" class="ck_name2 fl">项目内容</td>
+                                    <!--<td colspan="3" align="left" valign="top" class="ck_text fl" width="90%" ng-bind-html="to_trusted(item.T_Content)"></td>-->
+                                    <td colspan="3" align="left">
+                                        <textarea ng-bind="item.T_Content" readonly="readonly" class="text-area-view"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" valign="top" class="ck_name2 fl">项目备注</td>
+                                    <!--<td colspan="3" align="left" valign="top" class="ck_text fl" width="90%" ng-bind-html="to_trusted(item.C_Remark)"></td>-->
+                                    <td colspan="3" align="left">
+                                        <textarea ng-bind="item.C_Remark" readonly="readonly" class="text-area-view"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 预决算情况 -->
+        <div class="row">
+            <div class="col-sm-12 col-md-12" style="margin-bottom:1em;">
+                <div class="row ck2">
+                    <div class="col-sm-11 col-md-11 white18a">
+                        预决算情况
+                    </div>
+                    <div class="col-sm-1 col-md-1" style="text-align:right;">
+                        <a style="line-height:25px;" ng-click="detailSwitch('#prjBudget');">
+                            <img ng-src="/images/{{Img('prjBudget')}}">
+                        </a>
+                    </div>
+                </div>
+                <div id="prjBudget" class="row" style="margin-left:-2.5em;margin-right:-2.5em;">
+                    <div class="col-sm-12 col-md-12">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td align="right" class="ck4 fl">总收入预算</td>
+                                    <td align="left" class="ck5 fl">￥{{array1.shouru}}</td>
+                                    <td align="right" class="ck4 fl">总成本预算</td>
+                                    <td align="left" class="ck5 fl">￥{{array1.chengben}}</td>
+                                    <td align="right" class="ck4 fl">总日常预算</td>
+                                    <td align="left" class="ck5 fl">￥{{array1.richang}}</td>
+                                    <td align="right" class="ck4 fl">总内部成本</td>
+                                    <td align="left" class="ck5 fl">￥{{array1.neibu}}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="ck4 fl">审核中的收入</td>
+                                    <td align="left" class="ck5 fl">￥{{array2.shouru}}</td>
+                                    <td align="right" class="ck4 fl">审核中的成本</td>
+                                    <td align="left" class="ck5 fl">￥{{array2.chengben}}</td>
+                                    <td align="right" class="ck4 fl">审核中的预算</td>
+                                    <td align="left" class="ck5 fl">￥{{array2.richang}}</td>
+                                    <td align="right" class="ck4 fl">审核中的内部成本</td>
+                                    <td align="left" class="ck5 fl">￥{{array2.neibu}}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="ck4 fl">审核完的收入</td>
+                                    <td align="left" class="ck5 fl">￥{{array3.shouru}}</td>
+                                    <td align="right" class="ck4 fl">审核完的成本</td>
+                                    <td align="left" class="ck5 fl">￥{{array3.chengben}}</td>
+                                    <td align="right" class="ck4 fl">审核完的预算</td>
+                                    <td align="left" class="ck5 fl">￥{{array3.richang}}</td>
+                                    <td align="right" class="ck4 fl">审核完的内部成本</td>
+                                    <td align="left" class="ck5 fl">￥{{array3.neibu}}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="ck4 fl">实际总收人</td>
+                                    <td align="left" class="ck5 fl">￥{{ExpenseData.AccountMoney}}</td>
+                                    <td align="right" class="ck4 fl">实际总成本</td>
+                                    <td align="left" class="ck5 fl">￥{{ExpenseData.ChargeMoney}}</td>
+                                    <td align="right" class="ck4 fl">实际总预算</td>
+                                    <td align="left" class="ck5 fl">￥{{ExpenseData.ExpenseMoney}}</td>
+                                    <td align="right" class="ck4 fl">实际总内部成本</td>
+                                    <td align="left" class="ck5 fl">￥{{ExpenseData.WorkMoney}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 统计情况			 -->
+        <div class="row">
+            <div class="col-sm-12 col-md-12" style="margin-bottom:1em;">
+                <div class="row ck2">
+                    <div class="col-sm-11 col-md-11 white18a">
+                        统计情况
+                    </div>
+                    <div class="col-sm-1 col-md-1" style="text-align:right;">
+                        <a style="line-height:25px;" ng-click="detailSwitch('#prjSum');">
+                            <img ng-src="/images/{{Img('prjSum')}}">
+                        </a>
+                    </div>
+                </div>
+                <div id="prjSum" class="row" style="margin-left:-2.5em;margin-right:-2.5em;">
+                    <div class="col-sm-12 col-md-12">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td align="right" class="ck6 fl">预计盈利</td>
+                                    <td align="right" class="ck8 fl">￥{{shouru1}}</td>
+                                    <td align="left" class="ck7 fl" ng-class="{GetRedColor:shouruBai1< 40 && item.I_ProType === 0}">{{shouruBai1}}%</td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="ck6 fl">审核中的盈利</td>
+                                    <td align="right" class="ck8 fl">￥{{shouru2}}</td>
+                                    <td align="left" class="ck7 fl" ng-class="{GetRedColor:shouruBai2< 40 && item.I_ProType === 0}">{{shouruBai2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="ck6 fl">审核完的盈利</td>
+                                    <td align="right" class="ck8 fl">￥{{shouru3}}</td>
+                                    <td align="left" class="ck7 fl" ng-class="{GetRedColor:shouruBai3< 40 && item.I_ProType === 0}">{{shouruBai3}}%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 项目其他信息			 -->
+        <div class="row">
+            <div class="col-sm-12 col-md-12" style="margin-bottom:1em;">
+                <div class="row ck9">
+                    <div class="col-sm-11 col-md-11 white18a">
+                        项目其他信息
+                    </div>
+                    <div class="col-sm-1 col-md-1" style="text-align:right;">
+                        <a style="line-height:25px;" ng-click="detailSwitch('#prjOther');">
+                            <img ng-src="/images/{{Img('prjOther')}}">
+                        </a>
+                    </div>
+                </div>
+                <div id="prjOther" class="row" style="margin-left: -2.5em; margin-right: -2.5em; display: none;">
+                    <div class="col-sm-12 col-md-12">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr style="background-color: #55c2c2">
+                                    <td align="left" class="epCaption col-md-4" style="width:35%;">名称</td>
+                                    <td align="center" class="epCaption col-md-1" style="width:8%;">类型</td>
+                                    <td align="center" class="epCaption col-md-1" style="width:10%;">创建日期</td>
+                                    <td align="center" class="epCaption col-md-1" style="width:10%;">提交日期</td>
+                                    <td align="center" class="epCaption col-md-2" style="width:15%;">部门/提交人</td>
+                                    <td align="center" class="epCaption col-md-2" style="width:8%;">状态</td>
+                                    <td align="center" class="epCaption col-md-1" style="width:10%;">&nbsp;</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in array">
+                                    <td align="left" class="epRowItem" ng-bind="item.C_Title"></td>
+                                    <td align="center" class="epRowItem" ng-bind="item.I_Category|Category"></td>
+                                    <td align="center" class="epRowItem" ng-bind="item.D_Create"></td>
+                                    <td align="center" class="epRowItem" ng-bind="item.D_Submit"></td>
+                                    <td align="left" class="epRowItem">{{item.C_Creater}} <br />{{item.C_Department}}</td>
+                                    <td align="center" class="epRowItem" ng-class="item.FlowState | FlowStyle" title="{{item.FlowState | FlowState}}"></td>
+                                    <td align="center"><a style="cursor:pointer" ng-click="NavToView(item.I_Category, item.Id);" class="red12a">查看</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--留言反馈-->
+        <ep-feed-back-list owner="projectid"></ep-feed-back-list>
+
+        <!-- 项目文件			 -->
+        <ep-file-list owner="projectid" category="category"></ep-file-list>
+
+
+
+        <ep-flow-chart-data owner="projectid" category="category"></ep-flow-chart-data>
+    </div>
+</div>
+
+

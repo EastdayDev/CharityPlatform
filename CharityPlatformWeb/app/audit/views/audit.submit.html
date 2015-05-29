@@ -1,0 +1,60 @@
+﻿<div class="row" style="margin-top:1.5em;">
+    <div class="col-sm-12 col-md-12 audit-margin-left">
+        <div>
+            <div class="panel panel-primary">
+                <div class="panel-heading audit-pannel-heading">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <font style="font-weight:bold;font-size:large;text-align:left;">
+                                {{ baseData.I_Category | Category}}提交：
+                            </font>
+                            <font style="font-size:large;text-align:left;">
+                                {{ baseData.C_Title }}
+                            </font>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-11 col-md-11 col-sm-offset-1 col-md-offset-1">
+                            <ep-flow-chart flow-owner="id" owner-category="category" is-submit="true"></ep-flow-chart>
+                        </div>
+                    </div> <!-- 流程图 -->
+                    <div class="row" style="margin-top:1.5em;"> 
+                        <div class="col-md-1 col-md-offset-5">
+                            <a class="tj9_1 fl" ng-click="submit()">确 定</a>
+                        </div>
+                        <!--<div class="col-sm-1 col-md-1">
+                            <a class="tj9_2 fr" ng-click="reset()">重 置</a>
+                        </div>-->
+                    </div> <!-- row -->
+                </div>
+            </div>
+
+            <div class="panel panel-default" ng-show="depts && depts.length > 0">
+                <div class="panel-heading audit-pannel-heading">
+                    <div class="row">
+                        <div class="col-md-12">
+                            部门会签
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4 col-sm-offset-1 col-md-offset-1" style="padding-left:5.5em;">
+                            <ep-audit-dept items="depts"></ep-audit-dept>
+                        </div>  <!-- 左侧树 -->
+
+                        <div class="col-sm-3 col-md-3">
+                            <ep-audit-dept-pass depts="centerDepts" title="中心、职能部门及子公司"></ep-audit-dept-pass>
+
+                        </div>  <!-- 右侧树 -->
+
+                        <div class="col-sm-3 col-md-3" style="margin-left:1em;">
+                            <ep-audit-dept-pass depts="childDepts" title="中心/子公司下属"></ep-audit-dept-pass>
+                        </div>  <!-- 右侧树 -->
+                    </div>  <!-- 可选部门 -->
+                </div>
+            </div>
+        </div>
+    </div>

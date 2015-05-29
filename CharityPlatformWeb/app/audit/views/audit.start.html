@@ -1,0 +1,239 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="row" style="margin-top:0.5em;">
+            <div class="col-md-12 audit-margin-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading audit-pannel-heading">
+                        <div class="row">
+                            <div class="col-md-4">
+                                审核
+                            </div>
+                            <div class="col-md-8" style="text-align: right; font-size: 18px; font-weight: bold; color: #ff0000;">
+                                审核确定前请再次确认您的审核方式是否正确
+                                <!-- <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>-->
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6"> 
+                                <form class="form-horizontal">
+                                    <div class="form-group" style="text-align:left;">
+                                        <label class="col-sm-3 control-label">审核方式</label>
+                                        <div class="col-md-9">
+                                            <label class="radio-inline" style="width:auto;" ng-repeat="item in auditMethods" ng-class="{'audit-method-margin-left': $index===0}" ng-if="item.Visable">
+                                                <input type="radio" name="methodOptions" ng-click="markAuditMethod(item)" ng-checked="pickAuditMethod.Id===item.Id">{{item.Name}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">审核意见</label>
+                                        <div class="col-sm-7">
+                                            <textarea class="form-control" ng-model="auditDesc" rows="3" style="word-wrap: break-word;width:30em;" wrap="soft"></textarea>
+                                        </div>
+                                    </div>
+                                    <!--助理 *********************************************************************-->
+                                    <div class="form-group" ng-show="assistants.length>0">
+                                        <label class="col-sm-3 control-label"></label>
+                                        <div class="col-sm-7">
+                                            <label ng-repeat="item in assistants" style="width:5em;" class="checkbox-inline" ng-class="{'audit-method-margin-left': $index===0}">
+                                                <input type="checkbox" checklist-model="assistantChecks" checklist-value="item" />{{item.Name}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group pull-right" style="padding-right:5em;">
+                                        <button type="button" class="btn btn-primary" style="width:7em;margin-right:2em;" ng-disabled="!epAudit.checks || epAudit.checks.length === 0" ng-click="AuditFlows(false)">确 定</button>
+                                        <button type="button" class="btn btn-cancel" style="width: 7em; background-color: #bb5256;color:white;" ng-disabled="!epAudit.checks || epAudit.checks.length === 0" ng-click="AuditFlows(true);" ng-show="canAbort">通过并终止</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr style="background-color: #515151; border-bottom: 5px #515151 solid; ">
+                                <th class="epCaption" style="width:2%;"></th>
+                                <th class="epCaption" style="width:25%;">名称</th>
+                                <th class="epCaption" style="width:25%">所属项目</th>
+                                <th class="epCaption" style="width:10%">类型</th>
+                                <th class="epCaption" style="width:10%">流水号</th>
+                                <th class="epCaption" style="width:10%">创建人</th>
+                                <th class="epCaption" style="width:8%">新建日期</th>
+                                <th class="epCaption" style="width:10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in epAudit.items">
+                                <td height="50" align="center" class="bo_r grey12 lh50 sh1">
+                                    <input type="checkbox" checklist-model="epAudit.checks" checklist-value="item">
+                                </td>
+                                <td style="text-align:left" class="bo_r grey12 lh50 sh1" ng-bind="item.C_Title"></td>
+                                <td style="text-align:left" class="bo_r grey12 lh50 sh2"><a class="red12a" style="cursor:pointer" ui-sref="projectDetail({id:item.I_Project})" ng-bind="item.ProjectName"></a></td>
+                                <td align="center" class="bo_r lh50 sh3">
+                                    <ep-category category-id="item.I_Category"></ep-category>
+                                </td>
+                                <td align="center" class="bo_r lh50 sh3" ng-bind="item.Id"></td>
+                                <td style="text-align:left" class="bo_r grey12 lh50 sh4" >
+                                    <ep-dept-person dept="{{item.dName}}" person="{{item.uName}}"></ep-dept-person>
+                                </td>
+                                <td align="center" class="bo_r grey12 lh50 sh5" ng-bind="item.D_Create | date: 'yyyy-MM-dd'"></td>
+                                <td align="center" class="bo_r grey12 lh50 sh5">
+                                    <div class="lh50">
+                                        <a style="cursor:pointer" ng-click="NavView(item)" class="red12a">查看</a>
+                                        <a style="cursor:pointer" ng-click="feedback(item)" class="red12a">意见</a>
+                                        <a style="cursor:pointer" ng-click="NavEdit(item)" ng-class="{'forbidden':!CanEdit(item)}" class="red12a">修改</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <!-- 工单回复******************************************************************************* -->
+
+        <div class="row" ng-show="epAudit.canWorkReply">
+            <div class="col-md-12 audit-margin-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading audit-pannel-heading">
+                        <div class="row">
+                            <div class="col-md-4">
+                                工单回复
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group" style="margin-top:1em;">
+                                        <label class="col-md-3 control-label">内部成本决算</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" ng-model="epAudit.workReply.M_Account" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-top:20px;">
+                                        <label class="col-md-3 control-label">起止时间</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <ep-date-range-picker start-date="epAudit.workReply.D_Start" end-date="epAudit.workReply.D_End"></ep-date-range-picker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-top:20px;">
+                                        <label class="col-md-3 control-label">回复内容</label>
+                                        <div class="col-md-9">
+                                            <textarea class="form-control text-area-edit" wrap="hard" ng-model="epAudit.workReply.C_Reply"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-7">
+                                <table class="table table-striped table-hover" style="margin-top:1em;">
+                                    <thead>
+                                        <tr style="background-color: #515151; border-bottom: 5px #515151 solid; ">
+                                            <th class="epCaption" style="width:15%;">执行人</th>
+                                            <th class="epCaption" style="width:15%">开始</th>
+                                            <th class="epCaption" style="width:15%">结束</th>
+                                            <th class="epCaption" style="width:15%">金额</th>
+                                            <th class="epCaption" style="width:40%">回复内容</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in workReplies">
+                                            <td style="text-align:left" class="bo_r grey12 lh50 sh4" ng-bind="item.uName"></td>
+                                            <td align="center" class="bo_r grey12 lh50 sh5" ng-bind="item.D_Start | date: 'yyyy-MM-dd'"></td>
+                                            <td align="center" class="bo_r grey12 lh50 sh5" ng-bind="item.D_End | date: 'yyyy-MM-dd'"></td>
+                                            <td style="text-align:left" class="bo_r grey12 lh50 sh1" ng-bind="item.M_Account | currency"></td> 
+                                            <td align="center" class="bo_r lh50 sh3">
+                                                <div class="text-dot-dot" style="width:25em;" ng-bind="item.C_Reply" title="{{item.C_Reply}}"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 内部预算******************************************************************************* -->
+        <div class="row" ng-show="epAudit.checks.length === 1 && epAudit.checks[0].I_BudgetInternal === 5">
+            <div class="col-md-12 audit-margin-left">
+                <div class="panel panel-primary">
+                    <div class="panel-heading audit-pannel-heading" style=" font-size: 1.5em; color: #fff; background-color: #386081; ">
+                        <div class="row">
+                            <div class="col-md-10">
+                                内部预算
+                            </div>
+                            <div class="col-md-2">
+                                <a title="修改" class="pull-right" ng-click="showAuditInternalBudget()">
+                                    <span style="color:#fff">
+                                        <img src="../images/dh3.png" alt="修改" class="img-rounded">
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <tr class="yslb2">
+                            <td style="width:40%;text-align:left;" class="audit-budget-internal-list-title">类别</td>
+                            <td style="width:20%;text-align:left;" class="audit-budget-internal-list-title">刊例价</td>
+                            <td style="width:20%;text-align:left;" class="audit-budget-internal-list-title">内部结算</td>
+                            <td style="width:10%;" class="audit-budget-internal-list-title">数量</td>
+                            <td style="width:10%;" class="audit-budget-internal-list-title">金额</td>
+                        </tr>
+                        <tr ng-repeat="item in epAudit.budgetInternals">
+                            <td class="ck9_text">{{item.C_Title}}</td>
+                            <td class="ck9_text">{{item.F_Price}}{{item.C_Unit}}</td>
+                            <td class="ck9_text">{{item.F_In*10}}折</td>
+                            <td style="text-align:right" class="ck9_text">{{item.F_Amount}}</td>
+                            <td style="text-align:right" class="ck9_text" ng-bind="item.F_Amount * item.F_Price | currency:'￥'"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--传阅对象******************************************************************************** -->
+        <div class="row" ng-hide="!transfers || transfers.length === 0">
+            <div class="col-md-12 audit-margin-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading audit-pannel-heading">
+                        <div class="row">
+                            <div class="col-md-4">
+                                传阅
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-sm-4 col-md-4" style="padding-left:5.5em;">
+                            <ep-audit-dept items="transfers"></ep-audit-dept>
+                        </div>  <!-- 左侧树 -->
+
+                        <div class="col-sm-3 col-md-3">
+                            <ep-audit-dept-pass depts="transChecks" title="传阅对象"></ep-audit-dept-pass>
+                        </div>  <!-- 右侧树 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        {{msgContent}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="modal('ok')">OK</button>
+        <button class="btn btn-cancel" ng-click="modal('cancel')">Cancel</button>
+    </div>
+</script>

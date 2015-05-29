@@ -1,0 +1,17 @@
+﻿<ul class="ewm grey12 lh28 fc" id="sidebar" style="list-style-type:none;" ng-hide="disabled">
+    <li ng-show="canAudit">
+        <a class="floatMenu" ng-click="onAudit()">审核</a><br />
+    </li>
+    <li ng-show="canEdit">
+        <a class="floatMenu" ng-click="onEdit()">修改</a><br />
+    </li>
+    <li ng-show="canSubmit">
+        <a class="floatMenu" ng-click="onSubmit()">提交</a><br />
+    </li>
+    <li ng-show="canFeed">
+        <a class="floatMenu" ng-click="onFeed()">意见</a>
+    </li>
+    <li>
+        <a class="floatMenu" id="btnBack">返回</a>
+    </li>
+</ul>

@@ -1,0 +1,35 @@
+﻿<div class="modal-header" style=" font-size: 1.5em; color: #fff; background-color: #357ebd; height:50px; ">
+    <h3 class="modal-title"  ng-bind="epAudit.checks[0].C_Title" style="margin-top:-10px;"></h3>
+</div>
+<div class="modal-body" style="height: 400px; overflow-x: hidden; overflow-y: auto; padding-right: 0px;">
+    <table class="table table-striped table-hover" style="width: 100%; height: 100%; margin-left: -7px; margin-top: -16px;">
+        <thead class="yslb2">
+            <tr class="row">
+                <th align="center" style="width:2%;text-align:center;border-bottom:0;padding-top:4px;"></th>
+                <th align="center" style="width: 20%; text-align: center; font-family: 'Microsoft YaHei'; font-size: 14px; border-bottom: 0; padding-top: 4px; ">类别</th>
+                <th align="center" style="width: 30%; text-align: center; font-family: 'Microsoft YaHei'; font-size: 14px; border-bottom: 0; padding-top: 4px; ">具体分类</th>
+                <th align="center" style="width: 30%; text-align: center; font-family: 'Microsoft YaHei'; font-size: 14px; border-bottom: 0; padding-top: 4px; ">刊例价</th>
+                <th align="center" style="width: 9%; text-align: center; font-family: 'Microsoft YaHei'; font-size: 14px; border-bottom: 0; padding-top: 4px; ">内部结算</th>
+                <th align="center" style="width: 9%; text-align: center; font-family: 'Microsoft YaHei'; font-size: 14px; border-bottom: 0; padding-top: 4px; ">数量</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items" class="row">
+                <td>
+                    <input type="checkbox" checklist-model="checks" checklist-value="item" ng-disabled="item.disabled" />
+                </td>
+                <td class="epRowItem" align="left">{{item.C_Name}}</td>
+                <td class="epRowItem" align="left">{{item.C_Title}}</td>
+                <td class="epRowItem" align="left">{{item.F_Price}}{{item.C_Unit}}</td>
+                <td class="epRowItem" align="center">{{item.F_In*10}}折</td>
+                <td class="epRowItem" align="center">
+                    <input type="number" style="width:4em;" ng-model="item.F_Amount" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="update()">确 定</button>
+    <button class="btn btn-cancel" ng-click="close()">取 消</button>
+</div>

@@ -1,0 +1,91 @@
+<div class="row" style="margin-left: 0.2em; margin-top:0.5em;">
+    <div class="col-sm-2 col-md-2">
+        <div class="list-group">
+            <a href="#" class="list-group-item" style="background-color: #515151;color:white;font-weight:bold;">
+                我的待审
+            </a>
+            <a ng-click="switchData(1)" class="list-group-item" ng-class="{active:epAuditList.category===1}" ng-show="epAuditList.allProjects.length > 0"><span class="badge" ng-bind="epAuditList.allProjects.length"></span><p class="audit-list-item">项 目</p></a>
+            <a ng-click="switchData(2)" class="list-group-item" ng-class="{active:epAuditList.category===2}" ng-show="epAuditList.allBudgetAndContracts.length > 0"><span class="badge" ng-bind="epAuditList.allBudgetAndContracts.length"></span> <p class="audit-list-item">预 算/合 同</p></a>
+            <a ng-click="switchData(4)" class="list-group-item" ng-class="{active:epAuditList.category===4}" ng-show="epAuditList.allExpenses.length > 0"><span class="badge" ng-bind="epAuditList.allExpenses.length"></span> <p class="audit-list-item">报 销</p></a>
+            <a ng-click="switchData(5)" class="list-group-item" ng-class="{active:epAuditList.category===5}" ng-show="epAuditList.allReceipts.length > 0"><span class="badge" ng-bind="epAuditList.allReceipts.length"></span> <p class="audit-list-item">发 票</p></a>
+            <a ng-click="switchData(6)" class="list-group-item" ng-class="{active:epAuditList.category===6}" ng-show="epAuditList.allWorks.length > 0"><span class="badge" ng-bind="epAuditList.allWorks.length"></span> <p class="audit-list-item">工 单</p></a>
+            <a ng-click="switchData(0)" class="list-group-item" ng-class="{active:epAuditList.category===0}"><span class="badge" ng-bind="epAuditList.allData.length"></span> <p class="audit-list-item">全 部</p></a>
+        </div>
+    </div>
+
+    <div class="col-sm-10 col-md-10" style="padding-left:0px;padding-right:0px;">
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="white14 fw" style="background-color: #515151;line-height:1.95em;padding-top:0.2em;">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6" style="padding-left:2em;">
+                            <a ng-click="batchAudit()">
+                                <span style="color:#fff">
+                                    <img src="../images/dh3.png" alt="fffff" class="img-rounded">
+                                </span>
+                                <p style="font-weight: bold; font-size: 1.1em; margin-top: -1.8em; margin-left:1.8em; color: #fff">
+                                    批量审核
+                                </p>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6" ng-hide="epAudit.Items.length===0" style="text-align:right;padding-right:2em;">
+                            共计 【{{epAuditList.checks.length}}】
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr class="yslb2">
+                            <th class="detailItempCaption" style="width:5%;" ng-hide="epAuditList.category===6"></th>
+                            <th class="detailItempCaption" style="width:23%;">名称</th>
+                            <th class="detailItempCaption" style="width:23%">所属项目</th>
+                            <th class="detailItempCaption" style="width:5%">类型</th>
+                            <th class="detailItempCaption" style="width:6%">流水号</th>
+                            <th class="detailItempCaption" style="width:14%">创建人</th>
+                            <th class="detailItempCaption" style="width:9%">新建日期</th>
+                            <th class="detailItempCaption" style="width:15%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in data">
+                            <td height="50" align="center" class="bo_r grey12 lh50 sh1" ng-hide="epAuditList.category===6">
+                                <input type="checkbox" checklist-model="epAuditList.checks" checklist-value="item" ng-hide="item.I_Category===6">
+                            </td>
+                            <td height="50" style="text-align:left" class="bo_r grey12 lh50 sh1" ng-bind="item.C_Title"></td>
+                            <td height="50" style="text-align:left" class="bo_r grey12 lh50 sh2"><a class="red12a" style="width: 300px; float: left; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;" ui-sref="projectDetail({id:item.I_Project})" ng-bind="item.ProjectName" title="{{item.ProjectName}}"></a></td>
+                            <td height="50" align="center" class="bo_r lh50 sh3">
+                                <ep-category category-id="item.I_Category"></ep-category>
+                            </td>
+                            <td height="50" align="center" class="bo_r lh50 sh3" ng-bind="item.Id"></td>
+                            <td height="50" style="text-align:left" class="bo_r grey12 lh50 sh4">
+                                <ep-dept-person dept="{{item.dName}}" person="{{item.uName}}"></ep-dept-person>
+                            </td>
+                            <td height="50" align="center" class="bo_r grey12 lh50 sh5" ng-bind="item.D_Create | date: 'yyyy-MM-dd'">    </td>
+                            <td height="50" align="center" class="sh6 grey12">
+                                <div class="lh50">
+                                    <a class="red12a" style="cursor:pointer" ng-click="NavAudit(item);">审核</a>
+                                    <a style="cursor:pointer" ng-click="NavView(item)" class="red12a">查看</a>
+                                    <a style="cursor:pointer" ng-click="feedback(item)" class="red12a">意见</a>
+                                    <a style="cursor:pointer" ng-click="NavEdit(item)" ng-class="{'forbidden':!CanEdit(item)}" class="red12a">修改</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5 col-md-5 col-sm-offset-4 col-md-offset-4">
+                <ep-pager index="epAuditList.page.index" total="epAuditList.page.total" ng-show="epAuditList.page.total > 1"></ep-pager>
+            </div>
+        </div>
+    </div>
+</div>
