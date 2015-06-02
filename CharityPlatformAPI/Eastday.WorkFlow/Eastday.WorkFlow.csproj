@@ -61,17 +61,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eastday.Data\Eastday.Data.csproj">
-      <Project>{144931a9-861b-40dd-b7ba-ce27a5f5fa8a}</Project>
-      <Name>Eastday.Data</Name>
+    <ProjectReference Include="..\CharityPlatform.Data\CharityPlatform.Data.csproj">
+      <Project>{e08572de-8b74-4597-ad10-aefc8d87bc2f}</Project>
+      <Name>CharityPlatform.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Eastday.Entity\Eastday.Entity.csproj">
-      <Project>{9500cbf9-a3d4-43cf-aa43-bf8ea56951bc}</Project>
-      <Name>Eastday.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Eastday.Util\Eastday.Util.csproj">
-      <Project>{5e749e72-62ff-4a6a-94f4-e80e832b1e8a}</Project>
-      <Name>Eastday.Util</Name>
+    <ProjectReference Include="..\CharityPlatform.Entity\CharityPlatform.Entity.csproj">
+      <Project>{589a87bc-9579-4800-89a1-43218b88ef98}</Project>
+      <Name>CharityPlatform.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\Eastday.WorkFlowEngine\Eastday.WorkFlowEngine.csproj">
       <Project>{3fe6ea9e-d07e-4f0c-a0f8-723b00dd7eec}</Project>

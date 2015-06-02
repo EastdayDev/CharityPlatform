@@ -15,8 +15,8 @@ namespace Eastday.WorkFlow
     using System.Text;
     using System.Threading.Tasks;
     using Eastday.WorkFlowEngine;
-    using Eastday.Data;
-    using Eastday.Entity;
+    using CharityPlatform.Data;
+    using CharityPlatform.Entity;
 
     /// <summary>
     /// 传递类型
@@ -52,36 +52,36 @@ namespace Eastday.WorkFlow
     /// <summary>
     /// 通过功能编码查询部门
     /// </summary>
-    [Serializable]
-    public class DepartmentActor : IActor
-    {
-        public long Find(FlowAttachment flowAttachment, Participant participant)
-        {
-            using (Eastday.Data.WorkFlowBLL bll = new Eastday.Data.WorkFlowBLL())
-            {
-                return bll.GetDepByFuction(Convert.ToInt64(participant.Reference), flowAttachment.Creater);
-            }
-        }
-    }
+    //[Serializable]
+    //public class DepartmentActor : IActor
+    //{
+    //    public long Find(FlowAttachment flowAttachment, Participant participant)
+    //    {
+    //        using (CharityPlatform.Data.WorkFlowBLL bll = new CharityPlatform.Data.WorkFlowBLL())
+    //        {
+    //            return bll.GetDepByFuction(Convert.ToInt64(participant.Reference), flowAttachment.Creater);
+    //        }
+    //    }
+    //}
 
     /// <summary>
     /// 按工单类型查找工单签收人部门
     /// </summary>
-    public class WorkReceiverActor : IActor
-    {
-        /// <summary>
-        /// 工单类型
-        /// </summary>
-        public int WorkType { get; set; }
+    //public class WorkReceiverActor : IActor
+    //{
+    //    /// <summary>
+    //    /// 工单类型
+    //    /// </summary>
+    //    public int WorkType { get; set; }
 
-        public long Find(FlowAttachment flowAttachment, Participant participant)
-        {
-            using (Eastday.Data.WorkFlowBLL bll = new Eastday.Data.WorkFlowBLL())
-            {
-                return bll.GetWorkDepByFuction(participant.Reference, this.WorkType);
-            }
-        }
-    }
+    //    public long Find(FlowAttachment flowAttachment, Participant participant)
+    //    {
+    //        using (Eastday.Data.WorkFlowBLL bll = new Eastday.Data.WorkFlowBLL())
+    //        {
+    //            return bll.GetWorkDepByFuction(participant.Reference, this.WorkType);
+    //        }
+    //    }
+    //}
 
     /// <summary>
     /// 条件节点期望值接口实现
@@ -98,7 +98,8 @@ namespace Eastday.WorkFlow
         {
             using (SystemBLL bll = new SystemBLL())
             {
-                return bll.GetKindFlow(flowAttachment.Kind);
+                return 1;
+                //return bll.GetKindFlow(flowAttachment.Kind);
             }
         }
     }
@@ -109,13 +110,13 @@ namespace Eastday.WorkFlow
         /// <summary>
         /// 可被传阅接口实现(部门)
         /// </summary>
-        public static IList<DepartmentEntity> GetHeadOfficeTransfers()
-        {
-            using (DepartmentBLL bll = new DepartmentBLL())
-            {
-                return bll.GetDepartmentAll(-1, -1, -1);
-            }
-        }
+        //public static IList<DepartmentEntity> GetHeadOfficeTransfers()
+        //{
+        //    using (DepartmentBLL bll = new DepartmentBLL())
+        //    {
+        //        return bll.GetDepartmentAll(-1, -1, -1);
+        //    }
+        //}
 
         /// <summary>
         /// 可被传阅接口实现(领导)
@@ -131,71 +132,56 @@ namespace Eastday.WorkFlow
         /// <summary>
         /// 可被传阅接口实现(领导)
         /// </summary>
-        public static IList<DepartmentUserEntity> GetLeaderTransfers()
-        {
-            using (DepartmentBLL bll = new DepartmentBLL())
-            {
-                return bll.GetUserTreeListByFunc(11800);
-            }
-        }
+        //public static IList<DepartmentUserEntity> GetLeaderTransfers()
+        //{
+        //    using (DepartmentBLL bll = new DepartmentBLL())
+        //    {
+        //        return bll.GetUserTreeListByFunc(11800);
+        //    }
+        //}
 
         /// <summary>
         /// 可被传阅接口实现(工单)
         /// </summary>
-        public static IList<DepartmentUserEntity> GetWorkTransfers()
-        {
-            using (DepartmentBLL bll = new DepartmentBLL())
-            {
-                return bll.GetUserTreeWorkListByFunc(13200);
-            }
-        }        
+        //public static IList<DepartmentUserEntity> GetWorkTransfers()
+        //{
+        //    using (DepartmentBLL bll = new DepartmentBLL())
+        //    {
+        //        return bll.GetUserTreeWorkListByFunc(13200);
+        //    }
+        //}        
     }
 
 
     /// <summary>
     /// 可被传阅接口实现(领导)
     /// </summary>
-    [Serializable]
-    public class LeaderTransfer : ITransfer<DepartmentUserEntity>
-    {
-        public IList<DepartmentUserEntity> GetTransfers()
-        {
-            using (DepartmentBLL bll = new DepartmentBLL())
-            {
-                return bll.GetUserListByFunc(11800);
-            }
-        }
-    }
-
-    /// <summary>
-    /// 可被传阅接口实现(工单)
-    /// </summary>
-    [Serializable]
-    public class WorkTransfer : ITransfer<DepartmentUserEntity>
-    {
-        public IList<DepartmentUserEntity> GetTransfers()
-        {
-            using (DepartmentBLL bll = new DepartmentBLL())
-            {
-                return bll.GetUserListByFunc(11600);
-            }
-        }
-    }
+    //[Serializable]
+    //public class LeaderTransfer : ITransfer<DepartmentUserEntity>
+    //{
+    //    public IList<DepartmentUserEntity> GetTransfers()
+    //    {
+    //        using (DepartmentBLL bll = new DepartmentBLL())
+    //        {
+    //            return bll.GetUserListByFunc(11800);
+    //        }
+    //    }
+    //}
 
     /// <summary>
     /// 可被传阅接口实现(部门)
     /// </summary>
-    [Serializable]
-    public class DepartmentTransfer : ITransfer<DepartmentEntity>
-    {
-        public IList<DepartmentEntity> GetTransfers()
-        {
-            using (DepartmentBLL bll = new DepartmentBLL())
-            {
-                return bll.GetDepartmentAll(-1, -1, -1);
-            }
-        }
-    }
+    //[Serializable]
+    //public class DepartmentTransfer : ITransfer<DepartmentEntity>
+    //{
+    //    public IList<DepartmentEntity> GetTransfers()
+    //    {
+    //        using (DepartmentBLL bll = new DepartmentBLL())
+    //        {
+    //            return bll.GetDepartmentAll(-1, -1, -1);
+    //        }
+    //    }
+    //}
 
 
 

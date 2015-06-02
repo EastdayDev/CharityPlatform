@@ -1,6 +1,5 @@
-﻿using Eastday.Data;
-using Eastday.Entity;
-using Eastday.Util;
+﻿using CharityPlatform.Data;
+using CharityPlatform.Entity;
 using Eastday.WorkFlowEngine;
 using System;
 using System.Collections;
@@ -9,43 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eastday.WorkFlow
+namespace CharityPlatform.WorkFlow
 {
     public class FlowHelper
     {
-        /// <summary>
-        /// 打包提交
-        /// </summary>
-        /// <param name="id">项目编号</param>                
-        /// <param name="uid">创建人</param>
-        /// <param name="depLevel1">中心及职能部门</param>
-        /// <param name="depLevel2">中心下属部门</param>
-        /// <returns></returns>
-        public static bool CommitWrap(int id, long uid, IList<DepartmentEntity> centers, IList<DepartmentEntity> children)
-        {
-            try
-            {
-                //提交项目
-                FlowHelper.Commit(id, Category.Project, uid, centers, children, true);
-                using (ProjectBLL bll = new ProjectBLL())
-                {
-                    List<DataHeadEntity> dataList = bll.GetProjectChildren(id);
-                    foreach (var data in dataList)
-                    {
-                        if (data.I_Category == (int)Category.Budget || data.I_Category == (int)Category.Contract)
-                        {
-                            FlowHelper.Commit(data.Id, (Category)data.I_Category, uid, centers, children, true);
-                        } 
-                    }
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         /// <summary>
         /// 提交流程
         /// </summary>
@@ -56,7 +22,7 @@ namespace Eastday.WorkFlow
         /// <param name="depLevel2">中心下属部门</param>
         /// <param name="IsSubmit">1说明是提交流程，需要执行DeleteWorkFlow删除流程数据</param>
         /// <returns></returns>
-        public static void Commit(int id, Category category, long uid, IList<DepartmentEntity> centers, IList<DepartmentEntity> children, bool isSubmit)
+        public static void Commit(int id, int userId, IList<FunctionEntity> funcs, bool isSubmit)
         { 
             FlowEngine flowEngine = FlowHelper.Build(id, category, uid, centers, children);
             if (isSubmit) FlowManager.Instance().Delete(id);
@@ -72,7 +38,7 @@ namespace Eastday.WorkFlow
         /// <param name="depLevel1">中心及职能部门</param>
         /// <param name="depLevel2">中心下属部门</param>
         /// <returns>流程实例</returns>
-        public static FlowEngine Build(int id, Category category, long uid, IList<DepartmentEntity> centers, IList<DepartmentEntity> children)
+        public static FlowEngine Build(int id, int userId, IList<DepartmentEntity> centers, IList<DepartmentEntity> children)
         {
             FunctionEntity funcEntry = null;
             using (SysFunctionBLL bll = new SysFunctionBLL())
@@ -82,11 +48,6 @@ namespace Eastday.WorkFlow
 
             using (SystemBLL bll = new SystemBLL())
             {
-                if (category == Category.Budget)
-                {
-                    AssignBudgetInternal(id, centers, children); 
-                }
-
                 //获取当前模板
                 BusinessKindEntity flowKind = bll.GetKind(id);
 

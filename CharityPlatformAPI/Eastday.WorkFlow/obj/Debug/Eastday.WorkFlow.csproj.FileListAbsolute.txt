@@ -20,5 +20,3 @@ D:\Devspace\EastdayProjectNew\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.csproj
 D:\Devspace\EastdayProjectNew\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.dll
 D:\Devspace\EastdayProjectNew\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.pdb
 D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.csprojResolveAssemblyReference.cache
-D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.dll
-D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.pdb

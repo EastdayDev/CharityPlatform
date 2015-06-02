@@ -13,26 +13,24 @@ namespace Eastday.WorkFlow
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using Eastday.Data;
+    using CharityPlatform.Data;
     using Eastday.WorkFlowEngine;
-    using Eastday.Util;
     using System.Collections;
+    using CharityPlatform.Entity;
 
     class FlowKey 
     {
-        public Category Category = Category.Project;
         public int Owner = -1;
 
         public override int GetHashCode()
         {
             return Owner;
-            //return base.GetHashCode();
         }
 
         public override bool Equals(object obj)
         {
             FlowKey other = (FlowKey)obj;
-            return this.Category == other.Category && this.Owner == other.Owner;
+            return this.Owner == other.Owner;
         } 
     }
     /// <summary>
@@ -104,9 +102,9 @@ namespace Eastday.WorkFlow
         /// <param name="category">流程分类</param>
         /// <param name="owner">属主</param>
         /// <returns></returns>
-        public bool FlowExists(Category category, int owner)
+        public bool FlowExists(int owner)
         {
-            string fullName = GetFlowFile(category, owner);
+            string fullName = GetFlowFile(owner);
             return System.IO.File.Exists(fullName);
         }
         #endregion
@@ -119,14 +117,14 @@ namespace Eastday.WorkFlow
         /// <param name="category">分类</param>
         /// <param name="owner">属主</param>
         /// <returns></returns>
-        public FlowEngine Load(Category category, int owner)
+        public FlowEngine Load(int owner)
         {
-            FlowKey flowKey = new FlowKey() { Category = category, Owner = owner };
+            FlowKey flowKey = new FlowKey() { Owner = owner };
             if (this.dicFlow.ContainsKey(flowKey))
             {
                 return this.dicFlow[flowKey];
             }
-            string fileName = FlowManager.GetFlowFile(category, owner);
+            string fileName = FlowManager.GetFlowFile(owner);
             FlowEngine flowEngine = FlowEngine.Load(fileName);
             flowEngine.FinishedHandler -= new FlowEngine.FinishedEventHandler(FlowManager.FlowFinished);
             flowEngine.FinishedHandler += new FlowEngine.FinishedEventHandler(FlowManager.FlowFinished);
@@ -137,16 +135,16 @@ namespace Eastday.WorkFlow
             return flowEngine;
         }
 
-        public void Remove(Category category, int owner)
+        public void Remove(int owner)
         {
-            FlowKey flowKey = new FlowKey() { Category = category, Owner = owner };
+            FlowKey flowKey = new FlowKey() { Owner = owner };
             if (this.dicFlow.ContainsKey(flowKey))
             {
                 this.dicFlow.Remove(flowKey);
             } 
         }
 
-        private void Save(Category category, FlowEngine flowEngine)
+        private void Save(FlowEngine flowEngine)
         {
             if (flowEngine.Attachment.Owner == -1)
             {
@@ -154,7 +152,7 @@ namespace Eastday.WorkFlow
             }
             if (flowEngine.FlowState != FlowState.Finished)
             {
-                FlowKey flowKey = new FlowKey() { Category = category, Owner = flowEngine.Attachment.Owner };
+                FlowKey flowKey = new FlowKey() { Owner = flowEngine.Attachment.Owner };
                 if (!this.dicFlow.ContainsKey(flowKey))
                 {
                     this.dicFlow.Add(flowKey, flowEngine);
@@ -168,7 +166,7 @@ namespace Eastday.WorkFlow
                     this.dicFlow[flowKey] = flowEngine;
                 }
             }
-            string fileName = FlowManager.GetFlowFile(category, flowEngine.Attachment.Owner);
+            string fileName = FlowManager.GetFlowFile(flowEngine.Attachment.Owner);
             FlowEngine.Save(fileName, flowEngine);
         }        
 
@@ -178,36 +176,11 @@ namespace Eastday.WorkFlow
         /// <param name="category">业务分类</param>
         /// <param name="owner">文件属主</param>
         /// <returns>全路径文件名</returns>
-        private static string GetFlowFile(Category category, int owner)
+        private static string GetFlowFile(int owner)
         {
             string directory = string.Empty;
-            string path = System.Configuration.ConfigurationManager.AppSettings["EastdayFlowPath"];
-            switch (category)
-            {
-                case Category.Project:
-                    directory = "Project";
-                    break;
-                case Category.Budget:
-                    directory = "Budget";
-                    break;
-                case Category.Contract:
-                    directory = "Contract";
-                    break;
-                case Category.Expense:
-                    directory = "Expense";
-                    break;
-                case Category.Receipt:
-                    directory = "Receipt";
-                    break;
-                case Category.Work:
-                    directory = "Work";
-                    break;
-                default:
-                    directory = "unknown";
-                    break;
-            }
-
-            return string.Format("{0}/{1}/Flow_{2}.bin", path, directory, owner);
+            string path = System.Configuration.ConfigurationManager.AppSettings["FlowPath"]; 
+            return string.Format("{0}/Flow_{2}.bin", path, owner);
         }
 
         /// <summary>
@@ -273,70 +246,48 @@ namespace Eastday.WorkFlow
 
         #region Data save
 
-        public void Delete(int I_Owner)
-        {
-            using (Eastday.Data.WorkFlowBLL workFlowBLL = new Eastday.Data.WorkFlowBLL())
-            {
-                workFlowBLL.DeleteWorkFlow(I_Owner);
-            }
-        }
-
         /// <summary>
         /// 保存流程数据
         /// </summary>
         /// <param name="flowEngine">流程</param>
         /// <param name="category">分类</param>
         /// <param name="owner">具体业务数据对应的PK</param>
-        public void Save(Eastday.WorkFlowEngine.FlowEngine flowEngine, Category category)
+        public void Save(Eastday.WorkFlowEngine.FlowEngine flowEngine)
         {
-            using (Eastday.Data.WorkFlowBLL workFlowBLL = new Eastday.Data.WorkFlowBLL())
+            using (WorkFlowBLL workFlowBLL = new WorkFlowBLL())
             {
                 workFlowBLL.DbContext = workFlowBLL.CreateDbContext(true);
-                Eastday.Entity.WorkFlowEntity workFlowEntity = workFlowBLL.GetWorkFlowByOwner((int)category, flowEngine.Attachment.Owner);
-                if (workFlowEntity == null) workFlowEntity = new Entity.WorkFlowEntity();
-                workFlowEntity.C_Description = flowEngine.Description;
-                workFlowEntity.C_Name = flowEngine.Name;
-                workFlowEntity.I_Category = (int)category;
+                WorkFlowEntity workFlowEntity = workFlowBLL.GetWorkFlowByOwner(flowEngine.Attachment.Owner);
+                if (workFlowEntity == null) workFlowEntity = new WorkFlowEntity();
                 workFlowEntity.I_Owner = flowEngine.Attachment.Owner;
                 workFlowEntity.I_State = (int)flowEngine.FlowState;
+                workFlowEntity.I_Flag = 1;
 
                 //ParticipantEntity
                 var aCurrent = flowEngine.GetCurrent();
                 var steps = from step in flowEngine.FlowSteps where !(step is StepEnd) select step;
-                List<Eastday.Entity.ParticipantEntity> participants = new List<Eastday.Entity.ParticipantEntity>();
+                List<ParticipantEntity> participants = new List<ParticipantEntity>();
                 foreach (var step in steps)
                 {
                     foreach (var node in step.Nodes)
                     {                        
-                        Eastday.Entity.ParticipantEntity participantEntity = new Eastday.Entity.ParticipantEntity();
-                        participantEntity.I_Category = node.Participant.Category;
-                        participantEntity.I_Department = node.Participant.Department;
+                        ParticipantEntity participantEntity = new ParticipantEntity();
                         participantEntity.I_Reference = node.Participant.Reference;
                         participantEntity.I_WorkFlow = workFlowEntity.Id;
                         participantEntity.C_Step = step.Identification;
                         participantEntity.C_Node = node.Identification;
                         participantEntity.I_Auditer = node.Conclusion.Auditer;
+                        participantEntity.D_Audit = node.Conclusion.AuditDate;
+                        participantEntity.I_Bind = node.Participant.Category;
                         participantEntity.I_Current = step == aCurrent && node.AuditType == AuditType.UnAudit ? 1 : (int)node.Conclusion.AuditType;
 
-                        //if (step == aCurrent)
-                        //{
-                        //    // 当前步骤并行审核
-                        //    if (node.AuditType == AuditType.UnAudit )
-                        //    {
-                        //        participantEntity.I_Current = 1; 
-                        //    }
-                        //    //Node aNode = step.GetCurrent()[0];
-                        //    //participantEntity.I_Current = aNode == node ? 1 : (int)node.AuditType;
-                        //}
                         participants.Add(participantEntity);
                     }
-                }
-                                
+                } 
 
                 if (workFlowBLL.Insert(workFlowEntity, participants) > 0)
                 {
                     workFlowBLL.DbContext.CommitTransaction();
-                    this.Save(category, flowEngine);
                 }
             }
         }
@@ -353,7 +304,7 @@ namespace Eastday.WorkFlow
         /// <param name="auditDesc">审核描述</param>
         /// <param name="userId">Sys_User.Id</param>
         /// <returns>true 审核成功 false 不能审核</returns>
-        public bool Audit(FlowEngine flowEngine, AuditType auditType, string auditDesc, long userId)
+        public bool Audit(FlowEngine flowEngine, AuditType auditType, string auditDesc, int userId)
         {
             using (SystemBLL bll = new SystemBLL())
             { 

@@ -57,6 +57,7 @@
     <Compile Include="AppHelper.cs" />
     <Compile Include="BaseBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemBLL.cs" />
     <Compile Include="WorkFlowBLL.cs" />
   </ItemGroup>
   <ItemGroup>
