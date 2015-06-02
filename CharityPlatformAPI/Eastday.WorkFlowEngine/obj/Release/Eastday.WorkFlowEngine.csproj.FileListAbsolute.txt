@@ -1,0 +1,7 @@
+D:\Devspace\EastdayProjectNew\Eastday.WorkFlowEngine\bin\Release\Eastday.WorkFlowEngine.dll
+D:\Devspace\EastdayProjectNew\Eastday.WorkFlowEngine\bin\Release\Eastday.WorkFlowEngine.pdb
+D:\Devspace\EastdayProjectNew\Eastday.WorkFlowEngine\bin\Release\StyleCop.CSharp.dll
+D:\Devspace\EastdayProjectNew\Eastday.WorkFlowEngine\bin\Release\StyleCop.dll
+D:\Devspace\EastdayProjectNew\Eastday.WorkFlowEngine\obj\Release\Eastday.WorkFlowEngine.csprojResolveAssemblyReference.cache
+D:\Devspace\EastdayProjectNew\Eastday.WorkFlowEngine\obj\Release\Eastday.WorkFlowEngine.dll
+D:\Devspace\EastdayProjectNew\Eastday.WorkFlowEngine\obj\Release\Eastday.WorkFlowEngine.pdb

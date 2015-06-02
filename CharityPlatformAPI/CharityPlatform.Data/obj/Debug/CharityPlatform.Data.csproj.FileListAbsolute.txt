@@ -6,3 +6,6 @@ D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Data\bin\Debug\NPOI.d
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Data\bin\Debug\TokenHelper.dll
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Data\obj\Debug\CharityPlatform.Data.dll
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Data\obj\Debug\CharityPlatform.Data.pdb
+D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Data\obj\Debug\CharityPlatform.Data.csprojResolveAssemblyReference.cache
+D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Data\bin\Debug\CharityPlatform.Entity.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Data\bin\Debug\CharityPlatform.Entity.pdb
