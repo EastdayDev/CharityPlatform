@@ -124,15 +124,17 @@ GO
 
 ALTER TABLE [dbo].[Sys_User_Role] ADD  CONSTRAINT [DF_Sys_User_Role_I_Flag]  DEFAULT ((1)) FOR [I_Flag]
 go
-
+ 
 CREATE TABLE [dbo].[Project](
 	[Id] [int] identity(20150701, 1) NOT NULL,
+	[I_Flag] int default(1),
 	[I_Creater] int not null,							
 	[C_Title] [varchar](200) NULL,						-- 项目名称
 	[D_Create] [datetime] not null,
 	[D_Submit] [datetime] null,
 	[D_Confirm] [datetime] null,
 	[C_Scope] varchar(200) null,
+	[I_FlowType] int null,								-- 流程编号
 	[C_Org_Contacter] varchar(100) null,				-- 机构负责人
 	[C_Org_Contacter_Mobile] varchar(100) null,			-- 机构负责人联系方式	
 	[C_Project_Contacter] varchar(100) null,			-- 项目负责人
@@ -243,3 +245,12 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY] 
 
  
+ CREATE TABLE [dbo].[FlowKind](
+	[id] [int] identity(101, 1) NOT NULL,
+	[C_Name] [varchar](50) NULL,
+	[I_Flag] [int] NULL,
+	[I_Parent] [int] NULL,
+	[C_Remark] [varchar](200) NULL,
+	[I_Flow] [int] NULL,
+	[C_Template] [varchar](50) NULL 
+) ON [PRIMARY]

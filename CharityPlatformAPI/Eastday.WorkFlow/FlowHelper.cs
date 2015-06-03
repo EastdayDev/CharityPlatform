@@ -1,5 +1,6 @@
 ﻿using CharityPlatform.Data;
 using CharityPlatform.Entity;
+using Eastday.WorkFlow;
 using Eastday.WorkFlowEngine;
 using System;
 using System.Collections;
@@ -22,11 +23,11 @@ namespace CharityPlatform.WorkFlow
         /// <param name="depLevel2">中心下属部门</param>
         /// <param name="IsSubmit">1说明是提交流程，需要执行DeleteWorkFlow删除流程数据</param>
         /// <returns></returns>
-        public static void Commit(int id, int userId, IList<FunctionEntity> funcs, bool isSubmit)
-        { 
-            FlowEngine flowEngine = FlowHelper.Build(id, category, uid, centers, children);
+        public static void Commit(int id, int userId, IList<UserEntity> users, bool isSubmit)
+        {
+            FlowEngine flowEngine = FlowHelper.Build(id, userId, users);
             if (isSubmit) FlowManager.Instance().Delete(id);
-            FlowManager.Instance().Save(flowEngine, category);
+            FlowManager.Instance().FlowSave(flowEngine);
         }
 
         /// <summary>
@@ -38,76 +39,32 @@ namespace CharityPlatform.WorkFlow
         /// <param name="depLevel1">中心及职能部门</param>
         /// <param name="depLevel2">中心下属部门</param>
         /// <returns>流程实例</returns>
-        public static FlowEngine Build(int id, int userId, IList<DepartmentEntity> centers, IList<DepartmentEntity> children)
+        public static FlowEngine Build(int id, int userId, IList<UserEntity> users)
         {
-            FunctionEntity funcEntry = null;
-            using (SysFunctionBLL bll = new SysFunctionBLL())
-            {
-                funcEntry = bll.GetFunctionById(100, 10100);
-            }
-
             using (SystemBLL bll = new SystemBLL())
             {
+                int flowKindId = 0;
                 //获取当前模板
-                BusinessKindEntity flowKind = bll.GetKind(id);
-
-                FlowAttachment flowAttachment = new FlowAttachment() { Owner = id, Kind = flowKind.id };
-                flowAttachment.Creater = uid;
+                using (ProjectBLL prjBll = new ProjectBLL())
+                {
+                    flowKindId = (int)prjBll.USP_Project_Get(id).I_FlowType;
+                }
+                FlowKinkEntity flowKindEntity = bll.USP_Flow_Template(flowKindId);
+                FlowAttachment flowAttachment = new FlowAttachment() { Owner = id, Kind = flowKindEntity.id };
+                flowAttachment.Creater = userId;
 
                 FlowManager flowMgr = FlowManager.Instance();
+                FlowEngine flowEngine = flowMgr.TemplateLoad(flowKindEntity.C_Template);
 
-                FlowEngine flowEngine = flowMgr.TemplateLoad(flowKind.C_Template);
-                flowMgr.Assign(flowEngine, flowAttachment);
-
-                if (centers.Any())
+                if (users.Any())
                 {
-                    FlowHelper.AddLevel1(flowEngine, funcEntry, centers);
+                    FunctionEntity funcEntry = null;
+                    funcEntry = bll.Usp_Func_Get(10100);
+                    FlowHelper.AddCountersign(flowEngine, funcEntry, users);
                 }
-                if (children.Any())
-                {
-                    FlowHelper.AddLevel2(flowEngine, funcEntry, children);
-                }
-                //if (requiredOld)
-                //{
-                //    FlowHelper.Concat(id, category, flowEngine);
-                //}
-                FlowHelper.Concat(id, category, flowEngine);
+                FlowHelper.Concat(id, flowEngine);
 
                 return flowEngine;
-            }
-        }
-
-        /// <summary>
-        /// 日常预算需要将涉及的部门加入流程
-        /// </summary>
-        /// <param name="id">预算编号</param>
-        /// <param name="depLevel1">中心部门</param>
-        /// <param name="depLevel2">中心下属</param>
-        private static void AssignBudgetInternal(int id, IList<DepartmentEntity> centers, IList<DepartmentEntity> children)
-        {
-            using (SystemBLL bll = new SystemBLL())
-            {
-                List<DepartmentEntity> departmentBudgetInternal = bll.GetDepartmentByBudgetInternal(id);
-                if (departmentBudgetInternal.Any())
-                {
-                    foreach (var dep in departmentBudgetInternal)
-                    {
-                        if (dep.I_Level >= 20)
-                        {
-                            if (!children.Contains(dep))
-                            {
-                                children.Add(dep);
-                            }
-                        }
-                        else
-                        {
-                            if (!centers.Contains(dep))
-                            {
-                                centers.Add(dep);
-                            }
-                        }
-                    }
-                }
             }
         }
 
@@ -117,13 +74,13 @@ namespace CharityPlatform.WorkFlow
         /// <param name="id">编号</param>
         /// <param name="category">分类</param>
         /// <param name="flowEngine">新流程</param>
-        public static void Concat(int id, Category category, FlowEngine newFlowEngine)
+        public static void Concat(int id, FlowEngine newFlowEngine)
         {
             FlowManager flowMgr = FlowManager.Instance();
-            if (flowMgr.FlowExists(category, id))
+            if (flowMgr.FlowExists(id))
             {
                 int index = 0;
-                FlowEngine oldFlowEngine = flowMgr.Load(category, id);
+                FlowEngine oldFlowEngine = flowMgr.Load(id);
 
                 Step returnedStep = FindLastReturned(oldFlowEngine);
                 if (returnedStep == null) return;
@@ -182,52 +139,19 @@ namespace CharityPlatform.WorkFlow
         }
 
         /// <summary>
-        /// 增加中心级部门
+        /// 增加会签
         /// </summary>
         /// <param name="flowEngine">流程</param>
-        /// <param name="funcEntry">中心级部门指定功能</param>        
-        /// <param name="centers">中心部门编号</param>
-        private static void AddLevel1(FlowEngine flowEngine, FunctionEntity funcEntry, IList<DepartmentEntity> centers)
-        {
-            Step zrStep = FindByReference(flowEngine, 10200);
-            Step firstStep = zrStep == null ? flowEngine.FlowSteps.First() : zrStep;
-            Step newStep = null;
-            foreach (var dep in centers)
-            {
-                newStep = new StepGeneral();
-                Participant participant = new Participant() { Department = Convert.ToInt64(dep.Id), Category = 1, Reference = (long)funcEntry.Id };
-                newStep.Add(new Node(funcEntry.C_Name, participant) { Description = funcEntry.C_Name });
-
-                flowEngine.AddAfter(firstStep, newStep);
-                firstStep = newStep;
-            }
-            if (zrStep != null)
-            {
-                newStep = new StepGeneral();
-                foreach (var node in zrStep.Nodes)
-                {
-                    Participant p = (Participant)node.Participant.Clone();
-                    Node newNode = new Node(node.Name, p);
-                    newStep.Add(newNode);
-                }
-                flowEngine.AddAfter(firstStep, newStep);
-            }
-        }
-
-        /// <summary>
-        /// 增加中心下属部门
-        /// </summary>
-        /// <param name="flowEngine">流程</param>
-        /// <param name="funcEntry">中心下属部门指定功能</param>        
-        /// <param name="children">中心下属部门编号</param>
-        private static void AddLevel2(FlowEngine flowEngine, FunctionEntity funcEntry, IList<DepartmentEntity> children)
+        /// <param name="funcEntry"></param>        
+        /// <param name="users"></param>
+        private static void AddCountersign(FlowEngine flowEngine, FunctionEntity funcEntry, IList<UserEntity> users)
         {
             Step firstStep = flowEngine.FlowSteps.First();
             Step newStep = null;
-            foreach (var dep in children)
+            foreach (var user in users)
             {
                 newStep = new StepGeneral();
-                Participant participant = new Participant() { Department = Convert.ToInt64(dep.Id), Category = 1, Reference = (long)funcEntry.Id };
+                Participant participant = new Participant() { Department = -1, Category = 1, Reference = (long)funcEntry.Id };
                 newStep.Add(new Node(funcEntry.C_Name, participant) { Description = funcEntry.C_Name });
 
                 flowEngine.AddAfter(firstStep, newStep);
@@ -248,58 +172,6 @@ namespace CharityPlatform.WorkFlow
                 }
             }
             return null;
-        }
-
-        private static Hashtable BuildWorkDepts(int id, long uid)
-        {
-            Hashtable workDepts = new Hashtable();
-            //获取该工单信息
-            using (WorkBLL workBLL = new WorkBLL())
-            {
-                IList<WorkDept> references = workBLL.GetWorkParticipants(id, uid);
-                foreach (var reference in references)
-                {
-                    if (!workDepts.ContainsKey(reference.FuncId))
-                    {
-                        workDepts.Add(reference.FuncId, reference);
-                    }
-                }
-                return workDepts;
-            }
-        }
-
-        public static void CommitWork(int id, long uid)
-        {
-            //获取当前模板
-            using (SystemBLL bll = new SystemBLL())
-            {
-                BusinessKindEntity flowKind = bll.GetKind(id);
-
-                FlowAttachment attachment = new FlowAttachment() { Creater = uid, Owner = id };
-
-                FlowEngine flowEngine = FlowManager.Instance().TemplateLoad(flowKind.C_Template, attachment);
-
-                FlowManager.Instance().Assign(flowEngine, attachment);
-                Hashtable workDepts = BuildWorkDepts(id, uid);
-
-                foreach (var step in flowEngine.FlowSteps)
-                {
-                    Node node = step.Nodes.First();
-                    if (node.Participant.Reference == 15100) continue;
-                    WorkDept workDept = (WorkDept)workDepts[(int)node.Participant.Reference];
-                    switch (node.Participant.Category)
-                    {
-                        case 0:
-                            node.Participant.Department = workDept.Dept;
-                            break;
-                        default:
-                            node.Participant.Department = workDept.Dept;
-                            break;
-                    }
-                }
-                FlowManager.Instance().Save(flowEngine, Category.Work);
-            }
         } 
-
-    } 
+    }
 }

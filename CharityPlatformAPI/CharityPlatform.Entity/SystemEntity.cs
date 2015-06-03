@@ -70,6 +70,18 @@ namespace CharityPlatform.Entity
             return this.Id == ((FunctionEntity)obj).Id;
         }
     }
+
+    public class FlowKinkEntity
+    {
+        public int id { get; set; }
+        public string C_Name { get; set; }
+        public int? I_Flag { get; set; }
+        public int? I_Parent { get; set; }
+        public string C_Remark { get; set; }
+        public int? I_Flow { get; set; }
+        public string C_Template { get; set; }
+    }
+
     public class WordEntity
     {
         public int Id { get; set; }

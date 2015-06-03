@@ -20,3 +20,17 @@ D:\Devspace\EastdayProjectNew\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.csproj
 D:\Devspace\EastdayProjectNew\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.dll
 D:\Devspace\EastdayProjectNew\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.pdb
 D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.csprojResolveAssemblyReference.cache
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\Eastday.WorkFlow.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\Eastday.WorkFlow.pdb
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\CharityPlatform.Data.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\CharityPlatform.Entity.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\ClownFish.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\Eastday.WorkFlowEngine.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\StyleCop.CSharp.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\StyleCop.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\TokenHelper.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\CharityPlatform.Data.pdb
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\CharityPlatform.Entity.pdb
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\bin\Debug\Eastday.WorkFlowEngine.pdb
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlow\obj\Debug\Eastday.WorkFlow.pdb

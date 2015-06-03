@@ -28,14 +28,14 @@ namespace CharityPlatform.Data
         /// <param name="participants">所有参与者</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public int Insert(CharityPlatform.Entity.WorkFlowEntity workFlowEntity, List<CharityPlatform.Entity.ParticipantEntity> participants)
+        public int Usp_Flow_Insert(CharityPlatform.Entity.WorkFlowEntity workFlowEntity, List<CharityPlatform.Entity.ParticipantEntity> participants)
         {
-            this.ExecuteNonQuery("usp_Flow_Insert", workFlowEntity);
+            this.ExecuteNonQuery("Usp_Flow_Insert", workFlowEntity);
 
             foreach (var entity in participants)
             {
                 entity.I_WorkFlow = workFlowEntity.Id;
-                this.ExecuteNonQuery("usp_Participant_Insert", entity);
+                this.ExecuteNonQuery("Usp_Participant_Insert", entity);
             }
 
             return workFlowEntity.Id;
@@ -46,9 +46,9 @@ namespace CharityPlatform.Data
         /// </summary>
         /// <param name="entity">流程实体</param>
         /// <returns>影响的行数</returns>
-        public int Update(Entity.WorkFlowEntity entity)
+        public int Usp_Flow_Update(Entity.WorkFlowEntity entity)
         {
-            return this.ExecuteNonQuery("usp_Flow_Update", entity);
+            return this.ExecuteNonQuery("Usp_Flow_Update", entity);
         }
 
         /// <summary>
@@ -56,25 +56,24 @@ namespace CharityPlatform.Data
         /// </summary>
         /// <param name="owner">流程属主</param>
         /// <returns>流程实体</returns>
-        public Entity.WorkFlowEntity GetWorkFlowByOwner(int owner)
+        public Entity.WorkFlowEntity Usp_Flow_ByOwner(int owner)
         {
-            return this.GetDataItem<Entity.WorkFlowEntity>("usp_Flow_ByOwner", new { I_Owner = owner });
+            return this.GetDataItem<Entity.WorkFlowEntity>("Usp_Flow_ByOwner", new { I_Owner = owner });
+        } 
+
+        public void USP_Flow_Confirm(int owner)
+        {
+            this.ExecuteNonQuery("USP_Flow_Confirm", new { I_Owner = owner });
         }
 
         /// <summary>
-        /// 所有拥有该功能编号的用户
+        /// 删除流程数据
         /// </summary>
-        /// <param name="fuctionId">功能编号</param>
-        /// <returns>所有拥有该功能编号的用户</returns>
-        public IList<Entity.UserEntity> GetUsersByFuction(int funcId)
+        /// <param name="I_Owner"></param>
+        public void Usp_Workflow_Delete(int I_Owner)
         {
-            return this.FillList<Entity.UserEntity>("usp_Flow_FindDepartment", new { funcid = funcId });
+            this.ExecuteNonQuery("Usp_Workflow_Delete", new { I_Owner = I_Owner });
         }
-
-        public void FlowFinished(int owner)
-        {
-            this.ExecuteNonQuery("USP_Flow_Confirm", new { I_Owner = owner });
-        } 
     }
 
     /// <summary>
@@ -87,11 +86,11 @@ namespace CharityPlatform.Data
         /// </summary>
         /// <param name="entities">实体列表</param>
         /// <returns>影响行数</returns>
-        public int Insert(List<Entity.ParticipantEntity> entities)
+        public int Usp_Participant_Insert(List<Entity.ParticipantEntity> entities)
         {
             foreach (var entity in entities)
             {
-                this.ExecuteNonQuery("usp_Participant_Insert", entity);
+                this.ExecuteNonQuery("Usp_Participant_Insert", entity);
             }
 
             return entities.Count;
@@ -103,9 +102,9 @@ namespace CharityPlatform.Data
         /// </summary>
         /// <param name="workFlow">流程编号</param>
         /// <returns>参与者列表</returns>
-        public List<Entity.ParticipantEntity> GetParticipants(int workFlow)
-        {
-            return this.FillList<Entity.ParticipantEntity>("usp_Participant_ByWorkFlow", new { IWorkFlow = workFlow });
-        }
+        //public List<Entity.ParticipantEntity> Usp_Participant_ByWorkFlow(int workFlow)
+        //{
+        //    return this.FillList<Entity.ParticipantEntity>("Usp_Participant_ByWorkFlow", new { IWorkFlow = workFlow });
+        //}
     }
 }

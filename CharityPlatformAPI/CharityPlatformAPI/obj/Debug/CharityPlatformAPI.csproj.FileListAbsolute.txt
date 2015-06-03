@@ -19,6 +19,6 @@ D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\bin\System.Web.Htt
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\bin\zh-Hans\System.Web.Http.resources.dll
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\obj\Debug\CharityPlatformAPI.csprojResolveAssemblyReference.cache
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\obj\Debug\CharityPlatformAPI.dll
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\obj\Debug\CharityPlatformAPI.pdb
-D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\obj\Debug\CharityPlatformAPI.csprojResolveAssemblyReference.cache

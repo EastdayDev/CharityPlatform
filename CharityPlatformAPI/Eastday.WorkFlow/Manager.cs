@@ -18,7 +18,7 @@ namespace Eastday.WorkFlow
     using System.Collections;
     using CharityPlatform.Entity;
 
-    class FlowKey 
+    class FlowKey
     {
         public int Owner = -1;
 
@@ -31,7 +31,7 @@ namespace Eastday.WorkFlow
         {
             FlowKey other = (FlowKey)obj;
             return this.Owner == other.Owner;
-        } 
+        }
     }
     /// <summary>
     /// 流程管理
@@ -56,8 +56,8 @@ namespace Eastday.WorkFlow
         public static FlowManager Instance()
         {
             if (flowManager == null)
-            {                
-                flowManager = new FlowManager();                
+            {
+                flowManager = new FlowManager();
             }
             return flowManager;
         }
@@ -68,7 +68,7 @@ namespace Eastday.WorkFlow
         /// <returns></returns>
         public FlowEngine BuildEngine()
         {
-            FlowEngine flowEngine = new FlowEngine();            
+            FlowEngine flowEngine = new FlowEngine();
             flowEngine.FinishedHandler -= new FlowEngine.FinishedEventHandler(FlowManager.FlowFinished);
             flowEngine.FinishedHandler += new FlowEngine.FinishedEventHandler(FlowManager.FlowFinished);
             return flowEngine;
@@ -87,7 +87,7 @@ namespace Eastday.WorkFlow
             {
                 foreach (var node in step.Nodes)
                 {
-                    node.Participant.Actor = new DepartmentActor();
+                    //node.Participant.Actor = new DepartmentActor();
                     if (node is NodeCondition)
                     {
                         ((NodeCondition)node).Condition = new RevenuCondition();
@@ -107,6 +107,15 @@ namespace Eastday.WorkFlow
             string fullName = GetFlowFile(owner);
             return System.IO.File.Exists(fullName);
         }
+
+        public void Delete(int I_Owner)
+        {
+            using (WorkFlowBLL workFlowBLL = new WorkFlowBLL())
+            {
+                workFlowBLL.Usp_Workflow_Delete(I_Owner);
+            }
+        }
+
         #endregion
 
         #region file load and save
@@ -141,7 +150,7 @@ namespace Eastday.WorkFlow
             if (this.dicFlow.ContainsKey(flowKey))
             {
                 this.dicFlow.Remove(flowKey);
-            } 
+            }
         }
 
         private void Save(FlowEngine flowEngine)
@@ -168,7 +177,7 @@ namespace Eastday.WorkFlow
             }
             string fileName = FlowManager.GetFlowFile(flowEngine.Attachment.Owner);
             FlowEngine.Save(fileName, flowEngine);
-        }        
+        }
 
         /// <summary>
         /// 流程文件名
@@ -179,7 +188,7 @@ namespace Eastday.WorkFlow
         private static string GetFlowFile(int owner)
         {
             string directory = string.Empty;
-            string path = System.Configuration.ConfigurationManager.AppSettings["FlowPath"]; 
+            string path = System.Configuration.ConfigurationManager.AppSettings["FlowPath"];
             return string.Format("{0}/Flow_{2}.bin", path, owner);
         }
 
@@ -238,7 +247,7 @@ namespace Eastday.WorkFlow
             string file = this.GetTemplateFile(template);
             FlowEngine flowEngine = FlowEngine.Load(file);
             flowEngine.ResetIdentity();
-            flowEngine.Reset(flowAttachment);　
+            flowEngine.Reset(flowAttachment);
             return flowEngine;
         }
 
@@ -252,12 +261,12 @@ namespace Eastday.WorkFlow
         /// <param name="flowEngine">流程</param>
         /// <param name="category">分类</param>
         /// <param name="owner">具体业务数据对应的PK</param>
-        public void Save(Eastday.WorkFlowEngine.FlowEngine flowEngine)
+        public void FlowSave(Eastday.WorkFlowEngine.FlowEngine flowEngine)
         {
             using (WorkFlowBLL workFlowBLL = new WorkFlowBLL())
             {
                 workFlowBLL.DbContext = workFlowBLL.CreateDbContext(true);
-                WorkFlowEntity workFlowEntity = workFlowBLL.GetWorkFlowByOwner(flowEngine.Attachment.Owner);
+                WorkFlowEntity workFlowEntity = workFlowBLL.Usp_Flow_ByOwner(flowEngine.Attachment.Owner);
                 if (workFlowEntity == null) workFlowEntity = new WorkFlowEntity();
                 workFlowEntity.I_Owner = flowEngine.Attachment.Owner;
                 workFlowEntity.I_State = (int)flowEngine.FlowState;
@@ -270,7 +279,7 @@ namespace Eastday.WorkFlow
                 foreach (var step in steps)
                 {
                     foreach (var node in step.Nodes)
-                    {                        
+                    {
                         ParticipantEntity participantEntity = new ParticipantEntity();
                         participantEntity.I_Reference = node.Participant.Reference;
                         participantEntity.I_WorkFlow = workFlowEntity.Id;
@@ -283,9 +292,9 @@ namespace Eastday.WorkFlow
 
                         participants.Add(participantEntity);
                     }
-                } 
+                }
 
-                if (workFlowBLL.Insert(workFlowEntity, participants) > 0)
+                if (workFlowBLL.Usp_Flow_Insert(workFlowEntity, participants) > 0)
                 {
                     workFlowBLL.DbContext.CommitTransaction();
                 }
@@ -307,28 +316,25 @@ namespace Eastday.WorkFlow
         public bool Audit(FlowEngine flowEngine, AuditType auditType, string auditDesc, int userId)
         {
             using (SystemBLL bll = new SystemBLL())
-            { 
-                List<Entity.UserAuthEntity> userAuths = bll.GetSysAuthByUser(userId);
-                foreach (var userAuth in userAuths)
+            {
+                Participant participant = null;
+                Conclusion conclusion = null;
+                IList<FunctionEntity> userFuncs = bll.Usp_User_Funcs(userId);
+                foreach (var userFunc in userFuncs)
                 {
-                    Participant participant = new Participant() { Category = 1, Department = long.Parse(userAuth.Department), Reference = userAuth.FuncId };
-                    Conclusion conclusion = new Conclusion(auditType, long.Parse(userAuth.Uid), DateTime.Now) { Description = auditDesc };
-                    if (flowEngine.Audit(conclusion, participant))
-                    {
-                        return true;
-                    } 
-                }
-
-                IList<Eastday.Entity.DepartmentUserEntity> depUsers = bll.GetUserDepts(userId);
-                foreach (var depUser in depUsers)
-                {
-                    long uid = long.Parse(depUser.Uid);
-                    Participant participant = new Participant() { Category = 0, Department = uid, Reference = -1 };
-                    Conclusion conclusion = new Conclusion(auditType, uid, DateTime.Now) { Description = auditDesc };
+                    participant = new Participant() { Category = 1, Department = userId, Reference = (long)userFunc.Id };
+                    conclusion = new Conclusion(auditType, (long)userId, DateTime.Now) { Description = auditDesc };
                     if (flowEngine.Audit(conclusion, participant))
                     {
                         return true;
                     }
+                }
+
+                participant = new Participant() { Category = 0, Department = userId, Reference = -1 };
+                conclusion = new Conclusion(auditType, userId, DateTime.Now) { Description = auditDesc };
+                if (flowEngine.Audit(conclusion, participant))
+                {
+                    return true;
                 }
             }
             return false;
@@ -339,28 +345,20 @@ namespace Eastday.WorkFlow
         /// <param name="flowEngine"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public bool CanAudit(FlowEngine flowEngine, long userId)
-        {     
+        public bool CanAudit(FlowEngine flowEngine, int userId)
+        {
             Step current = flowEngine.GetCurrent();
             if (current == null || current.NodeValidCount == 0) return false;
             IList<Node> nodes = current.Nodes;
 
             using (SystemBLL bll = new SystemBLL())
             {
-                List<Entity.UserAuthEntity> userAuths = bll.GetSysAuthByUser(userId);
-                foreach (var userAuth in userAuths)
+                IList<FunctionEntity> userFuncs = bll.Usp_User_Funcs(userId);
+                foreach (var userFunc in userFuncs)
                 {
-                    Participant participant = new Participant() { Category = 1, Department = long.Parse(userAuth.Department), Reference = userAuth.FuncId };
-                    var auditNodes = from node in nodes where node.CanAudit(participant) == true select node;
-                    if (auditNodes.Any()) return true;
-                }
-
-                IList<Eastday.Entity.DepartmentUserEntity> depUsers = bll.GetUserDepts(userId);
-                foreach (var depUser in depUsers)
-                {
-                    long uid = long.Parse(depUser.Uid);
-                    Participant participant = new Participant() { Category = 0, Department = uid, Reference = -1 };
-                    var auditNodes = from node in nodes where node.CanAudit(participant) == true select node;
+                    var auditNodes = from node in nodes
+                                     where node.Participant.Reference == userFunc.Id || node.Participant.Department == userId
+                                     select node;
                     if (auditNodes.Any()) return true;
                 }
             }
@@ -371,7 +369,7 @@ namespace Eastday.WorkFlow
         /// 流程退回
         /// </summary>
         /// <param name="flowEngine"></param>
-        public bool Returned(FlowEngine flowEngine, AuditType auditType, string auditDesc, long userId)
+        public bool Returned(FlowEngine flowEngine, AuditType auditType, string auditDesc, int userId)
         {
             if (this.Audit(flowEngine, auditType, auditDesc, userId))
             {
@@ -385,7 +383,7 @@ namespace Eastday.WorkFlow
         /// 流程终止
         /// </summary>
         /// <param name="flowEngine"></param>
-        public bool Abort(FlowEngine flowEngine, string auditDesc, long userId)
+        public bool Abort(FlowEngine flowEngine, string auditDesc, int userId)
         {
             if (this.Audit(flowEngine, AuditType.Passed, auditDesc, userId))
             {
@@ -405,9 +403,9 @@ namespace Eastday.WorkFlow
             FlowEngine flowEngine = (FlowEngine)sender;
             using (WorkFlowBLL bll = new WorkFlowBLL())
             {
-                bll.FlowFinished(flowEngine.Attachment.Owner);
+                bll.USP_Flow_Confirm(flowEngine.Attachment.Owner);
             }
-        }        
+        }
 
         #endregion
 

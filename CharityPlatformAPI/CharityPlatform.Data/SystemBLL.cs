@@ -55,6 +55,15 @@ namespace CharityPlatform.Data
         }
 
         /// <summary>
+        /// 查找功能
+        /// </summary>        
+        /// <param name="Id"></param>
+        /// <returns>List<FunctionEntity></returns>
+        public FunctionEntity Usp_Func_Get(int id)
+        {
+            return this.GetDataItem<FunctionEntity>("Usp_Func_Get", new { Id = id });
+        }
+        /// <summary>
         /// 待审列表
         /// </summary>
         /// <param name="I_User">用户ID</param>
@@ -79,7 +88,25 @@ namespace CharityPlatform.Data
             return this.FillDataTable("USP_Check_List_Over", new { UserId = userId, PageIndex = pageIndex, PageSize = pageSize, FindValue = findValue });
         }
 
+        /// <summary>
+        /// 获得流程模板
+        /// </summary>
+        /// <param name="flow">流程定义编号</param>
+        /// <returns></returns>
+        public FlowKinkEntity USP_Flow_Template(int id)
+        {
+            return this.GetDataItem<FlowKinkEntity>("USP_Flow_Template", new { Id = id });
+        }
 
+        /// <summary>
+        /// 所有拥有该功能编号的用户
+        /// </summary>
+        /// <param name="fuctionId">功能编号</param>
+        /// <returns>所有拥有该功能编号的用户</returns>
+        public IList<Entity.UserEntity> Usp_User_ByFunc(int funcId)
+        {
+            return this.FillList<Entity.UserEntity>("Usp_User_ByFunc", new { funcid = funcId });
+        }
         /***********************************************************************************************/
 
 
