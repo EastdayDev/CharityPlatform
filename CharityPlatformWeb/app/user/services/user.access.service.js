@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('epUserModule').factory('epUser', ['epHttp', 'epCookie', 'appKey',
+angular.module('UserModule').factory('cpUser', ['epHttp', 'epCookie', 'appKey',
     function (epHttp, epCookie, appKey) {
         var service = {};
 
