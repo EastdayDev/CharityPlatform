@@ -10,3 +10,9 @@ D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlowEngine\bin\Debug\Styl
 D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlowEngine\bin\Debug\StyleCop.dll
 D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlowEngine\obj\Debug\Eastday.WorkFlowEngine.dll
 D:\Devspace\CharityForm\CharityPlatformAPI\Eastday.WorkFlowEngine\obj\Debug\Eastday.WorkFlowEngine.pdb
+D:\Devspace\CharityPlatform\CharityPlatformAPI\Eastday.WorkFlowEngine\bin\Debug\Eastday.WorkFlowEngine.dll
+D:\Devspace\CharityPlatform\CharityPlatformAPI\Eastday.WorkFlowEngine\bin\Debug\Eastday.WorkFlowEngine.pdb
+D:\Devspace\CharityPlatform\CharityPlatformAPI\Eastday.WorkFlowEngine\bin\Debug\StyleCop.CSharp.dll
+D:\Devspace\CharityPlatform\CharityPlatformAPI\Eastday.WorkFlowEngine\bin\Debug\StyleCop.dll
+D:\Devspace\CharityPlatform\CharityPlatformAPI\Eastday.WorkFlowEngine\obj\Debug\Eastday.WorkFlowEngine.dll
+D:\Devspace\CharityPlatform\CharityPlatformAPI\Eastday.WorkFlowEngine\obj\Debug\Eastday.WorkFlowEngine.pdb

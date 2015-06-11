@@ -6,3 +6,11 @@ D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Entity\bin\Debug\NPOI
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Entity\bin\Debug\TokenHelper.dll
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Entity\obj\Debug\CharityPlatform.Entity.dll
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatform.Entity\obj\Debug\CharityPlatform.Entity.pdb
+D:\Devspace\CharityPlatform\CharityPlatformAPI\CharityPlatform.Entity\bin\Debug\CharityPlatform.Entity.dll
+D:\Devspace\CharityPlatform\CharityPlatformAPI\CharityPlatform.Entity\bin\Debug\CharityPlatform.Entity.pdb
+D:\Devspace\CharityPlatform\CharityPlatformAPI\CharityPlatform.Entity\bin\Debug\ClownFish.dll
+D:\Devspace\CharityPlatform\CharityPlatformAPI\CharityPlatform.Entity\bin\Debug\log4net.dll
+D:\Devspace\CharityPlatform\CharityPlatformAPI\CharityPlatform.Entity\bin\Debug\NPOI.dll
+D:\Devspace\CharityPlatform\CharityPlatformAPI\CharityPlatform.Entity\bin\Debug\TokenHelper.dll
+D:\Devspace\CharityPlatform\CharityPlatformAPI\CharityPlatform.Entity\obj\Debug\CharityPlatform.Entity.dll
+D:\Devspace\CharityPlatform\CharityPlatformAPI\CharityPlatform.Entity\obj\Debug\CharityPlatform.Entity.pdb

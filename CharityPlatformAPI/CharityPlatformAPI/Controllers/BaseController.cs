@@ -1,15 +1,15 @@
-﻿namespace CharityPlatformAPI.Controllers
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 
+namespace CharityPlatformAPI.Controllers
+{
     public class BaseController : ApiController
     {
-        internal protected const string APP_ID = "CharityPlatform"; 
+        internal protected const string APP_ID = "CharityPlatform";
 
         [HttpPost]
         public int PostEntity(CharityPlatform.Entity.PostParameter parameter)
