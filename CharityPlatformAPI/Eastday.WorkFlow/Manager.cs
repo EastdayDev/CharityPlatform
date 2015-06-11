@@ -315,11 +315,11 @@ namespace Eastday.WorkFlow
         /// <returns>true 审核成功 false 不能审核</returns>
         public bool Audit(FlowEngine flowEngine, AuditType auditType, string auditDesc, int userId)
         {
-            using (SystemBLL bll = new SystemBLL())
+            using (AppBLL bll = new AppBLL())
             {
                 Participant participant = null;
                 Conclusion conclusion = null;
-                IList<FunctionEntity> userFuncs = bll.Usp_User_Funcs(userId);
+                IList<FunctionEntity> userFuncs = bll.FillList<FunctionEntity>("Usp_Funcs_ByUser", new { UserId = userId });
                 foreach (var userFunc in userFuncs)
                 {
                     participant = new Participant() { Category = 1, Department = userId, Reference = (long)userFunc.Id };
@@ -351,9 +351,9 @@ namespace Eastday.WorkFlow
             if (current == null || current.NodeValidCount == 0) return false;
             IList<Node> nodes = current.Nodes;
 
-            using (SystemBLL bll = new SystemBLL())
+            using (AppBLL bll = new AppBLL())
             {
-                IList<FunctionEntity> userFuncs = bll.Usp_User_Funcs(userId);
+                IList<FunctionEntity> userFuncs = bll.FillList<FunctionEntity>("Usp_Funcs_ByUser", new { UserId = userId });
                 foreach (var userFunc in userFuncs)
                 {
                     var auditNodes = from node in nodes

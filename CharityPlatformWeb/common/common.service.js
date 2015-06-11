@@ -1,23 +1,79 @@
 ﻿'use strict';
 
-angular.module('epCommonModule').value('version', '0.1');
+angular.module('CommonModule').value('version', '0.1');
 
-angular.module('epCommonModule').constant('appKey', 'CharityPlatform');
+angular.module('CommonModule').constant('appKey', 'CharityPlatform');
 
-angular.module('epCommonModule').constant('appname', '上海浦东慈善基金会');
+angular.module('CommonModule').constant('appname', '上海浦东慈善基金会');
 
-angular.module('epCommonModule').constant('epApiPrefix', 'http://localhost:8080/api');
+angular.module('CommonModule').constant('apiPrefix', 'http://localhost:4972/api');
 
-angular.module('epCommonModule').value('epPageSize', 10);
 
-angular.module('epCommonModule').factory('epHttp', ['$http', '$q', '$rootScope', 'epCookie', 'epApiPrefix',
-    function ($http, $q, $rootScope, epCookie, epApiPrefix) {
+angular.module('CommonModule').factory('cmCookie', ['appKey', function (appKey) {
+    var service = {};
+
+    /** 
+    * @description
+    * Sets a value for given cookie key
+    *
+    * sample : epCookieService.put('epCookie', { name: 'ddd', value: 'ttt' }, { expireMinutes: 60 });
+    *
+    * @param {string} key Id for the `value`.
+    * @param {string} json object value
+    * @param {Object=} options Options object. only expireMinutes, path, domain
+    */
+    service.put = function (name, value, option) {
+        var str = name + "=" + JSON.stringify(value);
+        if (option) {
+            //如果设置了过期时间
+            if (option.expireMinutes) {
+                var date = new Date();
+                var ms = option.expireMinutes * 60 * 1000;
+                date.setTime(date.getTime() + ms);
+                str += "; expires=" + date.toGMTString();
+            }
+            if (option.path) str += "; path=" + path;   //设置访问路径
+            if (option.domain) str += "; domain" + domain; //设置访问主机
+            if (option.secure) str += "; true";    //设置安全性
+        }
+        document.cookie = str;
+    }
+
+    service.expired = function(name) {
+        var str = name + '=' + ' ';
+        var date = new Date();
+        date.setTime(date.getTime() - 1000);
+        str += "; expires=" + date.toGMTString();
+        document.cookie = str;
+    }
+
+    //读取cookies
+    service.get = function (name) {
+        if (document.cookie.indexOf(name) === -1) return null;
+        var cookieItems = document.cookie.split(';');
+        var length = cookieItems.length;
+        for(var i = 0; i < length; i ++){
+            var items = cookieItems[i].split('=');
+            if (items[0].trim() === name) return JSON.parse(items[1]);
+        }
+        return null;
+    } 
+
+    service.appCookie = function(){
+        return service.get(appKey);
+    }
+    return service;
+}]);
+
+
+angular.module('CommonModule').factory('cmHttp', ['$http', '$q', '$rootScope', 'cmCookie', 'apiPrefix',
+    function ($http, $q, $rootScope, cmCookie, apiPrefix) {
         var service = {};
 
         var buildToken = function () {
             var token = '';
-            if (epCookie.appCookie()) {
-                var user = epCookie.appCookie();
+            if (cmCookie.appCookie()) {
+                var user = cmCookie.appCookie();
                 if (user.Token) {
                     var userToken = JSON.stringify(user.Token);
                     token = 'Basic ' + userToken.replace(/,/g, '$#@!');
@@ -28,8 +84,8 @@ angular.module('epCommonModule').factory('epHttp', ['$http', '$q', '$rootScope',
 
         service.buildTokenNotBasic = function () {
             var token = '';
-            if (epCookie.appCookie()) {
-                var user = epCookie.appCookie();
+            if (cmCookie.appCookie()) {
+                var user = cmCookie.appCookie();
                 if (user.Token) {
                     var userToken = JSON.stringify(user.Token);
                     token = userToken.replace(/,/g, '**');
@@ -39,7 +95,7 @@ angular.module('epCommonModule').factory('epHttp', ['$http', '$q', '$rootScope',
         }
 
         service.ajaxGet = function (controller, method, param, callback) {
-            var url = epApiPrefix + '/' + controller + '/' + method;
+            var url = apiPrefix + '/' + controller + '/' + method;
             if (!!param) {
                 url += '?'
                 angular.forEach(param, function (value, key) {
@@ -57,7 +113,7 @@ angular.module('epCommonModule').factory('epHttp', ['$http', '$q', '$rootScope',
 
         service.ajaxPost = function (controller, method, param, callback) {
             var token = buildToken();
-            var url = epApiPrefix + '/' + controller + '/' + method;
+            var url = apiPrefix + '/' + controller + '/' + method;
             $http.post(url, param, { headers: { 'Authorization': token } }).success(function (data) {
                 if (callback) callback(data);
             }).error(function (message, status) {
@@ -66,7 +122,7 @@ angular.module('epCommonModule').factory('epHttp', ['$http', '$q', '$rootScope',
         }
 
         service.promiseGet = function (controller, method, param) {
-            var url = epApiPrefix + '/' + controller + '/' + method;
+            var url = apiPrefix + '/' + controller + '/' + method;
             if (!!param) {
                 url += '?'
                 angular.forEach(param, function (value, key) {
@@ -84,7 +140,7 @@ angular.module('epCommonModule').factory('epHttp', ['$http', '$q', '$rootScope',
         }
 
         service.promisePost = function (controller, method, param) {
-            var url = epApiPrefix + '/' + controller + '/' + method;
+            var url = apiPrefix + '/' + controller + '/' + method;
             var deferred = $q.defer();
             var token = buildToken();
             $http.post(url, param, { headers: { 'Authorization': token } })

@@ -41,15 +41,11 @@ namespace CharityPlatform.WorkFlow
         /// <returns>流程实例</returns>
         public static FlowEngine Build(int id, int userId, IList<UserEntity> users)
         {
-            using (SystemBLL bll = new SystemBLL())
+            using (AppBLL bll = new AppBLL())
             {
-                int flowKindId = 0;
                 //获取当前模板
-                using (ProjectBLL prjBll = new ProjectBLL())
-                {
-                    flowKindId = (int)prjBll.USP_Project_Get(id).I_FlowType;
-                }
-                FlowKinkEntity flowKindEntity = bll.USP_Flow_Template(flowKindId);
+                int flowKindId = (int)bll.GetDataItem<ProjectEntity>("USP_Project_Get", new { Id = id }).I_FlowType;
+                FlowKinkEntity flowKindEntity = bll.GetDataItem<FlowKinkEntity>("USP_Flow_Template", new { Id = flowKindId });
                 FlowAttachment flowAttachment = new FlowAttachment() { Owner = id, Kind = flowKindEntity.id };
                 flowAttachment.Creater = userId;
 
@@ -59,7 +55,7 @@ namespace CharityPlatform.WorkFlow
                 if (users.Any())
                 {
                     FunctionEntity funcEntry = null;
-                    funcEntry = bll.Usp_Func_Get(10100);
+                    funcEntry = bll.GetDataItem<FunctionEntity>("Usp_Func_Get", new { Id = 10100 });
                     FlowHelper.AddCountersign(flowEngine, funcEntry, users);
                 }
                 FlowHelper.Concat(id, flowEngine);
@@ -172,6 +168,6 @@ namespace CharityPlatform.WorkFlow
                 }
             }
             return null;
-        } 
+        }
     }
 }

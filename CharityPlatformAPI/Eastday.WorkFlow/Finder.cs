@@ -96,10 +96,10 @@ namespace Eastday.WorkFlow
         /// <returns></returns>
         public int FindExpect(FlowAttachment flowAttachment)
         {
-            using (SystemBLL bll = new SystemBLL())
+            using (AppBLL bll = new AppBLL())
             {
-                return 1;
-                //return bll.GetKindFlow(flowAttachment.Kind);
+                FlowKinkEntity flowKind = bll.GetDataItem<FlowKinkEntity>("Usp_FlowKind_Get", new { Id = flowAttachment.Kind });
+                return (int)flowKind.I_Flow;
             }
         }
     }

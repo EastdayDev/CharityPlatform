@@ -105,6 +105,7 @@
     <Compile Include="Controllers\BasicAuthorizeAttribute.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HelperController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -122,7 +123,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CharityPlatform.Data\CharityPlatform.Data.csproj">
+      <Project>{e08572de-8b74-4597-ad10-aefc8d87bc2f}</Project>
+      <Name>CharityPlatform.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CharityPlatform.Entity\CharityPlatform.Entity.csproj">
+      <Project>{589a87bc-9579-4800-89a1-43218b88ef98}</Project>
+      <Name>CharityPlatform.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

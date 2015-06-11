@@ -15,12 +15,47 @@ namespace CharityPlatform.Data
     using System.Threading.Tasks;
     using ClownFish;
     using System.Data;
+    using CharityPlatform.Entity;
 
     /// <summary>
     /// 流程业务类
     /// </summary>
     public class WorkFlowBLL : AppBLL
     {
+        /// <summary>
+        /// 待审列表
+        /// </summary>
+        /// <param name="I_User">用户ID</param>
+        /// <param name="PageIndex">当前页号</param>
+        /// <param name="PageSize">页大小（每页显示多少个）</param>
+        /// <returns></returns>
+        public DataTable USP_Check_List(int userId, int pageIndex, int pageSize, string findValue)
+        {
+            return this.FillDataTable("USP_Check_List", new { UserId = userId, PageIndex = pageIndex, PageSize = pageSize, FindValue = findValue });
+        }
+
+        /// <summary>
+        /// 已审列表
+        /// </summary>
+        /// <param name="I_User"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="PageSize"></param>
+        /// <param name="findValue"></param>
+        /// <returns></returns>
+        public DataTable USP_Check_List_Over(int userId, int pageIndex, int pageSize, string findValue)
+        {
+            return this.FillDataTable("USP_Check_List_Over", new { UserId = userId, PageIndex = pageIndex, PageSize = pageSize, FindValue = findValue });
+        }
+
+        /// <summary>
+        /// 获得流程模板
+        /// </summary>
+        /// <param name="flow">流程定义编号</param>
+        /// <returns></returns>
+        public FlowKinkEntity USP_Flow_Template(int id)
+        {
+            return this.GetDataItem<FlowKinkEntity>("USP_Flow_Template", new { Id = id });
+        }
         /// <summary>
         /// 保存流程数据，会删除原有的所有参与者，再保存
         /// </summary>

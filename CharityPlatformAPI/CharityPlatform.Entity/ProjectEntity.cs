@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace CharityPlatform.Entity
 {
+    public class PostParameter
+    {
+        public string proc;
+        public object entity;
+    }
+
     public class ProjectEntity
     {
         public int Id;
@@ -35,5 +41,30 @@ namespace CharityPlatform.Entity
         public int I_Publisher;						// 发布人
         public DateTime? D_Publish;					// 发布时间
         public int I_State;					        // 0 创建 1 已发布
+    }
+
+    public class ProjectFileEntity
+    {
+        public int Id;
+        public int I_Project;
+        public int I_Category;
+        public int I_Uploader;
+        public DateTime D_Upload;
+        public string C_OriginName;     //文件原名
+        public string C_FileName;       //磁盘保存文件名
+        public string C_Remark;
+    }
+
+    public class ProjectDonationEntity
+    {
+        public int Id;
+        public int I_Project;
+        public int I_Method;
+        public int I_User;
+        public decimal M_Money;
+        public int I_From;
+        public string C_Transaction;
+        public DateTime D_Create;
+        public string C_Remark;
     }
 }

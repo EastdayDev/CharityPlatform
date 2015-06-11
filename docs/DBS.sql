@@ -10,12 +10,15 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+/*
+	机构伙伴
+*/
 CREATE TABLE [dbo].[Sys_Organization](
 	[Id] [int] NOT NULL,
 	[C_Contact] [varchar](50) NULL,
 	[D_Submit] [datetime] null,
 	[D_Confirm] [datetime] null,
-	[I_Audited] [int] NULL,			-- 0 未通过 1 通过 
+	[I_Audited] [int] NULL,			-- 机构账户审核
 	[I_Auditer] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
@@ -44,13 +47,15 @@ PRIMARY KEY CLUSTERED
 	[I_Function] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
- 
+/*
+	普通用户 
+*/ 
 CREATE TABLE [dbo].[Sys_User](
 	[Id] [int] IDENTITY(20150701,1) NOT NULL,
 	[C_Login] [varchar](30) NULL,
 	[C_Name] [varchar](50) NULL,
 	[I_Flag] [int] NULL,
-	[I_Category] [int] NOT NULL,		--0 基金会 1 机构用户 2 普通用户
+	[I_Category] [int] NOT NULL,		--用户类别
 	[D_Create] [datetime] not null,
 	[C_Password] [varchar](128) NULL,
 	[C_Mobile] [varchar](30) NULL,
@@ -67,24 +72,17 @@ CREATE TABLE [dbo].[Sys_User](
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+/*
+	用户基金账户
+*/
 CREATE TABLE [dbo].[User_Fund](
 	[Id] int identity(20150701, 1) not null,
 	[I_User] [int] NOT NULL,
-	[M_Money] [money] NOT NULL default(0),
-	[I_Flag] [int] NULL,
-	[C_Remark] [varchar](100) NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-
-CREATE TABLE [dbo].[User_Fund_Detail](
-	[Id] int identity(20150701, 1) not null,
-	[I_User] [int] NOT NULL,
 	[M_Money] [money] NOT NULL default(0),		-- 发生金额	
-	[I_Category] int not null default(0),		-- 类别：1 充值 2 捐款 3 提现 
+	[I_Category] int not null default(0),		-- 用户基金金额类别
+	[I_From] int null default(0),				-- 资金来源
+	[C_Transaction] varchar(200) null,			--交易编号
+	[D_Create] datetime null,
 	[I_Flag] [int] NULL default(1),
 	[C_Remark] [varchar](100) NULL,
 PRIMARY KEY CLUSTERED 
@@ -167,7 +165,7 @@ CREATE TABLE [dbo].[Project_Files](
 	[I_Uploader] int not null,							
 	[I_Project] int not null,								
 	[D_Upload] [datetime] not null,	 
-	[I_Category] int null,								-- 类别 0 展示图片 1 申请书 2 预算 10 其他	
+	[I_Category] int null,								-- 文件类型
 	[C_Remark] varchar(200) null,
 PRIMARY KEY CLUSTERED 
 (
@@ -175,6 +173,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
  
+  
  
 CREATE TABLE [dbo].[Project_Donation](	
 	[Id] int identity(20150701, 1) not null,
@@ -182,6 +181,9 @@ CREATE TABLE [dbo].[Project_Donation](
 	[I_User] int not null,			--  捐款人
 	[I_Method] int not null,		--	方式
 	[M_Money] money not null,		--	金额
+	[D_Create] datetime not null, 
+	[I_From] int null default(0),		-- 资金来源
+	[C_Transaction] varchar(200) null,  --交易编号
 	[C_Remark] varchar(200) null,
 PRIMARY KEY CLUSTERED 
 (
@@ -215,11 +217,13 @@ CREATE TABLE [dbo].[Words](
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+ 
 CREATE TABLE [dbo].[WorkFlow](
 	[Id] [int] IDENTITY(10000,1) NOT NULL,	
+	[D_Create] datetime not null,
 	[I_Flag] [int] NULL default(1),
 	[I_Owner] [int] NULL,					-- 流程属主			
-	[I_State] [int] NULL default(1),		-- 1 审核中 2 退回 3 审核通过  				
+	[I_State] [int] NULL default(1),		-- 流程状态  				
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -230,7 +234,7 @@ CREATE TABLE [dbo].[WorkFlow_Participant](
 	[Id] [int] IDENTITY(10000,1) NOT NULL,
 	[I_WorkFlow] [int] NULL,
 	[I_Flag] [int] NULL default(1),
-	[I_Bind] [int] NULL default(0),		--	绑定对象 0 功能编号 1 用户编号 
+	[I_Bind] [int] NULL default(0),		--	绑定类型 
 	[I_Number] [int] NULL,				-- 
 	[I_Reference] [int] NULL,			--	功能编号 或 用户编号
 	[C_Step] [varchar](50) NULL,		--	步骤

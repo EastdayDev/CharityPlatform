@@ -1,50 +1,53 @@
-﻿using Eastday.MsgManage.Common;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http;
-
-namespace CharityPlatformAPI.Controllers
+﻿namespace CharityPlatformAPI.Controllers
 {
+    using CharityPlatform.Data;
+    using CharityPlatform.Entity;
+    using Eastday.MsgManage.Common;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Data;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Http;
     public class FileController : ApiController
     {
         [HttpPost]
-        public int FileUpload()
+        public int Upload()
         {
             try
             {
-                string title = HttpContext.Current.Request["title"];
-                int category = Convert.ToInt32(HttpContext.Current.Request["category"]);
-                string remark = HttpContext.Current.Request["remark"];
-                int owner = Convert.ToInt32(HttpContext.Current.Request["owner"]);
-                string userId = HttpContext.Current.Request["userId"];
-                string loginName = HttpContext.Current.Request["loginName"];
+                ProjectFileEntity projectFileEntity = new ProjectFileEntity();
+                projectFileEntity.I_Project = int.Parse(HttpContext.Current.Request["projectId"]);
+                projectFileEntity.I_Category = Convert.ToInt32(HttpContext.Current.Request["category"]);
+                projectFileEntity.C_Remark = HttpContext.Current.Request["remark"];
+                projectFileEntity.I_Uploader = Convert.ToInt32(HttpContext.Current.Request["userId"]);
+                projectFileEntity.D_Upload = DateTime.Now;
+                projectFileEntity.C_OriginName = HttpContext.Current.Request.Files[0].FileName;
+
                 string filePath = ConfigurationManager.AppSettings["FileUpload"].ToString();
 
-                int index = HttpContext.Current.Request.Files[0].FileName.LastIndexOf('.');
+                int index = projectFileEntity.C_OriginName.LastIndexOf('.');
                 if (index == -1) { index = 0; }
-                string fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + HttpContext.Current.Request.Files[0].FileName.Substring(index);
+                projectFileEntity.C_FileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + projectFileEntity.C_OriginName.Substring(index);
 
-                string originalName = HttpContext.Current.Request.Files[0].FileName;
                 if (HttpContext.Current.Request.Files[0].ContentLength > 0)
                 {
                     if (!Directory.Exists(filePath))
                     {
                         Directory.CreateDirectory(filePath);
                     }
-                    HttpContext.Current.Request.Files[0].SaveAs(filePath + "\\" + fileName);
-
-                    //FileInsert(fileName, category, owner, title, remark, HttpContext.Current.Server.UrlEncode(originalName), userId);
-
+                    HttpContext.Current.Request.Files[0].SaveAs(filePath + "\\" + projectFileEntity.C_FileName);
+                    using (AppBLL bll = new AppBLL())
+                    { 
+                        bll.ExecuteNonQuery("Usp_Project_Files_Insert", projectFileEntity);
+                    } 
                     return 1;
                 }
                 return -1;
@@ -56,7 +59,7 @@ namespace CharityPlatformAPI.Controllers
         }
 
         [HttpGet]
-        public void DownUpload(int category, string originalName, string fullName, string token)
+        public void Download(int projectId, string fileName, string token)
         {
             try
             {
@@ -69,43 +72,17 @@ namespace CharityPlatformAPI.Controllers
                     return;
                 }
 
-                originalName = HttpContext.Current.Server.UrlDecode(originalName);
+                fileName = HttpContext.Current.Server.UrlDecode(fileName);
+                string fileUploadPath = ConfigurationManager.AppSettings["FileUpload"]; 
+                string fullName = System.IO.Path.Combine(fileUploadPath, projectId.ToString(), fileName);
 
-                string path = "";
-                switch (category)
-                {
-                    case 1:
-                        path = "Project/" + fullName;
-                        break;
-                    case 2:
-                        path = "Budget/" + fullName;
-                        break;
-                    case 3:
-                        path = "Contract/" + fullName;
-                        break;
-                    case 4:
-                        path = "Expense/" + fullName;
-                        break;
-                    case 5:
-                        path = "Receipt/" + fullName;
-                        break;
-                    case 6:
-                        path = "Work/" + fullName;
-                        break;
-                    default: path = "";
-                        break;
-                }
-
-                string newPath = ConfigurationManager.AppSettings["FileUpload"] + path;
-                string HeaderName = path.Substring(path.LastIndexOf("/") + 1);
-                FileInfo fileInfo = new FileInfo(newPath);
-
+                FileInfo fileInfo = new FileInfo(fullName); 
 
                 HttpContext.Current.Response.Clear();
                 HttpContext.Current.Response.ClearContent();
                 HttpContext.Current.Response.ClearHeaders();
 
-                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=" + originalName);
+                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=" + fileName);
                 HttpContext.Current.Response.AddHeader("Content-Length", fileInfo.Length.ToString());
                 HttpContext.Current.Response.AddHeader("Content-Transfer-Encoding", "binary");
                 HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
@@ -121,64 +98,6 @@ namespace CharityPlatformAPI.Controllers
             {
                 return;
             }
-        }
-
-
-        [HttpGet]
-        public int Download(int category, string fullName, string originalName)
-        {
-            originalName = HttpContext.Current.Server.UrlDecode(originalName);
-            try
-            {
-                string path = "";
-                switch (category)
-                {
-                    case 1:
-                        path = "Project/" + fullName;
-                        break;
-                    case 2:
-                        path = "Budget/" + fullName;
-                        break;
-                    case 3:
-                        path = "Contract/" + fullName;
-                        break;
-                    case 4:
-                        path = "Expense/" + fullName;
-                        break;
-                    case 5:
-                        path = "Receipt/" + fullName;
-                        break;
-                    case 6:
-                        path = "Work/" + fullName;
-                        break;
-                    default: path = "";
-                        break;
-                }
-                string newPath = ConfigurationManager.AppSettings["FileUpload"] + path;
-                string HeaderName = path.Substring(path.LastIndexOf("/") + 1);
-                FileInfo fileInfo = new FileInfo(newPath);
-
-                HttpContext.Current.Response.Clear();
-                HttpContext.Current.Response.ClearContent();
-                HttpContext.Current.Response.ClearHeaders();
-
-                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=" + originalName);
-                HttpContext.Current.Response.AddHeader("Content-Length", fileInfo.Length.ToString());
-                HttpContext.Current.Response.AddHeader("Content-Transfer-Encoding", "binary");
-                HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
-
-                HttpContext.Current.Response.ContentType = "application/octet-stream";
-                HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("gb2312");
-                HttpContext.Current.Response.WriteFile(fileInfo.FullName);
-                HttpContext.Current.Response.Flush();
-                HttpContext.Current.Response.End();
-
-                return 1;
-            }
-            catch
-            {
-                return -1;
-            }
-        }
+        } 
     }
 }

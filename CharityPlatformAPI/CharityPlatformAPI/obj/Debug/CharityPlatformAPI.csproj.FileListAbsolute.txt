@@ -22,3 +22,7 @@ D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\bin\zh-Hans\System
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\obj\Debug\CharityPlatformAPI.csprojResolveAssemblyReference.cache
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\obj\Debug\CharityPlatformAPI.dll
 D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\obj\Debug\CharityPlatformAPI.pdb
+D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\bin\CharityPlatform.Data.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\bin\CharityPlatform.Entity.dll
+D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\bin\CharityPlatform.Data.pdb
+D:\Devspace\CharityForm\CharityPlatformAPI\CharityPlatformAPI\bin\CharityPlatform.Entity.pdb
