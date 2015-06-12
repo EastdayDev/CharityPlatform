@@ -31,7 +31,6 @@ namespace CharityPlatform.Entity
         public String C_Contact { get; set; }
         public DateTime D_Submit { get; set; }
         public DateTime D_Confirm{ get; set; }
-        public String C_Remark { get; set; }
         public Int32? I_Audited { get; set; }
         public Int32? I_Auditer { get; set; } 
     }

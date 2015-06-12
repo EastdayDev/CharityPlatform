@@ -109,7 +109,7 @@ angular.module('CommonModule').factory('cmHttp', ['$http', '$q', '$rootScope', '
             }).error(function (message, status) {
                 $rootScope.$broadcast('onError', status, message, url);
             });
-        }
+        }        
 
         service.ajaxPost = function (controller, method, param, callback) {
             var token = buildToken();
@@ -120,7 +120,16 @@ angular.module('CommonModule').factory('cmHttp', ['$http', '$q', '$rootScope', '
                 $rootScope.$broadcast('onError', status, message, url);
             });
         }
+        /// BaseController 提交数据方式
+        service.getTable = function(param, callback){
+        	service.ajaxGet('Base', 'GetTable', param, callback);
+        }
 
+		/// BaseController 获得Table
+        service.postEntity = function(param, callback){
+        	service.ajaxPost('Base', 'PostEntity', param, callback);
+        }
+        
         service.promiseGet = function (controller, method, param) {
             var url = apiPrefix + '/' + controller + '/' + method;
             if (!!param) {
