@@ -7,8 +7,8 @@ angular.module('app').config(['$stateProvider', '$locationProvider', '$urlRouter
     }]);
 
 angular.module('app').run(['$templateCache', '$rootScope', '$state', '$stateParams',
-    '$location', 'epCookie', 'appKey','appname',
-    function ($templateCache, $rootScope, $state, $stateParams, $location, epCookie, appKey, appname) {
+    '$location', '_cookie', 'appKey','appname',
+    function ($templateCache, $rootScope, $state, $stateParams, $location, _cookie, appKey, appname) {
 
         var view = angular.element('#ui-view');
 

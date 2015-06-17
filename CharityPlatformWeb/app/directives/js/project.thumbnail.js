@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('epDirectiveModule').directive('projectThumbnail', ['$rootScope', function ($rootScope) {
+angular.module('directiveModule').directive('projectThumbnail', ['$rootScope', function ($rootScope) {
     var directive = {};
 
     directive.restrict = 'EA';

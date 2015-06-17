@@ -32,14 +32,32 @@
         <!--***********************       Common        ***************************************-->
         <script type="text/javascript" src="/app/common/prototype.func.js"></script>
         <script type="text/javascript" src="/app/common/common.service.js"></script>       
-                
-        <script type="text/javascript" src="/app/app.js"></script>
-        <!--***********************       Directive ***************************************-->
-        <script type="text/javascript" src="/app/directives/js/project.thumbnail.js"></script>
-
-
-        <!--***********************       controllers ***************************************-->
+        
+        <!--***********************       Home        ***************************************-->
         <script type="text/javascript" src="/app/home/controllers/home.index.controller.js"></script>
+        <script type="text/javascript" src="/app/home/home.services.js"></script>
+        <script type="text/javascript" src="/app/home/home.routes.js"></script>
+        
+        <!--***********************       User        ***************************************-->
+        <script type="text/javascript" src="/app/user/controllers/user.login.controller.js"></script>
+        <script type="text/javascript" src="/app/user/controllers/user.register.controller.js"></script>
+        <script type="text/javascript" src="/app/user/user.services.js"></script>
+        <script type="text/javascript" src="/app/user/user.routes.js"></script>
+        
+        <!--***********************       Partner        ***************************************-->
+        <script type="text/javascript" src="/app/partner/controllers/partner.index.controller.js"></script>        
+        <script type="text/javascript" src="/app/partner/partner.services.js"></script>
+        <script type="text/javascript" src="/app/partner/partner.routes.js"></script>
+        
+        <!--***********************       Donation        ***************************************-->
+        <script type="text/javascript" src="/app/donation/controllers/donation.list.controller.js"></script>        
+        <script type="text/javascript" src="/app/donation/donation.services.js"></script>
+        <script type="text/javascript" src="/app/donation/donation.routes.js"></script>
+        
+        <script type="text/javascript" src="/app/app.js"></script>
+        
+        <!--***********************       Directive ***************************************-->
+        <script type="text/javascript" src="/app/directives/js/project.thumbnail.js"></script>        
 
     </head>
     <body>
@@ -58,7 +76,7 @@
         <div class="index-menu-div">
             <div class="content-p-left-right">
                 <div class="index-logo"><img src="images/logo.png"></div>
-                <div class="index-menu-txt" ui-sref="index"><span>首页</span></div>
+                <div class="index-menu-txt" ui-sref="home"><span>首页</span></div>
                 <div class="index-menu-txt" ui-sref="about"><span>关于我们</span></div>
                 <div class="index-menu-txt" ui-sref="donationList"><span>我要捐款</span></div>
                 <div class="index-menu-txt" ui-sref="partner"><span>合作伙伴</span></div>

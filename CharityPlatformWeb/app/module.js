@@ -6,7 +6,13 @@ angular.module('componentModule', ['commonModule']);
 
 angular.module('authModule', []);
 
+angular.module('homeModule', []);
+
 angular.module('userModule', []);
+
+angular.module('partnerModule', []);
+
+angular.module('donationModule', []);
 
 angular.module('projectModule', []);
 
@@ -29,4 +35,7 @@ angular.module('app', [
     , 'auditModule'
     , 'fileModule'
     , 'directiveModule'
+    , 'homeModule'
+    , 'partnerModule'
+    , 'donationModule'
 ]);

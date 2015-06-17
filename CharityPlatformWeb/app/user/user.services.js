@@ -1,7 +1,7 @@
 ﻿'use strict';
 
-angular.module('UserModule').factory('cmUser', ['cmHttp', 'cmCookie', 'appKey',
-    function (cmHttp, cmCookie, appKey) {
+angular.module('userModule').factory('_user', ['_http', '_cookie', 'appKey',
+    function (_http, _cookie, appKey) {
         var service = {};
 
         service.userDepts = [];
@@ -11,24 +11,24 @@ angular.module('UserModule').factory('cmUser', ['cmHttp', 'cmCookie', 'appKey',
         service.user = {};
         service.userId = '-1';
 
-        if (cmCookie.get(appKey)) {
-            service.user = cmCookie.get(appKey);
+        if (_cookie.get(appKey)) {
+            service.user = _cookie.get(appKey);
             service.userId = service.user.Id;
             service.GetUserDepts();
         }
         
         service.register = function(user, callback){
         	var postParameter = {proc: 'Usp_User_Insert', entity: user};
-        	cmHttp.ajaxPost(postParameter, callback);
+        	_http.ajaxPost(postParameter, callback);
         }
 
         service.login = function (user, callback) {        	
             var postParameter = {proc: 'Usp_User_Login', entity: user};
-        	cmHttp.ajaxPost(postParameter, callback);
+        	_http.ajaxPost(postParameter, callback);
         }
 
         service.ChangePwd = function (user, callback) {
-            cmHttp.ajaxPost(apiController, 'ChangePwd', user, callback);
+            _http.ajaxPost(apiController, 'ChangePwd', user, callback);
         }
        
         return service;
