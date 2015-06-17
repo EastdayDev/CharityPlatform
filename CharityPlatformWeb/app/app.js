@@ -34,5 +34,6 @@ angular.module('app').run(['$templateCache', '$rootScope', '$state', '$statePara
             $rootScope.fromParams = fromParams;
             $rootScope.toState = toState;
             $rootScope.toParams = toParams; 
-        }); 
+        });        
+        
     }]);
