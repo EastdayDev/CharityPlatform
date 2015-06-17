@@ -1,15 +1,15 @@
 ﻿'use strict';
 
-angular.module('CommonModule').value('version', '0.1');
+angular.module('commonModule').value('version', '0.1');
 
-angular.module('CommonModule').constant('appKey', 'CharityPlatform');
+angular.module('commonModule').constant('appKey', 'CharityPlatform');
 
-angular.module('CommonModule').constant('appname', '上海浦东慈善基金会');
+angular.module('commonModule').constant('appname', '上海浦东慈善基金会');
 
-angular.module('CommonModule').constant('apiPrefix', 'http://localhost:4972/api');
+angular.module('commonModule').constant('apiPrefix', 'http://localhost:4972/api');
 
 
-angular.module('CommonModule').factory('cmCookie', ['appKey', function (appKey) {
+angular.module('commonModule').factory('_cookie', ['appKey', function (appKey) {
     var service = {};
 
     /** 
@@ -66,14 +66,14 @@ angular.module('CommonModule').factory('cmCookie', ['appKey', function (appKey) 
 }]);
 
 
-angular.module('CommonModule').factory('cmHttp', ['$http', '$q', '$rootScope', 'cmCookie', 'apiPrefix',
-    function ($http, $q, $rootScope, cmCookie, apiPrefix) {
+angular.module('commonModule').factory('_http', ['$http', '$q', '$rootScope', '_cookie', 'apiPrefix',
+    function ($http, $q, $rootScope, _cookie, apiPrefix) {
         var service = {};
 
         var buildToken = function () {
             var token = '';
-            if (cmCookie.appCookie()) {
-                var user = cmCookie.appCookie();
+            if (_cookie.appCookie()) {
+                var user = _cookie.appCookie();
                 if (user.Token) {
                     var userToken = JSON.stringify(user.Token);
                     token = 'Basic ' + userToken.replace(/,/g, '$#@!');
@@ -84,8 +84,8 @@ angular.module('CommonModule').factory('cmHttp', ['$http', '$q', '$rootScope', '
 
         service.buildTokenNotBasic = function () {
             var token = '';
-            if (cmCookie.appCookie()) {
-                var user = cmCookie.appCookie();
+            if (_cookie.appCookie()) {
+                var user = _cookie.appCookie();
                 if (user.Token) {
                     var userToken = JSON.stringify(user.Token);
                     token = userToken.replace(/,/g, '**');
