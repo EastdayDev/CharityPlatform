@@ -1,35 +1,32 @@
 ﻿'use strict';
 
-angular.module('epCommonModule', []);
+angular.module('commonModule', []);
 
-angular.module('epUtilModule', ['epCommonModule']);
+angular.module('componentModule', ['commonModule']);
 
-angular.module('epComponentModule', []);
+angular.module('authModule', []);
 
-angular.module('epAuthModule', []);
+angular.module('userModule', []);
 
-angular.module('epUserModule', []);
+angular.module('projectModule', []);
 
-angular.module('epProjectModule', []);
+angular.module('auditModule', []);
+ 
+angular.module('fileModule', []);
 
-angular.module('epAuditModule', []);
-
-angular.module('epFlowModule', []);
-
-angular.module('epFileModule', []);
-
-angular.module('epDirectiveModule', []);
+angular.module('directiveModule', []);
 
 angular.module('app', [
     'ui.router'
     ,'ui.bootstrap'
     , 'checklist-model'
     , 'ngCookies'
-    , 'epUtilModule'
-    , 'epComponentModule'
-    , 'epUserModule'
-    , 'epAuthModule'
-    , 'epProjectModule'
-    , 'epFileModule'
-    , 'epDirectiveModule'
+    , 'commonModule'
+    , 'componentModule'
+    , 'authModule'
+    , 'userModule'
+    , 'projectModule'
+    , 'auditModule'
+    , 'fileModule'
+    , 'directiveModule'
 ]);
