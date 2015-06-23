@@ -120,12 +120,13 @@ angular.module('commonModule').factory('_http', ['$http', '$q', '$rootScope', '_
                 $rootScope.$broadcast('onError', status, message, url);
             });
         }
-        /// BaseController 提交数据方式
-        service.getTable = function(param, callback){
-        	service.ajaxGet('Base', 'GetTable', param, callback);
+        
+        /// BaseController 获得Table
+        service.postTable = function(param, callback){
+        	service.ajaxGet('Base', 'PostTable', param, callback);
         }
 
-		/// BaseController 获得Table
+        /// BaseController 提交数据方式
         service.postEntity = function(param, callback){
         	service.ajaxPost('Base', 'PostEntity', param, callback);
         }

@@ -8,7 +8,7 @@ angular.module('authModule', []);
 
 angular.module('homeModule', []);
 
-angular.module('userModule', []);
+angular.module('userModule', ['componentModule']);
 
 angular.module('partnerModule', []);
 
@@ -19,6 +19,8 @@ angular.module('projectModule', []);
 angular.module('auditModule', []);
  
 angular.module('fileModule', []);
+
+angular.module('sysModule', []);
 
 angular.module('directiveModule', []);
 
@@ -38,4 +40,5 @@ angular.module('app', [
     , 'homeModule'
     , 'partnerModule'
     , 'donationModule'
+    , 'sysModule'
 ]);

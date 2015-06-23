@@ -4,36 +4,50 @@
     <div class="content-bg-white-div">
         <div class="content-login-div">
             <div class="register-title">
-                <div class="register-title-select" style="float: left; ">用户注册</div>
-                <div class="register-title-unselect" style="float: right; ">机构注册</div>
+                <div ng-class="{'register-title-select': !user.isOrganization,'register-title-unselect':user.isOrganization}" style="float: left;" ng-click="lableSwitch(0)">用户注册</div>
+                <div ng-class="{'register-title-select': user.isOrganization,'register-title-unselect': !user.isOrganization}" style="float: right; " ng-click="lableSwitch(1)">机构注册</div>
             </div>
             <div>
+                <div class="input-login" ng-show="user.isOrganization">
+                    <div class="input-icon-img">&nbsp;&nbsp;<img src="/images/r_tel.png" width="25px;" /></div>
+                    <div class="input-div">
+                        <input class="input-contral" type="text" placeholder="机构名称" ng-model="user.C_Name">
+                    </div>
+                </div>
                 <div class="input-login">
                     <div class="input-icon-img">&nbsp;&nbsp;<img src="/images/r_tel.png" width="25px;" /></div>
-                    <div class="input-div"><input class="input-contral" type="tel" name="tel" id="username" placeholder="手机号码"></div>
+                    <div class="input-div">
+                        <input class="input-contral" type="tel" placeholder="手机号码" ng-model="user.C_Mobile">
+                    </div>
                 </div>
                 <div class="yzm-div">
                     <div class="input-yzm " style="width:60%;float:left">
                         <div class="input-icon-img">&nbsp;&nbsp;<img src="/images/r_zcm.png" width="25px;" /></div>
-                        <div class="input-div" style="width: 100px;"><input class="input-contral" type="tel" name="tel" id="username" placeholder="验证码"></div>
+                        <div class="input-div" style="width: 100px;">
+                            <input class="input-contral" type="text" ng-model="user.securityCode" placeholder="验证码">
+                        </div>
                     </div>
-                    <div style="float: right;width:38%"><div class="btn-contral">获取验证码</div></div>
+                    <div style="float: right;width:38%"><div class="btn-contral" ng-click="generateCode()">获取验证码</div></div>
                 </div>
                 <div class="input-login">
                     <div class="input-icon-img">&nbsp;&nbsp;<img src="/images/login_pws.png" width="25px;" /></div>
-                    <div class="input-div"><input class="input-contral" type="tel" name="tel" id="username" placeholder="密码"></div>
+                    <div class="input-div">
+                        <input class="input-contral" type="password" ng-model="user.C_Password" placeholder="密码">
+                    </div>
                 </div>
                 <div class="input-login">
                     <div class="input-icon-img">&nbsp;&nbsp;<img src="/images/login_pws.png" width="25px;" /></div>
-                    <div class="input-div"><input class="input-contral" type="tel" name="tel" id="username" placeholder="密码确认"></div>
+                    <div class="input-div">
+                        <input class="input-contral" type="password" ng-model="user.confirmPwd" placeholder="密码确认">
+                    </div>
                 </div>
                 <div class="btn-groups">
                     <div style=" width: 43%; float: left;"><div class="btn-contral" ng-click="$state.go('login')">登&nbsp;&nbsp;录</div></div>
-                    <div style=" width: 43%; float: right;"><div class="btn-contral">注&nbsp;&nbsp;册</div></div>
+                    <div style=" width: 43%; float: right;">
+                        <div class="btn-contral" ng-click="register(user)">注&nbsp;&nbsp;册</div>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

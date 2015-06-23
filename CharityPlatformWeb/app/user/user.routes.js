@@ -9,7 +9,7 @@ angular.module('userModule').config(['$stateProvider', function ($stateProvider)
             controller: 'UserLoginController'
         }) 
         .state('register', {
-            url: '/edit',
+            url: '/register',
             templateUrl: '/app/user/views/user.register.html',
             controller: 'UserRegisterController'
         })

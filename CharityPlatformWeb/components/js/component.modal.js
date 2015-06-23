@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('epComponentModule').factory('epModal', ['$modal', function ($modal) {
+angular.module('componentModule').factory('epModal', ['$modal', function ($modal) {
     var service = {};
 
     service.msg = '';
@@ -11,7 +11,7 @@ angular.module('epComponentModule').factory('epModal', ['$modal', function ($mod
             animation: false,
             backdrop: true,
             templateUrl: '/components/html/modal.html',
-            controller: 'epConfirmController',
+            controller: 'ConfirmController',
             size: '' 
         });
 
@@ -28,7 +28,7 @@ angular.module('epComponentModule').factory('epModal', ['$modal', function ($mod
             animation: true,
             backdrop: true,
             templateUrl: '/components/html/modal.html',
-            controller: 'epInfoController',
+            controller: 'InfoController',
             size: ''
         });
 
@@ -58,7 +58,7 @@ angular.module('epComponentModule').factory('epModal', ['$modal', function ($mod
     return service;
 }]);
 
-angular.module('epComponentModule').controller('epConfirmController',
+angular.module('componentModule').controller('ConfirmController',
     ['$scope', '$modalInstance', 'epModal', 'appname', function ($scope, $modalInstance, epModal, appname) {
 
         $scope.epModal = epModal;
@@ -77,7 +77,7 @@ angular.module('epComponentModule').controller('epConfirmController',
     }]);
 
 
-angular.module('epComponentModule').controller('epInfoController',
+angular.module('componentModule').controller('InfoController',
     ['$scope', '$modalInstance', 'epModal', 'appname', function ($scope, $modalInstance, epModal, appname) {
 
         $scope.epModal = epModal;
@@ -91,7 +91,7 @@ angular.module('epComponentModule').controller('epInfoController',
         }
     }]); 
 
-angular.module('epComponentModule').controller('epModalController', ['$rootScope', '$scope', '$modalInstance', function ($rootScope, $scope, $modalInstance) {
+angular.module('componentModule').controller('ModalController', ['$rootScope', '$scope', '$modalInstance', function ($rootScope, $scope, $modalInstance) {
 
     $scope.msgContent = '';
 

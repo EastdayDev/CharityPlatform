@@ -9,7 +9,7 @@ namespace CharityPlatform.Entity
 {
     public class UserEntity
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public String C_Name { get; set; }
         public Int32? I_Flag { get; set; }
         public String C_Login { get; set; }

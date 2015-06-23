@@ -19,11 +19,26 @@ namespace CharityPlatformAPI.Controllers
         /// <param name="oldPwd"></param>
         /// <param name="newPwd"></param>
         /// <returns></returns>
+        [HttpPost]
         public int Usp_User_Register(UserEntity user)
         {
-            using (AppBLL bll = new AppBLL())
+            try
             {
-                return bll.ExecuteNonQuery("Usp_User_Insert", user);
+                using (AppBLL bll = new AppBLL())
+                {
+                    DataTable table = bll.FillDataTable("Usp_User_GetByMobile", new { C_Mobile = user.C_Mobile });
+                    /// 手机号码已经注册
+                    if (table.Rows.Count > 0) return -2;
+
+                    user.D_Create = DateTime.Now;
+                    user.C_Login = user.C_Mobile;
+                    user.I_Flag = 1;
+                    return bll.ExecuteNonQuery("Usp_User_Insert", user);
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
             }
         }
 
@@ -34,6 +49,7 @@ namespace CharityPlatformAPI.Controllers
         /// <param name="oldPwd"></param>
         /// <param name="newPwd"></param>
         /// <returns></returns>
+        [HttpPost]
         public int Usp_Org_Register(OrganizationEntity user)
         {
             using (AppBLL bll = new AppBLL())
@@ -46,11 +62,12 @@ namespace CharityPlatformAPI.Controllers
         /// 验证登录
         /// </summary>
         /// <returns>datatable</returns>
-        public DataTable Usp_User_Login(string Name, string Password)
+        [HttpGet]
+        public DataTable Usp_User_Login(string loginName, string password)
         {
             using (AppBLL bll = new AppBLL())
             {
-                return bll.FillDataTable("Usp_User_Login", new { C_Login = Name, C_Password = Password });
+                return bll.FillDataTable("Usp_User_Login", new { C_Login = loginName, C_Password = password });
             }
         }
 
@@ -61,6 +78,7 @@ namespace CharityPlatformAPI.Controllers
         /// <param name="oldPwd"></param>
         /// <param name="newPwd"></param>
         /// <returns></returns>
+        [HttpPost]
         public int Usp_User_ChangePwd(string login, string oldPwd, string newPwd)
         {
             using (AppBLL bll = new AppBLL())
@@ -75,6 +93,7 @@ namespace CharityPlatformAPI.Controllers
         /// </summary>
         /// <param name="fuctionId">功能编号</param>
         /// <returns>所有拥有该功能编号的用户</returns>
+        [HttpGet]
         public IList<UserEntity> Usp_User_ByFunc(int funcId)
         {
             using (AppBLL bll = new AppBLL())

@@ -27,8 +27,8 @@ namespace CharityPlatformAPI.Controllers
             }
         }
 
-        [HttpGet]
-        public System.Data.DataTable GetTable(CharityPlatform.Entity.PostParameter parameter)
+        [HttpPost]
+        public System.Data.DataTable PostTable(CharityPlatform.Entity.PostParameter parameter)
         {
             try
             {

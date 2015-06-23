@@ -5,15 +5,23 @@
             <div class="login-title">登&nbsp;&nbsp;录</div>
             <div class="input-login">
                 <div class="input-icon-img">&nbsp;&nbsp;<img src="/images/login_user.png" width="25px;" /></div>
-                <div class="input-div"><input class="input-contral" type="tel" name="tel" id="username" placeholder="用户名"></div>
+                <div class="input-div">
+                    <input class="input-contral" type="tel" placeholder="用户名" ng-model="userName">
+                </div>
             </div>
             <div class="input-login">
                 <div class="input-icon-img">&nbsp;&nbsp;<img src="/images/login_pws.png" width="25px;" /></div>
-                <div class="input-div"><input class="input-contral" type="tel" name="tel" id="username" placeholder="密码"></div>
+                <div class="input-div">
+                    <input class="input-contral" type="password" placeholder="密码" ng-model="password">
+                </div>
             </div>
             <div class="btn-groups">
-                <div style=" width: 43%; float: left;"><div class="btn-contral" ui-sref="userinfo">登&nbsp;&nbsp;录</div></div>
-                <div style=" width: 43%; float: right;"><div class="btn-contral" ui-sref="register">注&nbsp;&nbsp;册</div></div>
+                <div style=" width: 43%; float: left;">
+                        <div class="btn-contral" ng-click="login(userName, password)">登&nbsp;&nbsp;录</div>
+                </div>
+                <div style=" width: 43%; float: right;">
+                    <div class="btn-contral" ui-sref="register">注&nbsp;&nbsp;册</div>
+                </div>
             </div>
             <div class="forget-psw">
                 忘记密码

@@ -12,6 +12,7 @@ namespace CharityPlatformAPI
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            CharityPlatform.Data.AppHelper.Init();
         }
     }
 }

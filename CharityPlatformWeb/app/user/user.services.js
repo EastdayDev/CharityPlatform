@@ -17,14 +17,23 @@ angular.module('userModule').factory('_user', ['_http', '_cookie', 'appKey',
             service.GetUserDepts();
         }
         
-        service.register = function(user, callback){
-        	var postParameter = {proc: 'Usp_User_Insert', entity: user};
-        	_http.ajaxPost(postParameter, callback);
+        service.register = function(user, callback){                    	
+            var method = user.isOrganization === 0 ? 'Usp_User_Register' : 'Usp_Org_Register'
+        	_http.ajaxPost(apiController, method, user, callback);
         }
 
-        service.login = function (user, callback) {        	
-            var postParameter = {proc: 'Usp_User_Login', entity: user};
-        	_http.ajaxPost(postParameter, callback);
+        service.login = function (userName, password, callback) {        
+            var user = {loginName: userName, password: password};            
+        	_http.ajaxGet(apiController, 'Usp_User_Login', user, function(data){
+                if (data && data.length > 0){
+                    service.user = data[0];
+                    service.userId = service.user.Id;
+                    _cookie.put(appKey, service.user, { expireMinutes: 180 });
+                    if (callback) callback(true);
+                } else {
+                    if (callback) callback(false);
+                }                                
+            });
         }
 
         service.ChangePwd = function (user, callback) {
