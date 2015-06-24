@@ -52,10 +52,7 @@ namespace CharityPlatformAPI.Controllers
         [HttpPost]
         public int Usp_Org_Register(OrganizationEntity user)
         {
-            using (AppBLL bll = new AppBLL())
-            {
-                return bll.ExecuteNonQuery("Usp_Org_Insert", user);
-            }
+            return DataHelper.ExecuteNonQuery("Usp_Org_Insert", user);
         }
 
         /// <summary>
@@ -65,10 +62,7 @@ namespace CharityPlatformAPI.Controllers
         [HttpGet]
         public DataTable Usp_User_Login(string loginName, string password)
         {
-            using (AppBLL bll = new AppBLL())
-            {
-                return bll.FillDataTable("Usp_User_Login", new { C_Login = loginName, C_Password = password });
-            }
+            return DataHelper.FillDataTable("Usp_User_Login", new { C_Login = loginName, C_Password = password });
         }
 
         /// <summary>
@@ -81,11 +75,8 @@ namespace CharityPlatformAPI.Controllers
         [HttpPost]
         public int Usp_User_ChangePwd(string login, string oldPwd, string newPwd)
         {
-            using (AppBLL bll = new AppBLL())
-            {
-                DataTable table = bll.FillDataTable("Usp_User_ChangePwd", new { C_Login = login, C_NewPwd = newPwd, C_OldPwd = oldPwd });
-                return int.Parse(table.Rows[0][0].ToString());
-            }
+            DataTable table = DataHelper.FillDataTable("Usp_User_ChangePwd", new { C_Login = login, C_NewPwd = newPwd, C_OldPwd = oldPwd });
+            return int.Parse(table.Rows[0][0].ToString());
         }
 
         /// <summary>
@@ -96,10 +87,12 @@ namespace CharityPlatformAPI.Controllers
         [HttpGet]
         public IList<UserEntity> Usp_User_ByFunc(int funcId)
         {
-            using (AppBLL bll = new AppBLL())
-            {
-                return bll.FillList<UserEntity>("Usp_User_ByFunc", new { funcid = funcId });
-            }
+            return DataHelper.FillList<UserEntity>("Usp_User_ByFunc", new { funcid = funcId });
+        }
+
+        public DataTable Usp_User_List(int userId, string filterValue, int pageIndex, int pageSize)
+        {
+            return DataHelper.FillDataTable("Usp_User_List", new { userId = userId, filter = filterValue, pageIndex = pageIndex, pageSize = pageSize });
         }
     }
 }
