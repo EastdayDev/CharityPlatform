@@ -8,17 +8,20 @@ angular.module('userModule').factory('_user', ['_http', '_cookie', 'appKey',
 
         var apiController = 'User';
 
+        service.userPage = {index: 1, total: 0};
+        service.orgPage = {index: 1, total: 0};
+
         service.user = {};
         service.userId = '-1';
 
         if (_cookie.get(appKey)) {
             service.user = _cookie.get(appKey);
-            service.userId = service.user.Id;
-            service.GetUserDepts();
+            service.userId = service.user.Id;            
         }
         
         service.register = function(user, callback){                    	
             var method = user.isOrganization === 0 ? 'Usp_User_Register' : 'Usp_Org_Register'
+            user.I_Category = user.isOrganization === 0 ? 3 : 2;
         	_http.ajaxPost(apiController, method, user, callback);
         }
 

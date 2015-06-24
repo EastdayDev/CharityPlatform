@@ -55,7 +55,7 @@ CREATE TABLE [dbo].[Sys_User](
 	[C_Login] [varchar](30) NULL,
 	[C_Name] [varchar](50) NULL,
 	[I_Flag] [int] NULL,
-	[I_Category] [int] NOT NULL,		--用户类别
+	[I_Category] [int] NOT NULL,		--用户类别 1 基金会操作员   2 机构用户  3 普通用户
 	[D_Create] [datetime] not null,
 	[C_Password] [varchar](128) NULL,
 	[C_Mobile] [varchar](30) NULL,

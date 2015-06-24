@@ -7,8 +7,7 @@ angular.module('commonModule').constant('appKey', 'CharityPlatform');
 angular.module('commonModule').constant('appname', '上海浦东慈善基金会');
 
 angular.module('commonModule').constant('apiPrefix', 'http://localhost:4972/api');
-
-
+ 
 angular.module('commonModule').factory('_cookie', ['appKey', function (appKey) {
     var service = {};
 
@@ -123,7 +122,7 @@ angular.module('commonModule').factory('_http', ['$http', '$q', '$rootScope', '_
         
         /// BaseController 获得Table
         service.postTable = function(param, callback){
-        	service.ajaxGet('Base', 'PostTable', param, callback);
+        	service.ajaxPost('Base', 'PostTable', param, callback);
         }
 
         /// BaseController 提交数据方式

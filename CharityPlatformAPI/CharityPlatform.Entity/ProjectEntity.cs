@@ -9,7 +9,7 @@ namespace CharityPlatform.Entity
     public class PostParameter
     {
         public string proc;
-        public object entity;
+        public Object entity;
     }
 
     public class ProjectEntity

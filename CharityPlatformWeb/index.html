@@ -12,16 +12,17 @@
         <link href="/frameworks/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
         <link href="/frameworks/idcode/jquery.idcode.css" rel="stylesheet" />
         <link href="/frameworks/datepicker/css/datepicker3.css" rel="stylesheet">
-        <!--<link href="/frameworks/sementic/css/semantic.min.css" rel="stylesheet" />-->
         <link href="/css/site.css" rel="stylesheet" />
+
         <script type="text/javascript" src="/frameworks/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="/frameworks/angular/angular.js"></script>
-        <script type="text/javascript" src="/frameworks/angular-animate/angular-animate.js"></script>
-        <script type="text/javascript" src="/frameworks/angular-cookies/angular-cookies.js"></script>
-        <script type="text/javascript" src="/frameworks/angular-sanitize/angular-sanitize.js"></script>
-        <script type="text/javascript" src="/frameworks/angular-ui-router/release/angular-ui-router.js"></script>
-        <script type="text/javascript" src="/frameworks/angular-ui-router/release/angular-ui-router.js"></script>
-        <!--<script type="text/javascript" src="frameworks/sementic/javascript/semantic.min.js"></script>-->
+        <script type="text/javascript" src="/frameworks/angular/angular-animate.js"></script>
+        <script type="text/javascript" src="/frameworks/angular/angular-cookies.js"></script>
+        <script type="text/javascript" src="/frameworks/angular/angular-sanitize.js"></script>
+        <script type="text/javascript" src="/frameworks/angular/angular-ui-router.js"></script>
+        <script type="text/javascript" src="/frameworks/es5/es5.js"></script>
+        <script type="text/javascript" src="/frameworks/es5/es5-sham.min.js"></script>
+        <script type="text/javascript" src="/frameworks/es5/es5-shim.min.js"></script>
         <script type="text/javascript" src="/frameworks/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="/frameworks/datepicker/js/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="/frameworks/datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
@@ -33,7 +34,7 @@
         <script type="text/javascript" src="/app/common/prototype.func.js"></script>
         <script type="text/javascript" src="/app/common/common.service.js"></script>       
         
-          <!--***********************       Component        ***************************************-->
+          <!--***********************       Component        ***********************************-->
         <script type="text/javascript" src="/Components/js/component.modal.js"></script>
 
         <!--***********************       Home        ***************************************-->
@@ -41,13 +42,22 @@
         <script type="text/javascript" src="/app/home/home.services.js"></script>
         <script type="text/javascript" src="/app/home/home.routes.js"></script>
         
+        <!--***********************       Sys        ***************************************-->
+        <script type="text/javascript" src="/app/sys/controllers/sys.main.controller.js"></script>
+        <script type="text/javascript" src="/app/sys/controllers/sys.user.controller.js"></script>
+        <script type="text/javascript" src="/app/sys/controllers/sys.partner.controller.js"></script>
+        <script type="text/javascript" src="/app/sys/controllers/sys.role.controller.js"></script>
+        <script type="text/javascript" src="/app/sys/controllers/sys.permission.controller.js"></script>
+        <script type="text/javascript" src="/app/sys/sys.routes.js"></script>
+        <script type="text/javascript" src="/app/sys/sys.services.js"></script>
+
         <!--***********************       User        ***************************************-->
         <script type="text/javascript" src="/app/user/controllers/user.login.controller.js"></script>
         <script type="text/javascript" src="/app/user/controllers/user.register.controller.js"></script>
         <script type="text/javascript" src="/app/user/user.services.js"></script>
         <script type="text/javascript" src="/app/user/user.routes.js"></script>
         
-        <!--***********************       Partner        ***************************************-->
+        <!--***********************       Partner        ***********************************-->
         <script type="text/javascript" src="/app/partner/controllers/partner.index.controller.js"></script>        
         <script type="text/javascript" src="/app/partner/partner.services.js"></script>
         <script type="text/javascript" src="/app/partner/partner.routes.js"></script>
@@ -66,7 +76,11 @@
     <body>
         <div class="index-top">
             <div class="content-p-left-right">
-                <div class="index-top-login-info"><span>张三，欢迎登陆网络慈善平台。</span>&nbsp;<span class="index-top-logout">登出</span></div>
+                <div class="index-top-login-info">
+                    <span>{{_app.user.C_Name}} 网络慈善平台欢迎您</span>&nbsp;
+                    <span class="index-top-logout" ng-show="_app.user && _app.user.Id > 0" ng-click="_app.logout()">登出</span>
+                    <span class="index-top-logout" ng-hide="_app.user && _app.user.Id > 0" ui-sref="login">登录</span>
+                </div>
                 <div style="float: right;">
                     <div class="index-top-icons-div"><img src="images/top_icon_sina.png"/></div>
                     <div class="index-top-icons-div"><img src="images/top_icon_weixin.png"/></div>
@@ -83,7 +97,7 @@
                 <div class="index-menu-txt" ui-sref="about"><span>关于我们</span></div>
                 <div class="index-menu-txt" ui-sref="donationList"><span>我要捐款</span></div>
                 <div class="index-menu-txt" ui-sref="partner"><span>合作伙伴</span></div>
-                <div class="index-menu-txt" ui-sref="login"><span>用户中心</span></div>
+                <div class="index-menu-txt" ui-sref="sys.user"><span>用户中心</span></div>
             </div>
         </div>
         <div class="index-greed-line"></div>

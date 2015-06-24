@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('userModule').controller('UserRegisterController', ['$scope', '$state', '_user', 'epModal', 
-	function ($scope, $state, _user, epModal) {
+angular.module('userModule').controller('UserRegisterController',
+['$scope', '$state', '_user', '_app', 'epModal', 
+function ($scope, $state, _user, _app, epModal) {
 
 	$scope.user = {
 		isOrganization: 0
-		, C_Name: '测试01'
+		, C_Name: '张三丰'
 		, C_Mobile: '13585513045'
 		, C_Password: '123'
 		, confirmPwd: '123'
@@ -37,7 +38,8 @@ angular.module('userModule').controller('UserRegisterController', ['$scope', '$s
 			if (data === -2){
 				epModal.info('手机号码已经被使用！');
 			} else {
-				_user.login(user.C_Mobile, user.C_Password, function(data){					
+				_user.login(user.C_Mobile, user.C_Password, function(data){				
+					_app.user = _user.user;
 					$state.go('home');
 				});
 			}

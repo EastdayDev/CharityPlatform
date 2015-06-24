@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -34,7 +35,7 @@ namespace CharityPlatformAPI.Controllers
             {
                 using (CharityPlatform.Data.AppBLL bll = new CharityPlatform.Data.AppBLL())
                 {
-                    return bll.FillDataTable(parameter.proc, parameter.entity);
+                    return bll.FillDataTable(parameter.proc, parameter.entity); 
                 }
             }
             catch (Exception ex)
