@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="AppHelper.cs" />
     <Compile Include="AppBLL.cs" />
+    <Compile Include="DataHelper.cs" />
     <Compile Include="ProjectBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkFlowBLL.cs" />
