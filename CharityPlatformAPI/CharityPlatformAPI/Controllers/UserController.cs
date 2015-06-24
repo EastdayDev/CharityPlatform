@@ -79,6 +79,18 @@ namespace CharityPlatformAPI.Controllers
             return int.Parse(table.Rows[0][0].ToString());
         }
 
+        [HttpPost]
+        public int Usp_User_Update(UserEntity user)
+        {
+            return DataHelper.ExecuteNonQuery("Usp_User_Update", user);
+        }
+
+        [HttpPost]
+        public int Usp_Org_Update(OrganizationEntity org)
+        {
+            return DataHelper.ExecuteNonQuery("Usp_Org_Update", org);
+        }
+
         /// <summary>
         /// 所有拥有该功能编号的用户
         /// </summary>
@@ -90,6 +102,7 @@ namespace CharityPlatformAPI.Controllers
             return DataHelper.FillList<UserEntity>("Usp_User_ByFunc", new { funcid = funcId });
         }
 
+        [HttpGet]
         public DataTable Usp_User_List(int userId, string filterValue, int pageIndex, int pageSize)
         {
             return DataHelper.FillDataTable("Usp_User_List", new { userId = userId, filter = filterValue, pageIndex = pageIndex, pageSize = pageSize });
