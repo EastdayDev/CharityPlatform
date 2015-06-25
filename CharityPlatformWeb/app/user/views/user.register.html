@@ -4,16 +4,10 @@
     <div class="content-bg-white-div">
         <div class="content-login-div">
             <div class="register-title">
-                <div ng-class="{'register-title-select': !user.isOrganization,'register-title-unselect':user.isOrganization}" style="float: left;" ng-click="lableSwitch(0)">用户注册</div>
-                <div ng-class="{'register-title-select': user.isOrganization,'register-title-unselect': !user.isOrganization}" style="float: right; " ng-click="lableSwitch(1)">机构注册</div>
+                <div ng-class="{'register-title-select': !user.isOrganization,'register-title-unselect':user.isOrganization}" style="float: left;" ng-click="lableSwitch(0)">普通用户</div>
+                <div ng-class="{'register-title-select': user.isOrganization,'register-title-unselect': !user.isOrganization}" style="float: right; " ng-click="lableSwitch(1)">机构用户</div>
             </div>
-            <div>
-                <div class="input-login" ng-show="user.isOrganization">
-                    <div class="input-icon-img">&nbsp;&nbsp;<img src="/images/r_tel.png" width="25px;" /></div>
-                    <div class="input-div">
-                        <input class="input-contral" type="text" placeholder="机构名称" ng-model="user.C_Name">
-                    </div>
-                </div>
+            <div>                
                 <div class="input-login">
                     <div class="input-icon-img">&nbsp;&nbsp;<img src="/images/r_tel.png" width="25px;" /></div>
                     <div class="input-div">

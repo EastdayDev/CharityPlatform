@@ -1,25 +1,27 @@
 'use strict';
 
 angular.module('sysModule').controller('SysUserController',
-['$scope', '_user', '_http', function ($scope, _user, _http) { 
+['$scope', '_user', '_sys', function ($scope, _user, _sys) { 
 	
 	var pageSize = 10;
-
 	$scope.filterValue = '';
+	$scope._sys = _sys;
+	_sys.resetHold(3);
 
-	$scope.search = function(filterValue){
-		var param = {
-			proc: 'Usp_user_List', 
-			entity: {
-				pageIndex: _user.userPage.index, 
-				filter: filterValue, 
-				pageSize: pageSize}
-		};
-        _http.postTable(param, function(data){
-        	$scope.users = data;
-        	_user.userPage.total = Math.ceil($scope.users[0].Total / pageSize)
-        });
+	$scope.search = function(filterValue){  		
+		_user.Usp_User_List(filterValue, _sys.hold.pageIndex, pageSize, function(data){
+			$scope.items = data;
+			_sys.hold.total = 0;
+			if (data && data.length > 0){
+        		_sys.hold.total = Math.ceil($scope.items[0].Total / pageSize) 
+        	}
+		});
 	}
+
+	$scope.$on('onPageChanged', function(e, pageIndex){
+		_sys.hold.pageIndex = pageIndex;	
+		$scope.search($scope.filterValue);	
+	});
 
 	$scope.$on('$viewContentLoaded', function () {
 		 $scope.search($scope.filterValue);

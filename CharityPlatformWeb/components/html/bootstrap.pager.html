@@ -1,0 +1,9 @@
+<ul class="pagination" ng-hide="maxGroupIndex <= 1">
+	<li ng-click="previousGroup()" ng-class="{disabled:groupIndex===1}"><a>&laquo;</a></li>
+	<li ng-click="previous()"><a>&lt;</a></li>
+	<li ng-class="{active:item===pageIndex}" ng-repeat="item in totals" ng-click="changePage(item)">
+		<a ng-bind="item"></a>
+	</li>
+	<li ng-click="next()"><a>&gt;</a></li>
+	<li ng-click="nextGroup()" ng-class="{disabled:groupIndex===maxGroupIndex}"><a>&raquo;</a></li>
+</ul>

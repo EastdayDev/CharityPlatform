@@ -1,35 +1,37 @@
 'use strict';
 
-angular.module('sysModule').factory('_sys', ['_http', '_cookie', 'appKey',
-    function (_http, _cookie, appKey) {
-        var service = {};
+angular.module('sysModule').factory('_sys', 
+['_http', '_cookie', 'appKey', '_user',
+function (_http, _cookie, appKey, _user) {
+    var service = {}; 
 
-        service.userDepts = [];
+    var apiController = 'Sys';
 
-        var apiController = 'User';
-        
-        service.user = {};
-        service.userId = '-1';
+    service.hold = {tab: 0, pageIndex: 1, total: 0};
 
-        if (_cookie.get(appKey)) {
-            service.user = _cookie.get(appKey);
-            service.userId = service.user.Id;
-            service.GetUserDepts();
-        }
-        
-        service.register = function(user, callback){
-        	var postParameter = {proc: 'Usp_User_Insert', entity: user};
-        	_http.ajaxPost(postParameter, callback);
-        }
+    service.words = [];
 
-        service.login = function (user, callback) {        	
-            var postParameter = {proc: 'Usp_User_Login', entity: user};
-        	_http.ajaxPost(postParameter, callback);
-        }
+    if (_cookie.get(appKey)) {    
+        ///获取词语列表
+        _http.ajaxGet(apiController, 'Usp_Words_List', {flag: -1}, function(data){
+            service.words = data;
+        });
+    }       
 
-        service.ChangePwd = function (user, callback) {
-            _http.ajaxPost(apiController, 'ChangePwd', user, callback);
-        }
-       
-        return service;
-    }]);
+    service.resetHold = function(tab){
+        service.hold.tab = tab;
+        service.hold.pageIndex = 1;
+        service.hold.total = 0;
+    }
+
+    service.Usp_Org_List = function(filterValue, pageIndex, pageSize, callback){
+        var param = {
+            userId: _user.userId,
+            filterValue: filterValue,
+            pageIndex: pageIndex,
+            pageSize: pageSize};
+        _http.ajaxGet('Partner', 'Usp_Org_List', param, callback);            
+    }
+   
+    return service;
+}]);

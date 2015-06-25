@@ -5,7 +5,7 @@ angular.module('app').factory('_app',
     var service = {};    
 
     service.user = _user.user;
-
+    
     service.logout = function(){            
             _cookie.expired(appKey);
             service.user = null;

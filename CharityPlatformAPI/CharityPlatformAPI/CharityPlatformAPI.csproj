@@ -104,7 +104,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BasicAuthorizeAttribute.cs" />
     <Compile Include="Controllers\FileController.cs" />
-    <Compile Include="Controllers\HelperController.cs" />
+    <Compile Include="Controllers\PartnerController.cs" />
+    <Compile Include="Controllers\SysController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

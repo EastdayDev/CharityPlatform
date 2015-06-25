@@ -22,6 +22,8 @@ angular.module('fileModule', []);
 
 angular.module('sysModule', []);
 
+angular.module('filterModule', [])
+
 angular.module('directiveModule', []);
 
 angular.module('app', [
@@ -41,4 +43,5 @@ angular.module('app', [
     , 'partnerModule'
     , 'donationModule'
     , 'sysModule'
+    , 'filterModule'
 ]);

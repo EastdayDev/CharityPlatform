@@ -3,13 +3,13 @@
     <div class="content-bg-white-div">
         <div class="manager-div">
             <div class="manager-left">
-                <div ng-class="{'manager-tree-select':targetState==='sys.role', 'manager-tree-unselect':targetState!=='sys.role'}" ng-click="nav('sys.role')">角色管理</div>
-                <div ng-class="{'manager-tree-select':targetState==='sys.permission', 'manager-tree-unselect':targetState!=='sys.permission'}" ng-click="nav('sys.permission')">权限管理</div>
-                <div ng-class="{'manager-tree-select':targetState==='sys.partner', 'manager-tree-unselect':targetState!=='sys.partner'}" ng-click="nav('sys.partner')">合作伙伴</div>
-                <div ng-class="{'manager-tree-select':targetState==='sys.user', 'manager-tree-unselect':targetState!=='sys.user'}" ng-click="nav('sys.user')">用户管理</div>
+                <div ng-class="{'manager-tree-select':_sys.hold.tab===0, 'manager-tree-unselect':_sys.hold.tab!==0}" ng-click="nav(0)">角色管理</div>
+               <!--  <div ng-class="{'manager-tree-select':_sys.hold.tab===1, 'manager-tree-unselect':_sys.hold.tab!==1}" ng-click="nav(1)">权限管理</div> -->
+                <div ng-class="{'manager-tree-select':_sys.hold.tab===2, 'manager-tree-unselect':_sys.hold.tab!==2}" ng-click="nav(2)">合作伙伴</div>
+                <div ng-class="{'manager-tree-select':_sys.hold.tab===3, 'manager-tree-unselect':_sys.hold.tab!==3}" ng-click="nav(3)">用户管理</div>
             </div>
             <div class="manager-right" ui-view>                
-            </div>
+            </div>            
         </div>
     </div>
 </div>

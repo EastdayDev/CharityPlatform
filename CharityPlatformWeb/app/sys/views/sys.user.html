@@ -1,20 +1,21 @@
 <div class="manage-line-div">
-    <div class="search-div ">
-        <input class="input-contral-back search-bt" ng-model="filterValue" placeholder="姓名、登录名">
-        <img src="/images/search.png" width="30px" ng-click="search(filterValue)" />
-    </div> 
+    <div class="manage-line-div">
+        <div class="search-div">
+            <input class="input-contral-back search-bt" placeholder="姓名、登录名" ng-model="filterValue">
+            <img src="/images/search.png" style="cursor:pointer; width:25px;" ng-click="search(filterValue)" />
+        </div>
+    </div>
 </div>
 <div class="manage-line-div">
     <table border="1" cellpadding="1" cellspacing="1" width="100%" style="margin-top:10px;">
         <tr class="manage-table-tr-title"><td>登录名</td><td>姓名</td><td>类别</td><td>状态</td><td>操作</td></tr>
-        <tr class="manage-table-tr-valus" ng-repeat="item in users track by item.C_Login">
+        <tr class="manage-table-tr-valus" ng-repeat="item in items track by item.C_Login">
             <td ng-bind="item.C_Login"></td>
             <td ng-bind="item.C_Name"></td>
-            <td ng-bind="item.C_Category"></td>
-            <td ng-bind="item.C_Login"></td>            
-            <td ng-bind="item.C_Flag"></td>
+            <td ng-bind="item.I_Category | userCategory"></td>         
+            <td ng-bind="item.I_Flag | flag"></td>
             <td><span class="manage-bt-update">修改</span>&nbsp;&nbsp;<span class="manage-bt-role">角色</span></td>
         </tr>       
     </table>
-
+    <div boot-strap-page page-index="_sys.hold.pageIndex" page-total="_sys.hold.total" />
 </div>

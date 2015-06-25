@@ -105,7 +105,7 @@ namespace CharityPlatformAPI.Controllers
         [HttpGet]
         public DataTable Usp_User_List(int userId, string filterValue, int pageIndex, int pageSize)
         {
-            return DataHelper.FillDataTable("Usp_User_List", new { userId = userId, filter = filterValue, pageIndex = pageIndex, pageSize = pageSize });
+            return DataHelper.FillDataTable("Usp_User_List", new { userId = userId, filter = string.IsNullOrEmpty(filterValue) ? "" : filterValue, pageIndex = pageIndex, pageSize = pageSize });
         }
     }
 }
