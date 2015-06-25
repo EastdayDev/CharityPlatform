@@ -38,7 +38,7 @@ namespace CharityPlatform.Data
             Profiler.TryStartClownFishProfiler();
 
             //// 注册SQLSERVER数据库连接字符串
-            ConnectionStringSettings setting = ConfigurationManager.ConnectionStrings["CharityPlatformDb"];
+            ConnectionStringSettings setting = ConfigurationManager.ConnectionStrings["sqldb"];
             DbContext.RegisterDbConnectionInfo("Sqlserver", setting.ProviderName, "@", setting.ConnectionString);
 
             //// 启动自动编译数据实体加载器的工作模式。

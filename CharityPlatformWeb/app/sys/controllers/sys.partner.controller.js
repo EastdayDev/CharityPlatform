@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sysModule').controller('SysPartnerController',
-['$scope', '_sys', function ($scope, _sys) { 
+['$scope', '_sys', 'epModal', function ($scope, _sys, epModal) { 
 	
 	var pageSize = 10;
 	$scope.filterValue = '';
@@ -23,7 +23,35 @@ angular.module('sysModule').controller('SysPartnerController',
 		$scope.search($scope.filterValue);	
 	});
 
+	$scope.showPartnerEdit = function(editId){
+		_sys.editId = editId;
+		epModal.showModal('/app/sys/views/partner.edit.html', 'PartnerEditController');
+	}
+
+	$scope.$on('onSaveSuccess', function(e, editItem){
+		console.log(editItem);
+	});
+
 	$scope.$on('$viewContentLoaded', function () {
 		 $scope.search($scope.filterValue);
     });
+}]);
+
+
+angular.module('sysModule').controller('PartnerEditController',
+['$scope', '$modalInstance', '_sys', function ($scope, $modalInstance, _sys) { 
+	
+	$scope._sys = _sys;
+	$scope.save = function(){
+		_sys.Usp_Org_Insert(_sys.editItem, function(data){
+			if (data) {
+				$scope.$emmit('onSaveSuccess', _sys.editItem);
+				$modalInstance.close();
+			}
+		});
+	}
+
+	$scope.close = function () {
+        $modalInstance.close();
+    }     
 }]);

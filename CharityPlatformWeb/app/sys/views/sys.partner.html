@@ -2,8 +2,10 @@
     <div class="manage-line-div">
         <div class="search-div">
             <input class="input-contral-back search-bt" placeholder="名称、联系人" ng-model="filterValue">
-            <img src="/images/search.png" style="cursor:pointer; width:25px;" ng-click="search(filterValue)" />
+            <img src="/images/search.png" style="cursor:pointer; width:25px;" ng-click="search(filterValue)" /> 
         </div>
+        <button class="btn btn-primary" value="add" ng-click="showPartnerEdit({Id:-1})">添加</button>
+
     </div>
 </div>
     <div class="manage-line-div">
@@ -14,7 +16,7 @@
             <td ng-bind="item.C_Contact"></td>
             <td ng-bind="item.C_Mobile"></td>         
             <td ng-bind="item.I_Audited | auditState"></td>
-            <td><span class="manage-bt-update">修改</span>&nbsp;&nbsp;<span class="manage-bt-role">角色</span></td>
+            <td><span class="manage-bt-update" ng-click="showPartnerEdit(item)">修改</span>&nbsp;&nbsp;<span class="manage-bt-role">角色</span></td>
         </tr>   
         </table>
         <div boot-strap-page page-index="_sys.hold.pageIndex" page-total="_sys.hold.total" />

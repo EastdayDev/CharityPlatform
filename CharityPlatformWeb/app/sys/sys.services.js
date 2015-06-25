@@ -9,6 +9,8 @@ function (_http, _cookie, appKey, _user) {
 
     service.hold = {tab: 0, pageIndex: 1, total: 0};
 
+    service.editItem = {Id: -1};
+
     service.words = [];
 
     if (_cookie.get(appKey)) {    
@@ -31,6 +33,10 @@ function (_http, _cookie, appKey, _user) {
             pageIndex: pageIndex,
             pageSize: pageSize};
         _http.ajaxGet('Partner', 'Usp_Org_List', param, callback);            
+    }
+
+    service.Usp_Org_Insert = function(org, callback) {
+        _http.ajaxPost('Partner', 'Usp_Org_Insert', org, callback);
     }
    
     return service;

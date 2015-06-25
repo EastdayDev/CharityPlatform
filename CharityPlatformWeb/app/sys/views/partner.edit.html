@@ -1,0 +1,39 @@
+<div class="content-m-left-right">    
+    <div class="content-bg-white-div">
+        <div class="userinfo-title"></div>
+        <div class="pa-div" style="min-height:120px;">
+            <div class="title-green">合伙伙伴</div>
+            <table border="0" cellpadding="0" cellspacing="0" width="96%" style="margin-left:10px;">
+                <tr>
+                    <td class="td-project-audit-txt">名称</td>
+                    <td class="td-project-audit-contral" colspan="5">
+                        <input class="input-contral-project" ng-model="_sys.editItem.C_Name">
+                    </td>
+                    <!-- <td class="td-project-audit-txt">项目发布方</td>
+                    <td class="td-project-audit-contral"><input class="input-contral-project" placeholder=""></td>
+                    <td class="td-project-audit-txt"></td>
+                    <td class="td-project-audit-contral" style="text-align:right;"><label style="font-weight: 100;"><input name="Fruit" type="checkbox" value="" />自由项目</label></td> -->
+                </tr>
+                <tr>
+                    <td class="td-project-audit-txt">联系人</td>
+                    <td class="td-project-audit-contral"  colspan="2">
+                        <input class="input-contral-project" ng-model="_sys.editItem.C_Contact">
+                    </td>
+                    <td class="td-project-audit-txt">联系电话</td>
+                    <td class="td-project-audit-contral"  colspan="2">
+                        <input class="input-contral-project" ng-model="_sys.editItem.C_Mobile">
+                    </td> 
+                </tr>                
+            </table>
+        </div>
+
+        <div class="pa-div">
+            <div style="clear: both; padding-top: 10px; padding-left: 10px; width: 100%;">
+                <textarea name="yj" ng-model="_sys.editItem.C_Remark" style="width: 96%; height: 200px; border: 1px solid #128d56" rows="5" />
+            </div>
+            <div class="myAccount-bt-line " style="padding-right:4%;">
+                <div class="shenhe-bt" ng-click="close()"><div class="btn-contral" style="margin-left:20px;">取&nbsp;&nbsp;&nbsp;&nbsp;消</div></div><div class="shenhe-bt"><div class="btn-contral" style="">确&nbsp;&nbsp;&nbsp;&nbsp;定</div></div></div>
+        </div>
+    </div>
+
+</div>
