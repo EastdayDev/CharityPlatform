@@ -26,13 +26,21 @@ namespace CharityPlatform.Entity
             return this.Id == ((UserEntity)obj).Id;
         }
     }
-    public class OrganizationEntity : UserEntity
+    public class OrganizationEntity 
     {
+        public int Id { get; set; }
+        public Int32 I_Flag { get; set; }
+        public Int32 I_Creater { get; set; } 
+        public String C_Name { get; set; }
         public String C_Contact { get; set; }
-        public DateTime D_Submit { get; set; }
-        public DateTime D_Confirm{ get; set; }
+        public String C_Mobile { get; set; }
+        public String C_Address { get; set; }
+        public DateTime? D_Create { get; set; }
+        public DateTime? D_Submit { get; set; }
+        public DateTime? D_Confirm{ get; set; }
         public Int32? I_Audited { get; set; }
         public Int32? I_Auditer { get; set; } 
+        public String C_Remark { get; set; }
     }
     public class UserRoleEntity
     {

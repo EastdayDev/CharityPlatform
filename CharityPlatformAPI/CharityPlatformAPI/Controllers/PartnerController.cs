@@ -1,4 +1,5 @@
 ﻿using CharityPlatform.Data;
+using CharityPlatform.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +15,14 @@ namespace CharityPlatformAPI.Controllers
         [HttpGet]
         public DataTable Usp_Org_List(int userId, string filterValue, int pageIndex, int pageSize)
         {
-            return DataHelper.FillDataTable("Usp_Org_List",new { userId = userId, filter = string.IsNullOrEmpty(filterValue) ? "" : filterValue, pageIndex = pageIndex, pageSize = pageSize });
+            return DataHelper.FillDataTable("Usp_Org_List", new { userId = userId, filter = string.IsNullOrEmpty(filterValue) ? "" : filterValue, pageIndex = pageIndex, pageSize = pageSize });
         }
+        [HttpPost]
+        public int Usp_Org_Insert(OrganizationEntity entity)
+        {
+            DataHelper.ExecuteNonQuery("Usp_Org_Insert", entity);
+            return entity.Id;
+        }
+
     }
 }
