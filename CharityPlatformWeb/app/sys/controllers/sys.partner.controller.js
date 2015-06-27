@@ -23,14 +23,22 @@ angular.module('sysModule').controller('SysPartnerController',
 		$scope.search($scope.filterValue);	
 	});
 
-	$scope.showPartnerEdit = function(editId){
-		_sys.editId = editId;
+	$scope.showPartnerEdit = function(item){
+		_sys.editItem = item;
 		epModal.showModal('/app/sys/views/partner.edit.html', 'PartnerEditController');
 	}
 
-	$scope.$on('onSaveSuccess', function(e, editItem){
-		console.log(editItem);
+	$scope.$on('onPartnerSaveSuccess', function(e, editItem){
+		var length = $scope.items.length;
+		for (var i = 0; i < length; i++) {
+			if ($scope.items[i].Id === editItem.Id) return;
+		};
+		$scope.items.insert(0, editItem);		
 	});
+
+	$scope.audit = function(){
+		alert(1);
+	}
 
 	$scope.$on('$viewContentLoaded', function () {
 		 $scope.search($scope.filterValue);
@@ -39,14 +47,27 @@ angular.module('sysModule').controller('SysPartnerController',
 
 
 angular.module('sysModule').controller('PartnerEditController',
-['$scope', '$modalInstance', '_sys', function ($scope, $modalInstance, _sys) { 
+['$scope', '$rootScope', '$modalInstance', '_sys', '_user', 'epModal',
+function ($scope, $rootScope, $modalInstance, _sys, _user, epModal) { 
 	
 	$scope._sys = _sys;
 	$scope.save = function(){
+		if (!_sys.editItem.C_Name){
+			epModal.info('请填写机构名称');
+			return;
+		}
+		if (_sys.editItem.Id === -1) {
+			///新增数据设置默认值
+			_sys.editItem.I_Flag = 1;						
+			_sys.editItem.I_Auditer = -1;
+			_sys.editItem.I_Audited = 195; /// 新开户
+			_sys.editItem.I_Creater = _user.userId;
+		}
 		_sys.Usp_Org_Insert(_sys.editItem, function(data){
 			if (data) {
-				$scope.$emmit('onSaveSuccess', _sys.editItem);
 				$modalInstance.close();
+				if (_sys.editItem.Id === -1) _sys.editItem.Id = parseInt(data);
+				$rootScope.$broadcast('onPartnerSaveSuccess', _sys.editItem);				
 			}
 		});
 	}

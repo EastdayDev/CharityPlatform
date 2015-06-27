@@ -1,33 +1,12 @@
 ﻿'use strict'
 var filterApp = angular.module('filterModule');
 
-filterApp.filter('userCategory', [function () {
+filterApp.filter('dictFilter', ['_sys', function (_sys) {
     return function (value) {
-        switch (value) {
-            case 101: return "基金会";
-            case 105: return "机构用户";
-            case 110: return "普通用户";
-            default: return "未知";
+        var length = _sys.words.length;
+        for (var i = 0; i < length; i++) {
+            if (_sys.words[i].Id === value) return _sys.words[i].C_Name;
         }
-    }
-}]);
-
-filterApp.filter('flag', [function () {
-    return function (value) {
-        switch (value) {
-            case 0: return "无效";
-            case 1: return "有效";            
-            default: return "未知";
-        }
-    }
-}]);
-
-filterApp.filter('auditState', [function () {
-    return function (value) {
-        switch (value) {
-            case 185: return "通过";
-            case 190: return "未通过";            
-            default: return "未知";
-        }
+        return '未知';
     }
 }]);
