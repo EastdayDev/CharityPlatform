@@ -51,7 +51,7 @@ namespace CharityPlatform.Entity
 
     public class RoleEntity
     { 
-        public Int32? Id { get; set; }
+        public Int32 Id { get; set; }
         public String C_Name { get; set; }
         public Int32? I_Flag { get; set; }
         public String C_Remark { get; set; }

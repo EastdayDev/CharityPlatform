@@ -20,6 +20,11 @@ namespace CharityPlatformAPI.Controllers
         [HttpPost]
         public int Usp_Org_Insert(OrganizationEntity entity)
         {
+            if (entity.I_Audited != -1 && entity.D_Confirm == null)
+            {
+                ///设置审核日期
+                entity.D_Confirm = DateTime.Now;
+            }
             DataHelper.ExecuteNonQuery("Usp_Org_Insert", entity);
             return entity.Id;
         }

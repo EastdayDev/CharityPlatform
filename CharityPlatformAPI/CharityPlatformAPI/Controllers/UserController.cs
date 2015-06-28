@@ -80,9 +80,9 @@ namespace CharityPlatformAPI.Controllers
         }
 
         [HttpPost]
-        public int Usp_User_Update(UserEntity user)
+        public int Usp_User_Insert(UserEntity user)
         {
-            return DataHelper.ExecuteNonQuery("Usp_User_Update", user);
+            return DataHelper.ExecuteNonQuery("Usp_User_Insert", user);
         }
 
         [HttpPost]

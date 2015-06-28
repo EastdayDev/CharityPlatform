@@ -16,6 +16,8 @@ angular.module('componentModule').directive('bootStrapPage', function () {
     	///每组显示页标签数
     	var groupSize = 5;    	
 
+        $scope.hideStyle = true;
+
     	$scope.totals = [];
     	$scope.maxGroupIndex = Math.ceil($scope.pageTotal / groupSize) 
     	$scope.groupIndex = Math.ceil($scope.pageIndex / groupSize) 
@@ -29,25 +31,29 @@ angular.module('componentModule').directive('bootStrapPage', function () {
 	    	}
     	}		
 
-		$scope.$watch('pageTotal', function(n){
+		$scope.$watch('pageTotal', function(e){
 			$scope.totals = [];
     		$scope.maxGroupIndex = Math.ceil($scope.pageTotal / groupSize) 
     		$scope.groupIndex = Math.ceil($scope.pageIndex / groupSize) 
-			resetPageItems($scope.groupIndex);
+			resetPageItems($scope.groupIndex); 
 		});
 
     	$scope.previousGroup = function() {    		
-			resetPageItems($scope.groupIndex - 1);
-			$scope.pageIndex = $scope.totals[$scope.totals.length - 1];			
-			$scope.groupIndex = Math.ceil($scope.pageIndex / groupSize);
-			$scope.changePage($scope.pageIndex); 
+            if ($scope.groupIndex > 1) {
+    			resetPageItems($scope.groupIndex - 1);
+    			$scope.pageIndex = $scope.totals[$scope.totals.length - 1];			
+    			$scope.groupIndex = Math.ceil($scope.pageIndex / groupSize);
+    			$scope.changePage($scope.pageIndex); 
+            }
     	}
 
     	$scope.nextGroup = function() {    		
-    		resetPageItems($scope.groupIndex + 1);
-    		$scope.pageIndex = $scope.totals[0];
-    		$scope.groupIndex = Math.ceil($scope.pageIndex / groupSize);
-    		$scope.changePage($scope.pageIndex);
+            if ($scope.groupIndex < $scope.maxGroupIndex){
+        		resetPageItems($scope.groupIndex + 1);
+        		$scope.pageIndex = $scope.totals[0];
+        		$scope.groupIndex = Math.ceil($scope.pageIndex / groupSize);
+        		$scope.changePage($scope.pageIndex);
+            }
     	}
 
     	$scope.changePage = function(index){

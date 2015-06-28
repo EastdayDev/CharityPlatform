@@ -5,7 +5,7 @@
             <img src="/images/search.png" style="cursor:pointer; width:25px;" ng-click="search(filterValue)" />
         </div>
     </div>
-     <div style="float: right; padding: 5px 1px 5px 0; cursor: pointer;font-size:15px; color:#159059">添加</div>
+<!--      <div style="float: right; padding: 5px 1px 5px 0; cursor: pointer;font-size:15px; color:#159059" ng-click="showEdit({Id:-1})">添加</div> -->
 </div>
 <div class="manage-line-div">
     <table border="1" cellpadding="1" cellspacing="1" width="100%" style="margin-top:10px;">
@@ -15,7 +15,7 @@
             <td ng-bind="item.C_Name"></td>
             <td ng-bind="item.I_Category | dictFilter"></td>         
             <td ng-bind="item.I_Flag | dictFilter"></td>
-            <td><span class="manage-bt-update">修改</span>&nbsp;&nbsp;<span class="manage-bt-role">角色</span></td>
+            <td><span class="manage-bt-update" ng-click="showEdit(item)">修改</span>&nbsp;&nbsp;<span class="manage-bt-role">角色</span></td>
         </tr>       
     </table>
     <div boot-strap-page page-index="_sys.hold.pageIndex" page-total="_sys.hold.total" />

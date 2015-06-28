@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sysModule').controller('SysUserController',
-['$scope', '_user', '_sys', function ($scope, _user, _sys) { 
+['$scope', '_user', '_sys', 'epModal', function ($scope, _user, _sys, epModal) { 
 	
 	var pageSize = 10;
 	$scope.filterValue = '';
@@ -23,6 +23,12 @@ angular.module('sysModule').controller('SysUserController',
 		$scope.search($scope.filterValue);	
 	});
 
+	$scope.showEdit = function(item){
+		_sys.editItem = item;
+		angular.copy(_sys.editItem, _sys.copyItem);
+		epModal.showModal('/app/sys/views/user.edit.html', 'UserEditController');
+	}
+	
 	$scope.$on('$viewContentLoaded', function () {
 		 $scope.search($scope.filterValue);
     });
@@ -34,27 +40,17 @@ function ($scope, $rootScope, $modalInstance, _sys, _user, epModal) {
 	
 	$scope._sys = _sys;
 	$scope.save = function(){
-		if (!_sys.editItem.C_Name){
-			epModal.info('请填写机构名称');
-			return;
-		}
-		if (_sys.editItem.Id === -1) {
-			///新增数据设置默认值
-			_sys.editItem.I_Flag = 1;						
-			_sys.editItem.I_Auditer = -1;
-			_sys.editItem.I_Audited = 195; /// 新开户
-			_sys.editItem.I_Creater = _user.userId;
-		}
-		_sys.Usp_Org_Insert(_sys.editItem, function(data){
+		_user.Usp_User_Insert(_sys.editItem, function(data){
 			if (data) {
 				$modalInstance.close();
 				if (_sys.editItem.Id === -1) _sys.editItem.Id = parseInt(data);
-				$rootScope.$broadcast('onPartnerSaveSuccess', _sys.editItem);				
+				$rootScope.$broadcast('onSaveSuccess', _sys.editItem);				
 			}
 		});
 	}
 
 	$scope.close = function () {
         $modalInstance.close();
+        angular.copy(_sys.copyItem, _sys.editItem);
     }     
 }]);

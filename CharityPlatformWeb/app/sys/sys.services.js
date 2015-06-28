@@ -9,6 +9,7 @@ function (_http, _cookie, appKey, _user) {
 
     service.hold = {tab: 0, pageIndex: 1, total: 0};
 
+    service.copyItem = {Id: -1};
     service.editItem = {Id: -1};
 
     service.words = [];

@@ -4,7 +4,7 @@
             <input class="input-contral-back search-bt" placeholder="名称、联系人" ng-model="filterValue">
             <img src="/images/search.png" style="cursor:pointer; width:25px;" ng-click="search(filterValue)" /> 
         </div>        
-         <div style="float: right; padding: 5px 1px 5px 0; cursor: pointer;font-size:15px; color:#159059" ng-click="showPartnerEdit({Id:-1})">添加</div>
+         <div style="float: right; padding: 5px 1px 5px 0; cursor: pointer;font-size:15px; color:#159059" ng-click="showEdit({Id:-1})">添加</div>
     </div>
 </div>
     <div class="manage-line-div">
@@ -16,11 +16,24 @@
                 <td ng-bind="item.C_Mobile"></td>         
                 <td ng-bind="item.I_Audited | dictFilter"></td>
                 <td>
-                    <span class="manage-bt-update" ng-click="showPartnerEdit(item)">修改</span>
+                    <span class="manage-bt-update" ng-click="showEdit(item)">修改</span>
                     &nbsp;&nbsp;
-                    <button class="manage-bt-role" ng-disabled="item.I_Audited!==195" ng-click="audit(item)">审核</button>                
+                   <!--  <button class="manage-bt-role" ng-disabled="item.I_Audited!==195" ng-click="audit(item)">审核</button>    -->
+
+                    <!-- Split button -->
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default">审核</button>
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu" ng-hide="item.I_Audited!==195">
+                        <li><a  ng-click="audit(item,185)">通过</a></li>
+                        <li><a  ng-click="audit(item,190)">未通过</a></li>    
+                      </ul>
+                    </div>             
                 </td>
             </tr>   
         </table>
-        <div boot-strap-page page-index="_sys.hold.pageIndex" page-total="_sys.hold.total" ></div>
+        <div style="text-align:right;" boot-strap-page page-index="_sys.hold.pageIndex" page-total="_sys.hold.total" ></div>
     </div>

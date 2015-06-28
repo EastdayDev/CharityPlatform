@@ -48,6 +48,10 @@ function (_http, _cookie, appKey) {
         _http.ajaxGet(apiController, 'Usp_User_List', param, callback);            
     }
 
+    service.Usp_User_Insert = function(user, callback){
+        _http.ajaxPost(apiController, 'Usp_User_Insert', user, callback);
+    }
+
     service.ChangePwd = function (user, callback) {
         _http.ajaxPost(apiController, 'ChangePwd', user, callback);
     }

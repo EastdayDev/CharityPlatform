@@ -1,4 +1,4 @@
-<ul class="pagination" >
+<ul class="pagination" ng-hide="pageTotal<=1">
 	<li ng-click="previousGroup()" ng-class="{disabled:groupIndex===1}"><a>&laquo;</a></li>
 	<li ng-click="previous()"><a>&lt;</a></li>
 	<li ng-class="{active:item===pageIndex}" ng-repeat="item in totals" ng-click="changePage(item)">

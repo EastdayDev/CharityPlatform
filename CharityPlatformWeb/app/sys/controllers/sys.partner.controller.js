@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sysModule').controller('SysPartnerController',
-['$scope', '_sys', 'epModal', function ($scope, _sys, epModal) { 
+['$scope', '_sys', '_user', 'epModal', function ($scope, _sys, _user, epModal) { 
 	
 	var pageSize = 10;
 	$scope.filterValue = '';
@@ -13,7 +13,7 @@ angular.module('sysModule').controller('SysPartnerController',
 			$scope.items = data;
 			_sys.hold.total = 0;
 			if (data && data.length > 0){
-        		_sys.hold.total = Math.ceil($scope.items[0].Total / pageSize) 
+        		_sys.hold.total = Math.ceil($scope.items[0].Total / pageSize); 
         	}
 		});
 	}
@@ -23,12 +23,13 @@ angular.module('sysModule').controller('SysPartnerController',
 		$scope.search($scope.filterValue);	
 	});
 
-	$scope.showPartnerEdit = function(item){
+	$scope.showEdit = function(item){
 		_sys.editItem = item;
+		angular.copy(_sys.editItem, _sys.copyItem);
 		epModal.showModal('/app/sys/views/partner.edit.html', 'PartnerEditController');
 	}
 
-	$scope.$on('onPartnerSaveSuccess', function(e, editItem){
+	$scope.$on('onSaveSuccess', function(e, editItem){
 		var length = $scope.items.length;
 		for (var i = 0; i < length; i++) {
 			if ($scope.items[i].Id === editItem.Id) return;
@@ -36,9 +37,22 @@ angular.module('sysModule').controller('SysPartnerController',
 		$scope.items.insert(0, editItem);		
 	});
 
-	$scope.audit = function(){
-		alert(1);
-	}
+	// $scope.audit = function(item){
+	// 	_sys.editItem = item;
+	// 	angular.copy(_sys.editItem, _sys.copyItem);
+	// 	epModal.showModal('/app/sys/views/partner.audit.html', 'PartnerAuditController');
+	// }
+
+ 	$scope.audit = function(item, auditType){
+ 		_sys.editItem = item;
+ 		_sys.editItem.I_Auditer = _user.userId;		
+ 		_sys.editItem.I_Audited = auditType;
+		_sys.Usp_Org_Insert(_sys.editItem, function(data){
+			if (!data) {
+				angular.copy(_sys.copyItem, _sys.editItem);
+			}
+		});
+ 	}
 
 	$scope.$on('$viewContentLoaded', function () {
 		 $scope.search($scope.filterValue);
@@ -67,12 +81,40 @@ function ($scope, $rootScope, $modalInstance, _sys, _user, epModal) {
 			if (data) {
 				$modalInstance.close();
 				if (_sys.editItem.Id === -1) _sys.editItem.Id = parseInt(data);
-				$rootScope.$broadcast('onPartnerSaveSuccess', _sys.editItem);				
+				$rootScope.$broadcast('onSaveSuccess', _sys.editItem);				
+			} else {
+				angular.copy(_sys.copyItem, _sys.editItem);
 			}
 		});
 	}
 
 	$scope.close = function () {
         $modalInstance.close();
+        angular.copy(_sys.copyItem, _sys.editItem);
     }     
 }]);
+
+
+
+// angular.module('sysModule').controller('PartnerAuditController',
+// ['$scope', '$rootScope', '$modalInstance', '_sys', '_user', 'epModal',
+// function ($scope, $rootScope, $modalInstance, _sys, _user, epModal) { 
+	
+// 	$scope._sys = _sys;
+// 	$scope.save = function(){	 
+// 		_sys.editItem.I_Auditer = _user.userId;		
+// 		_sys.Usp_Org_Insert(_sys.editItem, function(data){
+// 			if (data) {
+// 				$modalInstance.close();				
+// 				$rootScope.$broadcast('onSaveSuccess', _sys.editItem);				
+// 			} else {
+// 				angular.copy(_sys.copyItem, _sys.editItem);
+// 			}
+// 		});
+// 	}
+
+// 	$scope.close = function () {
+//         $modalInstance.close();
+//         angular.copy(_sys.copyItem, _sys.editItem);
+//     }     
+// }]);
