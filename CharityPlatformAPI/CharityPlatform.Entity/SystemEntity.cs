@@ -42,12 +42,12 @@ namespace CharityPlatform.Entity
         public Int32? I_Auditer { get; set; } 
         public String C_Remark { get; set; }
     }
-    public class UserRoleEntity
-    {
-        public int UserId { get; set; }
+    //public class UserRoleEntity
+    //{
+    //    public int UserId { get; set; }
 
-        public IList<RoleEntity> Roles = new List<RoleEntity>();
-    }
+    //    public IList<RoleEntity> Roles = new List<RoleEntity>();
+    //}
 
     public class RoleEntity
     { 
@@ -76,6 +76,20 @@ namespace CharityPlatform.Entity
         {
             return this.Id == ((FunctionEntity)obj).Id;
         }
+    }
+
+    public class RoleFuncEntity
+    {
+        public int I_Role;
+        public int I_Function;
+        public int I_Flag;
+    }
+
+    public class UserRoleEntity
+    {
+        public int I_User;
+        public int I_Role;
+        public int I_Flag;
     }
 
     public class FlowKinkEntity

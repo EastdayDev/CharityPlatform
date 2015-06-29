@@ -25,6 +25,30 @@ namespace CharityPlatformAPI.Controllers
             return entity.Id;
         }
 
+        [HttpPost]
+        public bool Usp_RoleFunc_Insert(IList<RoleFuncEntity> entities)
+        {
+            if (!entities.Any()) return false;
+            DataHelper.ExecuteNonQuery("Usp_RoleFunc_Delete", new { I_Role = entities[0].I_Role });
+            foreach (var entity in entities)
+            {
+                DataHelper.ExecuteNonQuery("Usp_RoleFunc_Insert", entity); 
+            }
+            return true;
+        }
+
+        [HttpPost]
+        public bool Usp_UserRole_Insert(IList<UserRoleEntity> entities)
+        {
+            if (!entities.Any()) return false;
+            DataHelper.ExecuteNonQuery("Usp_UserRole_Delete", new { I_User = entities[0].I_User });
+            foreach (var entity in entities)
+            {
+                DataHelper.ExecuteNonQuery("Usp_UserRole_Insert", entity);
+            }
+            return true;
+        } 
+
         [HttpGet]
         public DataTable Usp_Func_List()
         {
@@ -36,5 +60,11 @@ namespace CharityPlatformAPI.Controllers
         {
             return DataHelper.FillDataTable("Usp_Funcs_ByRole", new { roleId = roleId });
         }
+         [HttpGet]
+        public DataTable Usp_Roles_ByUser(int userId)
+        {
+            return DataHelper.FillDataTable("Usp_Roles_ByUser", new { I_User = userId });
+        }
+        
     }
 }

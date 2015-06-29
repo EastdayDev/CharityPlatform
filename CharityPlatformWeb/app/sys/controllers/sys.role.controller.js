@@ -28,6 +28,12 @@ angular.module('sysModule').controller('SysRoleController',
 		angular.copy(_sys.editItem, _sys.copyItem);
 		epModal.showModal('/app/sys/views/role.edit.html', 'RoleEditController');
 	}
+	
+	$scope.showRoleAuth = function(item){
+		_sys.editItem = item;
+		angular.copy(_sys.editItem, _sys.copyItem);
+		epModal.showModal('/app/sys/views/role.auth.html', 'RoleAuthController');
+	}
 
 	$scope.pickRole = function(item){
 		$scope.currentRole = item;
@@ -50,11 +56,7 @@ angular.module('sysModule').controller('SysRoleController',
 	}
 
 	$scope.$on('$viewContentLoaded', function () {
-		 $scope.search($scope.filterValue);
-
-		 _auth.Usp_Func_List(function(data){
-		 	$scope.funcs = data;
-		 })
+		 $scope.search($scope.filterValue);  
     });
 }]);
 
@@ -86,5 +88,40 @@ function ($scope, $rootScope, $modalInstance, _sys, _auth, _user, epModal) {
 	$scope.close = function () {
         $modalInstance.close();
         angular.copy(_sys.copyItem, _sys.editItem);
+    }     
+}]);
+
+
+
+angular.module('sysModule').controller('RoleAuthController',
+['$scope', '$rootScope', '$modalInstance', '_sys', '_auth', '_user', 'epModal',
+function ($scope, $rootScope, $modalInstance, _sys, _auth, _user, epModal) { 
+	
+	$scope._sys = _sys;
+	$scope._auth = _auth;
+	$scope.roleFuncs = [];
+
+	_auth.Usp_Funcs_ByRole(_sys.editItem.Id, function(data){
+	 	$scope.roleFuncs = data;
+	 })
+
+	$scope.save = function(){
+		if ($scope.roleFuncs.length === 0) return;
+		var roleId = _sys.editItem.Id;
+		var roleFuncInsertItems = [];
+		angular.forEach($scope.roleFuncs, function(item){
+			this.push({I_Role: roleId, I_Function: item.Id});
+		}, roleFuncInsertItems);
+		_auth.Usp_RoleFunc_Insert(roleFuncInsertItems, function(data){
+			if (data) {
+				$modalInstance.close();				 				
+			} else {
+				epModal.info('权限设置发生异常!');
+			}
+		});
+	}
+
+	$scope.close = function () {
+        $modalInstance.close(); 
     }     
 }]);

@@ -28,6 +28,12 @@ angular.module('sysModule').controller('SysUserController',
 		angular.copy(_sys.editItem, _sys.copyItem);
 		epModal.showModal('/app/sys/views/user.edit.html', 'UserEditController');
 	}
+
+	$scope.showUserRole = function(item){
+		_sys.editItem = item;
+		angular.copy(_sys.editItem, _sys.copyItem);
+		epModal.showModal('/app/sys/views/user.role.html', 'UserRoleController');
+	}
 	
 	$scope.$on('$viewContentLoaded', function () {
 		 $scope.search($scope.filterValue);
@@ -53,4 +59,41 @@ function ($scope, $rootScope, $modalInstance, _sys, _user, epModal) {
         $modalInstance.close();
         angular.copy(_sys.copyItem, _sys.editItem);
     }     
+}]);
+ 
+
+angular.module('sysModule').controller('UserRoleController',
+['$scope', '$rootScope', '$modalInstance', '_sys', '_auth', '_user', 'epModal',
+function ($scope, $rootScope, $modalInstance, _sys, _auth, _user, epModal) { 
+	
+	$scope._sys = _sys;
+	$scope._auth = _auth;
+	$scope.userRoles = [];
+
+	_auth.Usp_Roles_ByUser(_sys.editItem.Id, function(data){
+		angular.forEach(data, function(item){
+			this.push(item.Id);
+		}, $scope.userRoles);
+	 	//$scope.userRoles = data;
+	 })
+
+	$scope.save = function(){
+		if ($scope.userRoles.length === 0) return;
+		var userId = _sys.editItem.Id;
+		var userRoleInsertItems = [];
+		angular.forEach($scope.userRoles, function(item){
+			this.push({I_Role: item, I_User: userId});
+		}, userRoleInsertItems);
+		_auth.Usp_UserRole_Insert(userRoleInsertItems, function(data){
+			if (data) {
+				$modalInstance.close();				 				
+			} else {
+				epModal.info('权限设置发生异常!');
+			}
+		});
+	}
+
+	$scope.close = function () {
+        $modalInstance.close(); 
+    }        
 }]);

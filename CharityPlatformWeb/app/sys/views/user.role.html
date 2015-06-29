@@ -1,0 +1,27 @@
+<div class="content-m-left-right">    
+    <div class="content-bg-white-div">
+        <div class="userinfo-title"></div>
+        <div class="pa-div" style="min-height:120px;">
+            <div class="title-green">权限分配</div>
+            <div class="manage-line-div">
+                <table border="1" cellpadding="1" cellspacing="1" width="100%" style="margin-top:10px;">
+                    <tr class="manage-table-tr-title"><td></td><td>角色</td><td>类别</td></tr>
+                    <tr class="manage-table-tr-valus" ng-repeat="item in _auth.allRoles">
+                        <td>
+                            <input type="checkbox" checklist-value="item.Id" checklist-model="userRoles">
+                        </td>
+                        <td ng-bind="item.C_Name"></td>
+                        <td ng-bind="item.C_Remark"></td>
+                    </tr>   
+                </table> 
+            </div>
+
+        </div>
+
+        <div class="pa-div">            
+            <div class="myAccount-bt-line " style="padding-right:4%;">
+                <div class="shenhe-bt" ng-click="close()"><div class="btn-contral" style="margin-left:20px;">取&nbsp;&nbsp;&nbsp;&nbsp;消</div></div><div class="shenhe-bt"><div class="btn-contral" ng-click="save()">确&nbsp;&nbsp;&nbsp;&nbsp;定</div></div></div>
+        </div>
+    </div>
+
+</div>

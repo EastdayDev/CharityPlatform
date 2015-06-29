@@ -7,14 +7,8 @@ angular.module('authModule').factory('_auth', ['_http', '_cookie', '_user', 'app
 
         var apiController = 'Auth';
 
-        var auths = [];
-
-        service.GetAuthes = function (userId) {
-            var param = { userId: userId };
-            _http.ajaxGet(apiController, 'FindAuthes', param, function (data) {
-                auths = data;
-            });
-        }
+        service.allAuths = [];
+        service.allRoles = [];
 
         service.Usp_Role_List = function(filterValue, pageIndex, pageSize, callback){
             var param = {
@@ -29,14 +23,32 @@ angular.module('authModule').factory('_auth', ['_http', '_cookie', '_user', 'app
             _http.ajaxPost(apiController, 'Usp_Role_Insert', role, callback);
         }
 
+        service.Usp_RoleFunc_Insert = function(roleFuncs, callback){
+            _http.ajaxPost(apiController, 'Usp_RoleFunc_Insert', roleFuncs, callback);
+        }
+
+        service.Usp_UserRole_Insert = function(userRoles, callback){
+            _http.ajaxPost(apiController, 'Usp_UserRole_Insert', userRoles, callback);
+        }
+
         service.Usp_Funcs_ByRole = function(roleId, callback){
             var param = {roleId: roleId };
             _http.ajaxGet(apiController, 'Usp_Funcs_ByRole', param, callback);            
+        }  
+
+        service.Usp_Roles_ByUser = function(userId, callback){
+            var param = {userId: userId};
+            _http.ajaxGet(apiController, 'Usp_Roles_ByUser', param, callback);
         }
-    
-        service.Usp_Func_List = function(callback){
-            _http.ajaxGet(apiController, 'Usp_Func_List', null, callback);            
-        }
- 
+
+        
+        _http.ajaxGet(apiController, 'Usp_Func_List', null, function(data){
+            service.allAuths = data;
+        });        
+
+        service.Usp_Role_List('', 1, 100000, function(data){
+            service.allRoles = data;
+        });  
+
         return service;
     }]);
