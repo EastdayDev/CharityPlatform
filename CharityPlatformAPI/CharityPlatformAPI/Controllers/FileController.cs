@@ -19,15 +19,15 @@
     public class FileController : ApiController
     {
         [HttpPost]
-        public int Upload()
+        public int UploadFiles()
         {
             try
             {
                 ProjectFileEntity projectFileEntity = new ProjectFileEntity();
-                projectFileEntity.I_Project = int.Parse(HttpContext.Current.Request["projectId"]);
-                projectFileEntity.I_Category = Convert.ToInt32(HttpContext.Current.Request["category"]);
-                projectFileEntity.C_Remark = HttpContext.Current.Request["remark"];
-                projectFileEntity.I_Uploader = Convert.ToInt32(HttpContext.Current.Request["userId"]);
+                projectFileEntity.I_Project = int.Parse(HttpContext.Current.Request["I_Owner"]);
+                projectFileEntity.I_Category = Convert.ToInt32(HttpContext.Current.Request["I_Category"]);
+                projectFileEntity.C_Remark = HttpContext.Current.Request["C_Remark"];
+                projectFileEntity.I_Uploader = Convert.ToInt32(HttpContext.Current.Request["I_Uploader"]);
                 projectFileEntity.D_Upload = DateTime.Now;
                 projectFileEntity.C_OriginName = HttpContext.Current.Request.Files[0].FileName;
 
@@ -43,11 +43,8 @@
                     {
                         Directory.CreateDirectory(filePath);
                     }
-                    HttpContext.Current.Request.Files[0].SaveAs(filePath + "\\" + projectFileEntity.C_FileName);
-                    using (AppBLL bll = new AppBLL())
-                    { 
-                        bll.ExecuteNonQuery("Usp_Project_Files_Insert", projectFileEntity);
-                    } 
+                    HttpContext.Current.Request.Files[0].SaveAs(filePath + "\\" + projectFileEntity.I_Project.ToString() + "\\" + projectFileEntity.C_FileName);
+                    DataHelper.ExecuteNonQuery("Usp_File_Insert", projectFileEntity);
                     return 1;
                 }
                 return -1;
@@ -57,9 +54,10 @@
                 return -1;
             }
         }
+        
 
         [HttpGet]
-        public void Download(int projectId, string fileName, string token)
+        public void DownloadFile(int owner, string fileName, string token)
         {
             try
             {
@@ -73,10 +71,10 @@
                 }
 
                 fileName = HttpContext.Current.Server.UrlDecode(fileName);
-                string fileUploadPath = ConfigurationManager.AppSettings["FileUpload"]; 
-                string fullName = System.IO.Path.Combine(fileUploadPath, projectId.ToString(), fileName);
+                string fileUploadPath = ConfigurationManager.AppSettings["FileUpload"];
+                string fullName = System.IO.Path.Combine(fileUploadPath, owner.ToString(), fileName);
 
-                FileInfo fileInfo = new FileInfo(fullName); 
+                FileInfo fileInfo = new FileInfo(fullName);
 
                 HttpContext.Current.Response.Clear();
                 HttpContext.Current.Response.ClearContent();
@@ -98,6 +96,6 @@
             {
                 return;
             }
-        } 
+        }
     }
 }

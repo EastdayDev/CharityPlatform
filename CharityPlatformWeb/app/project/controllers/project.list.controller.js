@@ -1,16 +1,11 @@
 ﻿'use strict';
 
-angular.module('epProjectModule').controller('epProjectListController',
-    ['$scope', '$location', '$state', 'epProjectListHold', 'epProjectChildrenHold', 'epProject', '$rootScope', 'epModal',
-        function ($scope, $location, $state, epProjectListHold, epProjectChildrenHold, epProject, $rootScope, epModal) {
+angular.module('projectModule').controller('ProjectListController',
+['$scope', '$state', '_project', '$rootScope', 'epModal',
+function ($scope, $state, _project, $rootScope, epModal) {
 
             $scope.items = [];
-
-            $scope.$emit('onResetFloatMenu', -1);
-
-            $scope.$emit('onChangeTitle', '项目列表');
-
-            $scope.hold = epProjectListHold;
+ 
             $scope.hold.filterValue = "";
 
             var queryProjectList = function (index, size, filterValue) {
