@@ -13,4 +13,15 @@ angular.module('userModule').config(['$stateProvider', function ($stateProvider)
             templateUrl: '/app/user/views/user.register.html',
             controller: 'UserRegisterController'
         })
+        .state('user', {
+            abstract: true,
+            url: '/user',
+            templateUrl: '/app/user/views/user.center.html',
+            controller: 'UserCenterController'
+        })
+        .state('user.detail', {            
+            url: '/detail',
+            templateUrl: '/app/user/views/user.detail.html',
+            controller: 'UserDetailController'
+        })
 }]);
