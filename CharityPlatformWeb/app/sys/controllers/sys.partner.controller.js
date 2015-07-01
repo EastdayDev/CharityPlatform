@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sysModule').controller('SysPartnerController',
-['$scope', '_sys', '_user', 'epModal', function ($scope, _sys, _user, epModal) { 
+['$scope', '_sys', '_user', '_partner', 'epModal', function ($scope, _sys, _user, _partner, epModal) { 
 	
 	var pageSize = 10;
 	$scope.filterValue = '';
@@ -47,7 +47,7 @@ angular.module('sysModule').controller('SysPartnerController',
  		_sys.editItem = item;
  		_sys.editItem.I_Auditer = _user.userId;		
  		_sys.editItem.I_Audited = auditType;
-		_sys.Usp_Org_Insert(_sys.editItem, function(data){
+		_partner.Usp_Org_Insert(_sys.editItem, function(data){
 			if (!data) {
 				angular.copy(_sys.copyItem, _sys.editItem);
 			}
@@ -61,8 +61,8 @@ angular.module('sysModule').controller('SysPartnerController',
 
 
 angular.module('sysModule').controller('PartnerEditController',
-['$scope', '$rootScope', '$modalInstance', '_sys', '_user', 'epModal',
-function ($scope, $rootScope, $modalInstance, _sys, _user, epModal) { 
+['$scope', '$rootScope', '$modalInstance', '_sys', '_user', '_partner', 'epModal',
+function ($scope, $rootScope, $modalInstance, _sys, _user, _partner, epModal) { 
 	
 	$scope._sys = _sys;
 	$scope.save = function(){
@@ -77,7 +77,7 @@ function ($scope, $rootScope, $modalInstance, _sys, _user, epModal) {
 			_sys.editItem.I_Audited = 195; /// 新开户
 			_sys.editItem.I_Creater = _user.userId;
 		}
-		_sys.Usp_Org_Insert(_sys.editItem, function(data){
+		_partner.Usp_Org_Insert(_sys.editItem, function(data){
 			if (data) {
 				$modalInstance.close();
 				if (_sys.editItem.Id === -1) _sys.editItem.Id = parseInt(data);

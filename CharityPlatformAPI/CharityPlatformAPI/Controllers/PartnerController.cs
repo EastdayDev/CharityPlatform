@@ -17,10 +17,17 @@ namespace CharityPlatformAPI.Controllers
         {
             return DataHelper.FillDataTable("Usp_Org_List", new { userId = userId, filter = string.IsNullOrEmpty(filterValue) ? "" : filterValue, pageIndex = pageIndex, pageSize = pageSize });
         }
+
+        [HttpGet]
+        public DataTable Usp_Org_ById(int id)
+        {
+            return DataHelper.FillDataTable("Usp_Org_ById", new { Id = id });
+        }
+
         [HttpPost]
         public int Usp_Org_Insert(OrganizationEntity entity)
         {
-            if (entity.I_Audited != -1 && entity.D_Confirm == null)
+            if (entity.I_Audited == 190 || entity.I_Audited == 185)
             {
                 ///设置审核日期
                 entity.D_Confirm = DateTime.Now;

@@ -1,25 +1,62 @@
 <div class="row">
-	<div class="col-md-6">
-		<table border="1" cellpadding="1" cellspacing="1" width="100%">
-		    <tr><td class="td-user-title ">登录名</td><td class="td-user-value">13912312312</td></tr>
-		    <tr><td class="td-user-title ">姓名</td><td class="td-user-value">用户111</td></tr>
-		    <tr><td class="td-user-title">联系方式</td><td class="td-user-value">13912312312</td></tr>
-		    <tr><td class="td-user-title">注册地点</td><td class="td-user-value">上海徐汇区</td></tr>
-		</table>
+	<div class="col-md-6">		
+        <table border="1" cellpadding="1" cellspacing="1" width="100%">
+            <tr>
+                <td class="td-user-title ">登录名</td>
+                <td class="td-user-value" ng-bind="user.C_Login"></td>
+            </tr>
+            <tr>
+                <td class="td-user-title ">姓名</td>
+                <td class="td-user-value" ng-bind="user.C_Name"></td>
+            </tr>
+            <tr>
+                <td class="td-user-title">联系方式</td>
+                <td class="td-user-value" ng-bind="user.C_Mobile"></td>
+            </tr>
+            <tr>
+                <td class="td-user-title">注册时间</td>
+                <td class="td-user-value" ng-bind="user.D_Create | date:'yyyy-MM-dd'"></td>
+            </tr>                 
+        </table>
 	</div>
-	<div class="col-md-6">
-		<table border="1" cellpadding="1" cellspacing="1" width="100%">
-		    <tr><td class="td-user-title ">登录名</td><td class="td-user-value">13912312312</td></tr>
-		    <tr><td class="td-user-title ">姓名</td><td class="td-user-value">用户111</td></tr>
-		    <tr><td class="td-user-title">联系方式</td><td class="td-user-value">13912312312</td></tr>
-		    <tr><td class="td-user-title">注册地点</td><td class="td-user-value">上海徐汇区</td></tr>
-		</table>
+	<div class="col-md-6" ng-show="user.I_Category===105">
+		 <table border="1" cellpadding="1" cellspacing="1" width="100%" >
+            <tr>
+                <td class="td-user-title ">机构名称</td>
+                <td class="td-user-value" ng-bind="user.C_OrgName"></td>
+            </tr>
+            <tr>
+                <td class="td-user-title ">机构地址</td>
+                <td class="td-user-value" ng-bind="user.C_OrgAddress"></td>
+            </tr>
+            <tr>
+                <td class="td-user-title ">联系人</td>
+                <td class="td-user-value" ng-bind="user.C_OrgContact"></td>
+            </tr>
+            <tr>
+                <td class="td-user-title ">联系方式</td>
+                <td class="td-user-value" ng-bind="user.C_OrgMobile"></td>
+            </tr> 
+        </table>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="myAccount-bt-line "><img src="/images/ystg.png" /></div>
-            <div class="myAccount-bt-line "><div class="shenhe-bt"><div class="btn-contral" style="margin-left:20px;">修改密码</div></div><div class="shenhe-bt"><div class="btn-contral" style="">资料变更</div></div></div>
+		<div class="myAccount-bt-line" ng-show="user.I_Category===105">
+			<img ng-src="{{auditState}}" />
+		</div>
+            <div class="myAccount-bt-line ">
+            	<div class="shenhe-bt">
+            		<div class="btn-contral" style="margin-left:20px;" ui-sref="changepwd">修改密码</div>
+            	</div>
+            	<div class="shenhe-bt">
+            		<div class="btn-contral" ui-sref="userEdit">资料变更</div>
+            	</div>
+            	<div class="shenhe-bt" style="margin-right:20px;" ng-show="user.I_Category===105 && (user.I_Audited===190 || user.I_Audited===200)">
+            		<div class="btn-contral" ui-sref="userEdit">提交审核</div>
+            	</div>
+            </div>
+        </div>
 	</div>
 </div>

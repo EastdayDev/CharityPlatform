@@ -1,35 +1,82 @@
-﻿<div class="row">
-    <div class="col-sm-4 col-md-4 col-sm-offset-1 col-md-offset-1 form-box" style="margin-top:5em">
-        <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">姓 名</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="userInfo.C_Name" required>
-                    （必填）
+﻿<div class="content-m-left-right">    
+    <div class="content-bg-white-div">
+        <div class="userinfo-title"></div>
+        <div class="pa-div" style="min-height:120px;">
+            <div class="title-green">资料变更</div>
+            <table border="0" cellpadding="0" cellspacing="0" width="96%" style="margin-left:10px;">
+                <tr>
+                    <td class="td-project-audit-txt">登录名</td>
+                    <td class="td-project-audit-contral" colspan="5" ng-bind="user.C_Login"> 
+                    </td>                                         
+                </tr>
+                <tr>
+                    <td class="td-project-audit-txt">姓名</td>
+                    <td class="td-project-audit-contral" colspan="2">
+                        <input class="input-contral-project" ng-model="user.C_Name">
+                    </td>    
+                </tr>
+                <tr>
+                    <td class="td-project-audit-txt">地址</td>
+                    <td class="td-project-audit-contral" colspan="5">
+                        <input class="input-contral-project" ng-model="user.C_Address">
+                    </td>    
+                </tr>     
+                <tr>                    
+                    <td class="td-project-audit-txt">联系电话</td>
+                    <td class="td-project-audit-contral"  colspan="2">
+                        <input class="input-contral-project" ng-model="user.C_Mobile">
+                    </td> 
+                    <td class="td-project-audit-txt">邮箱</td>
+                    <td class="td-project-audit-contral"  colspan="2">
+                        <input class="input-contral-project" ng-model="user.C_Email">
+                    </td>
+                </tr>                
+            </table> 
+        </div>
+
+        <div class="pa-div" ng-show="user.I_Category===105">
+            <table border="0" cellpadding="0" cellspacing="0" width="96%" style="margin-left:10px;">
+                <tr>
+                    <td class="td-project-audit-txt">机构名称</td>
+                    <td class="td-project-audit-contral" colspan="5"> 
+                        <input class="input-contral-project" ng-model="org.C_Name">
+                    </td>                                         
+                </tr>
+                <tr>
+                    <td class="td-project-audit-txt">机构地址</td>
+                    <td class="td-project-audit-contral" colspan="5">
+                        <input class="input-contral-project" ng-model="org.C_Address">
+                    </td>    
+                </tr>   
+                <tr>
+                    <td class="td-project-audit-txt">联系人</td>
+                    <td class="td-project-audit-contral" colspan="2">
+                        <input class="input-contral-project" ng-model="org.C_Contact">
+                    </td>    
+                    <td class="td-project-audit-txt">联系电话</td>
+                    <td class="td-project-audit-contral" colspan="2">
+                        <input class="input-contral-project" ng-model="org.C_Mobile">
+                    </td>  
+                </tr>   
+                <tr>
+                    <td class="td-project-audit-txt">备注</td>
+                    <td class="td-project-audit-contral" colspan="5">
+                        <textarea name="yj" ng-model="_sys.editItem.C_Remark" style="width: 100%; height: 200px; border: 1px solid #128d56" rows="5" />
+                    </td>
+                </tr>                    
+            </table>
+        </div>
+
+        <div style="padding-bottom:50px;">             
+            <div class="myAccount-bt-line " style="padding-right:4%;">
+                <div class="shenhe-bt" ng-click="cancel()">
+                    <div class="btn-contral" style="margin-left:20px;">取&nbsp;&nbsp;&nbsp;&nbsp;消</div>
+                </div>
+                <div class="shenhe-bt">
+                    <div class="btn-contral" ng-click="save()">确&nbsp;&nbsp;&nbsp;&nbsp;定</div>
                 </div>
             </div>
-            
-            <div class="form-group">
-                <label class="col-sm-2 control-label">电 话</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="userInfo.C_Mobile" required>
-                    （必填）
-                </div>
-                <label class="col-sm-offset-3 col-sm-15 control-label" style="color:grey">电话号码请填写区号和8位电话号码,</label>
-                <label class="col-sm-offset-3 col-sm-15 control-label" style="color:grey">例如：021-63051234-1111。</label>
-                <label class="col-sm-offset-3 col-sm-15 control-label" style="color:grey">手机号至少11位，例如：13912345678。</label>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">备 注</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="userInfo.C_Remark" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-5 col-sm-10">
-                    <button class="btn btn-primary" type="button" ng-click="EditUserInfo()">确 定</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
+
 </div>

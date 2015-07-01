@@ -24,4 +24,19 @@ angular.module('userModule').config(['$stateProvider', function ($stateProvider)
             templateUrl: '/app/user/views/user.detail.html',
             controller: 'UserDetailController'
         })
+        .state('user.project', {            
+            url: '/project',
+            templateUrl: '/app/user/views/user.project.html',
+            controller: 'UserProjectController'
+        })  
+        .state('userEdit', {            
+            url: '/user/edit',
+            templateUrl: '/app/user/views/user.edit.html',
+            controller: 'UserEditController'
+        })  
+        .state('changepwd', {            
+            url: '/changepwd',
+            templateUrl: '/app/user/views/user.passwd.html',
+            controller: 'UserPwdController'
+        })       
 }]);

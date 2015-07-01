@@ -26,7 +26,7 @@ angular.module('sysModule').controller('SysUserController',
 	$scope.showEdit = function(item){
 		_sys.editItem = item;
 		angular.copy(_sys.editItem, _sys.copyItem);
-		epModal.showModal('/app/sys/views/user.edit.html', 'UserEditController');
+		epModal.showModal('/app/sys/views/user.edit.html', 'SysUserEditController');
 	}
 
 	$scope.showUserRole = function(item){
@@ -40,7 +40,7 @@ angular.module('sysModule').controller('SysUserController',
     });
 }]);
 
-angular.module('sysModule').controller('UserEditController',
+angular.module('sysModule').controller('SysUserEditController',
 ['$scope', '$rootScope', '$modalInstance', '_sys', '_user', 'epModal',
 function ($scope, $rootScope, $modalInstance, _sys, _user, epModal) { 
 	

@@ -1,35 +1,29 @@
 ﻿'use strict';
 
-angular.module('partnerModule').factory('_partner', ['_http', '_cookie', 'appKey',
-    function (_http, _cookie, appKey) {
-        var service = {};
 
-        service.userDepts = [];
+angular.module('partnerModule').factory('_partner', 
+['_http', '_cookie', 'appKey',
+function (_http, _cookie, appKey) {
+    var service = {};
 
-        var apiController = 'User';
+    var apiController = 'Partner';   
 
-        service.user = {};
-        service.userId = '-1';
+    service.Usp_Org_List = function(filterValue, pageIndex, pageSize, callback){
+        var param = {
+            userId: _user.userId,
+            filterValue: filterValue,
+            pageIndex: pageIndex,
+            pageSize: pageSize};
+        _http.ajaxGet(apiController, 'Usp_Org_List', param, callback);            
+    }
 
-        if (_cookie.get(appKey)) {
-            service.user = _cookie.get(appKey);
-            service.userId = service.user.Id;
-            service.GetUserDepts();
-        }
-        
-        service.register = function(user, callback){
-        	var postParameter = {proc: 'Usp_User_Insert', entity: user};
-        	_http.ajaxPost(postParameter, callback);
-        }
+    service.Usp_Org_Insert = function(org, callback) {
+        _http.ajaxPost(apiController, 'Usp_Org_Insert', org, callback);
+    }
 
-        service.login = function (user, callback) {        	
-            var postParameter = {proc: 'Usp_User_Login', entity: user};
-        	_http.ajaxPost(postParameter, callback);
-        }
+    service.Usp_Org_ById = function (id, callback) {
+        _http.ajaxGet(apiController, 'Usp_Org_ById', {id: id}, callback);
+    }
 
-        service.ChangePwd = function (user, callback) {
-            _http.ajaxPost(apiController, 'ChangePwd', user, callback);
-        }
-       
-        return service;
-    }]);
+    return service;
+}]);

@@ -12,8 +12,8 @@
         </div>
         <div class="userinfo-detail-div">
             <div class="myAccount-tab-bt">
-                <div class="myAccount-unselect-div" ui-sref="myProjects">我的项目</div>
-                <div class="myAccount-select-div" ui-sref="myAccount">基本资料</div>
+                <div ng-class="{'myAccount-unselect-div':!$state.includes('user.project'), 'myAccount-select-div':$state.includes('user.project')}" ui-sref="user.project">我的项目</div>
+                <div ng-class="{'myAccount-unselect-div':!$state.includes('user.detail'), 'myAccount-select-div':$state.includes('user.detail')}" ui-sref="user.detail">基本资料</div>
             </div>
             <div ui-view>
                 

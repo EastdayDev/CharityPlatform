@@ -42,6 +42,7 @@ namespace CharityPlatform.Entity
         public Int32? I_Auditer { get; set; } 
         public String C_Remark { get; set; }
     }
+
     //public class UserRoleEntity
     //{
     //    public int UserId { get; set; }

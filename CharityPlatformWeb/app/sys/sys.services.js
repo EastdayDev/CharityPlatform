@@ -25,20 +25,6 @@ function (_http, _cookie, appKey, _user) {
         service.hold.tab = tab;
         service.hold.pageIndex = 1;
         service.hold.total = 0;
-    }
-
-    service.Usp_Org_List = function(filterValue, pageIndex, pageSize, callback){
-        var param = {
-            userId: _user.userId,
-            filterValue: filterValue,
-            pageIndex: pageIndex,
-            pageSize: pageSize};
-        _http.ajaxGet('Partner', 'Usp_Org_List', param, callback);            
-    }
-
-    service.Usp_Org_Insert = function(org, callback) {
-        _http.ajaxPost('Partner', 'Usp_Org_Insert', org, callback);
-    }
-   
+    }   
     return service;
 }]);

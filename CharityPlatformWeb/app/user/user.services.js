@@ -5,8 +5,6 @@ angular.module('userModule').factory('_user',
 function (_http, _cookie, appKey) {
     var service = {};
 
-    service.userDepts = [];
-
     var apiController = 'User';
 
     service.userPage = {index: 1, total: 0};
@@ -52,8 +50,12 @@ function (_http, _cookie, appKey) {
         _http.ajaxPost(apiController, 'Usp_User_Insert', user, callback);
     }
 
-    service.ChangePwd = function (user, callback) {
-        _http.ajaxPost(apiController, 'ChangePwd', user, callback);
+    service.Usp_Change_Pwd = function (user, callback) {
+        _http.ajaxPost(apiController, 'Usp_Change_Pwd', user, callback);
+    }
+
+    service.Usp_UserInfo_ById = function(userId, callback){
+        _http.ajaxGet(apiController, 'Usp_UserInfo_ById', {userId: userId}, callback);  
     }
    
     return service;
