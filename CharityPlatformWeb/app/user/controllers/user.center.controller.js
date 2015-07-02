@@ -7,13 +7,16 @@ function ($scope, _user, _app, $state, epModal) {
     
 
 angular.module('userModule').controller('UserDetailController',
-['$scope', '_user', '_app', '$state', 'epModal', 
-function ($scope, _user, _app, $state, epModal) { 	
+['$scope', '_user', '_partner', '_app', '$state', 'epModal', 
+function ($scope, _user, _partner, _app, $state, epModal) { 	
  
- 	$scope.submitAudit = function(){
- 		if (!$scope.user.I_Audited){
-
- 		}
+ 	$scope.submitAudit = function(id){
+ 		_partner.OrgSubmitAudit(id, function(data){
+ 			if (data == 1){
+ 				$scope.user.I_Audited = 195;
+ 				epModal.info('机构数据已经提交审核！');
+ 			}
+ 		}); 		
  	}
 
  	$scope.$on('$viewContentLoaded', function(e){

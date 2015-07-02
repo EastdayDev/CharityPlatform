@@ -9,7 +9,7 @@ angular.module('sysModule').controller('SysPartnerController',
 	_sys.resetHold(2);
 
 	$scope.search = function(filterValue){  		
-		_sys.Usp_Org_List(filterValue, _sys.hold.pageIndex, pageSize, function(data){
+		_partner.Usp_Org_List(filterValue, _sys.hold.pageIndex, pageSize, function(data){
 			$scope.items = data;
 			_sys.hold.total = 0;
 			if (data && data.length > 0){

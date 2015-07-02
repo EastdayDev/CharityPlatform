@@ -30,7 +30,7 @@ angular.module('userModule').config(['$stateProvider', function ($stateProvider)
             controller: 'UserProjectController'
         })  
         .state('userEdit', {            
-            url: '/user/edit',
+            url: '/user/edit/:id',
             templateUrl: '/app/user/views/user.edit.html',
             controller: 'UserEditController'
         })  

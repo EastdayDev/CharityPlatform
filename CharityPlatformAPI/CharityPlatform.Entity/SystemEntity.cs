@@ -43,6 +43,24 @@ namespace CharityPlatform.Entity
         public String C_Remark { get; set; }
     }
 
+    public class UserOrgEntity
+    {
+        private UserEntity _User = new UserEntity();
+        private OrganizationEntity _Org = new OrganizationEntity();
+
+        public UserEntity User
+        {
+            get { return this._User; }
+            set { this._User = value; }
+        }
+
+        public OrganizationEntity Org
+        {
+            get { return this._Org; }
+            set { this._Org = value; }
+        }
+    }
+
     //public class UserRoleEntity
     //{
     //    public int UserId { get; set; }

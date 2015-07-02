@@ -2,8 +2,8 @@
 
 
 angular.module('partnerModule').factory('_partner', 
-['_http', '_cookie', 'appKey',
-function (_http, _cookie, appKey) {
+['_http', '_user', '_cookie', 'appKey',
+function (_http, _user, _cookie, appKey) {
     var service = {};
 
     var apiController = 'Partner';   
@@ -19,6 +19,15 @@ function (_http, _cookie, appKey) {
 
     service.Usp_Org_Insert = function(org, callback) {
         _http.ajaxPost(apiController, 'Usp_Org_Insert', org, callback);
+    }
+
+    service.Usp_UserOrg_Insert = function(user, org, callback) {
+        var param = {User: user, Org: org}
+        _http.ajaxPost(apiController, 'Usp_UserOrg_Insert', param, callback);
+    }
+
+    service.OrgSubmitAudit = function(id, callback){
+        _http.ajaxGet(apiController, 'OrgSubmitAudit', {Id: id}, callback);
     }
 
     service.Usp_Org_ById = function (id, callback) {

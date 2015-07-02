@@ -36,5 +36,51 @@ namespace CharityPlatformAPI.Controllers
             return entity.Id;
         }
 
+        [HttpGet]
+        public int OrgSubmitAudit(int Id)
+        {
+            OrganizationEntity orgEntity = DataHelper.GetDataItem<OrganizationEntity>("Usp_Org_ById", new { Id = Id });
+            orgEntity.D_Submit = DateTime.Now;
+            orgEntity.I_Audited = 195;
+            return DataHelper.ExecuteNonQuery("Usp_Org_Insert", orgEntity);
+        }
+
+        [HttpPost]
+        public int Usp_UserOrg_Insert(UserOrgEntity entity)
+        {
+            using (AppBLL bll = new AppBLL())
+            {
+                bll.DbContext = bll.CreateDbContext(true);
+                try
+                {
+                    DataHelper.ExecuteNonQuery("Usp_User_Insert", entity.User);
+                    if (entity.User.I_Category == 105 && !string.IsNullOrEmpty(entity.Org.C_Name))
+                    {
+                        /// 机构用户 190 审核未通过  185 审核通过 
+                        OrganizationEntity orgEntity = bll.GetDataItem<OrganizationEntity>("Usp_Org_ById", new { Id = entity.Org.Id });
+                        if (orgEntity!=null && orgEntity.I_Audited >190 && entity.Org.I_Audited <= 190)
+                        {
+                            ///设置审核日期
+                            entity.Org.D_Confirm = DateTime.Now;
+                        }
+                        if (entity == null)
+                        {
+                            entity.Org.Id = entity.User.Id;
+                        }
+                        DataHelper.ExecuteNonQuery("Usp_Org_Insert", entity.Org);
+                    }
+                    bll.DbContext.CommitTransaction();
+                    return 1;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+
+
+
+        }
+
     }
 }
