@@ -51,7 +51,7 @@
             		<div class="btn-contral" style="margin-left:20px;" ui-sref="changepwd">修改密码</div>
             	</div>
             	<div class="shenhe-bt">
-            		<div class="btn-contral" ui-sref="userEdit({id: user.Id})" ng-show="user.I_Category===105 && (user.I_Audited===190 || user.I_Audited===200)">资料变更</div>
+            		<div class="btn-contral" ui-sref="userEdit({id: user.Id})" ng-show="user.I_Category===105 && (user.I_Audited==null || user.I_Audited===190 || user.I_Audited===200)">资料变更</div>
             	</div>
             	<div class="shenhe-bt" style="margin-right:20px;" ng-show="user.I_Category===105 && (user.I_Audited===190 || user.I_Audited===200)">
             		<div class="btn-contral" ng-click="submitAudit(user.Id)">提交审核</div>
