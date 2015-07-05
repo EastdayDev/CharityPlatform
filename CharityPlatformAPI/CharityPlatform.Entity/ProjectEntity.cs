@@ -43,17 +43,7 @@ namespace CharityPlatform.Entity
         public int I_State;					        // 0 创建 1 已发布
     }
 
-    public class ProjectFileEntity
-    {
-        public int Id;
-        public int I_Project;
-        public int I_Category;
-        public int I_Uploader;
-        public DateTime D_Upload;
-        public string C_OriginName;     //文件原名
-        public string C_FileName;       //磁盘保存文件名
-        public string C_Remark;
-    }
+   
 
     public class ProjectDonationEntity
     {

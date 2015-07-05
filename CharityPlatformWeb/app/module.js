@@ -26,6 +26,8 @@ angular.module('filterModule', [])
 
 angular.module('directiveModule', []);
 
+angular.module('hbUploaderModule', []);
+
 angular.module('app', [
     'ui.router'
     ,'ui.bootstrap'
@@ -44,4 +46,5 @@ angular.module('app', [
     , 'donationModule'
     , 'sysModule'
     , 'filterModule'
+    , 'hbUploaderModule'
 ]);

@@ -67,7 +67,17 @@ namespace CharityPlatform.Entity
 
     //    public IList<RoleEntity> Roles = new List<RoleEntity>();
     //}
-
+    public class FileEntity
+    {
+        public int Id;
+        public int I_Owner;
+        public int I_Category;
+        public int I_Uploader;
+        public DateTime D_Upload;
+        public string C_OriginName;     //文件原名
+        public string C_FileName;       //磁盘保存文件名
+        public string C_Remark;
+    }
     public class RoleEntity
     { 
         public Int32 Id { get; set; }

@@ -26,8 +26,13 @@ function ($scope, $stateParams, _user, _partner, _app, $state, $window, epModal)
 			});
 		}
 	} 
+	///上传图片参数  140 展示图片 
+	$scope.uploadParam = {I_Owner: -1, I_Category: 140, I_Uploader: -1, C_Remark: ''};
 
-	$scope.$on('$viewContentLoaded', function(e){		
+	$scope.$on('$viewContentLoaded', function(e){	
+		$scope.uploadParam.I_Owner = $stateParams.id;	
+		$scope.uploadParam.I_Uploader = _user.userId;	
+
 		_partner.Usp_Org_ById($stateParams.id, function(data){
 			if (data && data.length > 0){
 				$scope.org = data[0];
@@ -37,6 +42,7 @@ function ($scope, $stateParams, _user, _partner, _app, $state, $window, epModal)
 		_user.Usp_UserInfo_ById($stateParams.id, function(data){
 			if (data && data.length > 0){
 				$scope.user = data[0];
+				$scope.uploadParam.I_Category = 141; /// 机构展示图片
 			}
 		});
 	});

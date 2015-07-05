@@ -63,7 +63,7 @@ namespace CharityPlatformAPI.Controllers
                             ///设置审核日期
                             entity.Org.D_Confirm = DateTime.Now;
                         }
-                        if (entity == null)
+                        if (orgEntity == null)
                         {
                             entity.Org.Id = entity.User.Id;
                         }

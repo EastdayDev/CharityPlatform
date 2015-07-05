@@ -23,28 +23,29 @@
         {
             try
             {
-                ProjectFileEntity projectFileEntity = new ProjectFileEntity();
-                projectFileEntity.I_Project = int.Parse(HttpContext.Current.Request["I_Owner"]);
-                projectFileEntity.I_Category = Convert.ToInt32(HttpContext.Current.Request["I_Category"]);
-                projectFileEntity.C_Remark = HttpContext.Current.Request["C_Remark"];
-                projectFileEntity.I_Uploader = Convert.ToInt32(HttpContext.Current.Request["I_Uploader"]);
-                projectFileEntity.D_Upload = DateTime.Now;
-                projectFileEntity.C_OriginName = HttpContext.Current.Request.Files[0].FileName;
+                FileEntity fileEntity = new FileEntity();
+                fileEntity.I_Owner = int.Parse(HttpContext.Current.Request["I_Owner"]);
+                fileEntity.I_Category = Convert.ToInt32(HttpContext.Current.Request["I_Category"]);
+                fileEntity.C_Remark = HttpContext.Current.Request["C_Remark"];
+                fileEntity.I_Uploader = Convert.ToInt32(HttpContext.Current.Request["I_Uploader"]);
+                fileEntity.D_Upload = DateTime.Now;
+                fileEntity.C_OriginName = HttpContext.Current.Request.Files[0].FileName;
 
-                string filePath = ConfigurationManager.AppSettings["FileUpload"].ToString();
+                string fileUploadPath = ConfigurationManager.AppSettings["FileUpload"].ToString();
 
-                int index = projectFileEntity.C_OriginName.LastIndexOf('.');
+                int index = fileEntity.C_OriginName.LastIndexOf('.');
                 if (index == -1) { index = 0; }
-                projectFileEntity.C_FileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + projectFileEntity.C_OriginName.Substring(index);
+                fileEntity.C_FileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + fileEntity.C_OriginName.Substring(index);
 
                 if (HttpContext.Current.Request.Files[0].ContentLength > 0)
                 {
-                    if (!Directory.Exists(filePath))
+                    string path = System.IO.Path.Combine(fileUploadPath, fileEntity.I_Owner.ToString());
+                    if (!Directory.Exists(path))
                     {
-                        Directory.CreateDirectory(filePath);
+                        Directory.CreateDirectory(path);
                     }
-                    HttpContext.Current.Request.Files[0].SaveAs(filePath + "\\" + projectFileEntity.I_Project.ToString() + "\\" + projectFileEntity.C_FileName);
-                    DataHelper.ExecuteNonQuery("Usp_File_Insert", projectFileEntity);
+                    HttpContext.Current.Request.Files[0].SaveAs(path + "\\" + fileEntity.C_FileName);
+                    DataHelper.ExecuteNonQuery("Usp_File_Insert", fileEntity);
                     return 1;
                 }
                 return -1;
@@ -96,6 +97,13 @@
             {
                 return;
             }
+        }
+
+
+        [HttpGet]
+        public DataTable Usp_File_List(int owner, int category)
+        {
+            return DataHelper.FillDataTable("Usp_File_List", new { I_Owner = owner, I_Category = category });
         }
     }
 }

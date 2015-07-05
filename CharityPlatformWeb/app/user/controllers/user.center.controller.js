@@ -1,14 +1,17 @@
 'use strict';
 
 angular.module('userModule').controller('UserCenterController',
-['$scope', '_user', '_app', '$state', 'epModal', 
-function ($scope, _user, _app, $state, epModal) {  
+['$scope', '_user', '_app', '$state', '_cookie', 'appKey', 'epModal', 
+function ($scope, _user, _app, $state, _cookie, appKey, epModal) {  
+	if (!_cookie.get(appKey)) {
+		$state.go('login');
+	}
 }]);
     
 
 angular.module('userModule').controller('UserDetailController',
-['$scope', '_user', '_partner', '_app', '$state', 'epModal', 
-function ($scope, _user, _partner, _app, $state, epModal) { 	
+['$scope', '$state', '_user', '_partner', '_app', 'epModal', 
+function ($scope, $state, _user, _partner, _app, epModal) { 	
  
  	$scope.submitAudit = function(id){
  		_partner.OrgSubmitAudit(id, function(data){
@@ -20,13 +23,17 @@ function ($scope, _user, _partner, _app, $state, epModal) {
  	}
 
  	$scope.$on('$viewContentLoaded', function(e){
-		_user.Usp_UserInfo_ById(_user.user.Id, function(data){
-			if (data && data.length > 0){
-				$scope.user = data[0];				
-				$scope.auditState = $scope.user.I_Audited===185 ? '/images/ystg.png' : '/images/wsh.png';
-			}
-		});
+ 		if (_user.userId !== '-1'){
+			_user.Usp_UserInfo_ById(_user.user.Id, function(data){
+				if (data && data.length > 0){
+					$scope.user = data[0];				
+					$scope.auditState = $scope.user.I_Audited===185 ? '/images/ystg.png' : '/images/wsh.png';
+				}
+			});
+		}
 	});
+
+	
 }]);
 
 
