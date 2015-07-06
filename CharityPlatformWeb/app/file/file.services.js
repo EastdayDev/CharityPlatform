@@ -1,6 +1,14 @@
 ﻿'use strict';
 
-angular.module('fileModule').factory('epFile', ['_http',
+angular.module('fileModule').factory('_fileServer', ['apiPrefix', function(apiPrefix){
+    var service = {};
+    service.url = apiPrefix + '/file/UploadFiles';
+    service.imageExts = 'gif,png,jpg,jpeg,bmp';
+    service.uploadParameter = {I_Owner: -1};
+    return service;
+}]);
+
+angular.module('fileModule').factory('_file', ['_http',
     function(_http) {
         var service = {};
 
@@ -11,7 +19,7 @@ angular.module('fileModule').factory('epFile', ['_http',
                 owner: owner,
                 category: category
             };
-            epHttp.ajaxGet(apiUrl, 'Usp_File_List', param, callback);
+            _http.ajaxGet(apiController, 'Usp_File_List', param, callback);
         }
 
         return service;

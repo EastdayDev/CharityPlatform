@@ -68,8 +68,8 @@
                     <tr>
                         <td class="td-project-audit-txt"></td>
                         <td class="td-project-audit-contral" colspan="5">
-                            <img src="/files/20150703/a.jpg" width="200px" height="200px"/>
-                            <!-- <span hb-image-uploader req-url="http://localhost:4972/api/File/UploadFiles", parameter="uploadParam" extensions="png,bmp,jpg,jpeg,gif"/> -->
+                            <img ng-repeat="file in files" ng-src="{{file.C_FileName}}" width="200px" height="200px"/>
+                            <a class="btn-contral" style="width:220px;" ui-sref="imageUpload">添加图片</a>
                         </td>
                     </tr>                    
                 </table>
