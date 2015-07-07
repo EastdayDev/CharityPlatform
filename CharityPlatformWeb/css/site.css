@@ -334,7 +334,7 @@ a {
         margin-right: auto;
         width:250px;
         padding-top:100px;
-        
+
     }
     .login-title {
         height: 30px;
@@ -395,7 +395,7 @@ a {
 
     .register-title {
         height: 30px;
-       
+
         color: #ffffff;
         font-size: 16px;
         text-align: center;
@@ -536,7 +536,7 @@ a {
         min-height:280px;
     }
 
-        
+
     .manager-div {
         padding: 20px 20px 20px 20px;
     }
@@ -575,8 +575,8 @@ a {
         .manager-right {
         width:75%;
         float:left;
-     
-    
+
+
     }
     .input-contral-back {
         background-color: #f4f4f4;
@@ -714,7 +714,7 @@ a {
         margin-right:1%;
     }
 
-       
+
     .title-green {
         height: 30px;
         margin-top: -10px;
@@ -759,7 +759,7 @@ a {
         padding-left: 5px;
     }
 
-    
+
     .project-alpple-icon-div {
         clear: both;
         padding-top: 10px;
@@ -913,3 +913,9 @@ a {
         .juankuan-line-div label {
             font-weight: 100;
         }
+
+        .upload-imgs {
+       margin-right: 5%;
+       width: 25%;
+       margin-top: 10px;
+   }
