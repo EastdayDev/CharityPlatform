@@ -13,15 +13,23 @@ angular.module('fileModule').factory('_file', ['_http',
         var service = {};
 
         var apiController = 'File';
+        var fileWebDirectory = 'files';
 
         service.Usp_File_List = function(owner, category, callback) {
             var param = {
                 owner: owner,
                 category: category
             };
-            _http.ajaxGet(apiController, 'Usp_File_List', param, callback);
+            _http.ajaxGet(apiController, 'Usp_File_List', param, function(data){
+                var files = [];
+                angular.forEach(data, function(file) {
+                    file.C_FileName = '/' + fileWebDirectory + '/' 
+                    + file.I_Owner + '/' + file.C_FileName;
+                    this.push(file);
+                }, files);
+                if (callback) callback(files);
+            });
         }
-
         return service;
     }
 ]);

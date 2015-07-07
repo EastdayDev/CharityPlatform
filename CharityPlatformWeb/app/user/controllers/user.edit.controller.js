@@ -31,15 +31,11 @@ angular.module('userModule').controller('UserEditController', ['$scope', '$state
 		// 	I_Category: 140,
 		// 	I_Uploader: -1,
 		// 	C_Remark: ''
-		// };
-
+		// };		
 		var showFileList = function(id, category) {
 			_file.Usp_File_List($stateParams.id, category, function(data) {
 				$scope.files = [];
-				angular.forEach(data, function(file) {
-					file.C_FileName = '/files/' + file.I_Owner + '/' + file.C_FileName;
-					this.push(file);
-				}, $scope.files);
+				$scope.files = data;				
 			});
 		}
 
