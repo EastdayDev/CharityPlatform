@@ -14,8 +14,8 @@ angular.module('hbUploaderModule').directive('hbUploader', ['$rootScope',
 
     directive.templateUrl = '/hbUploader/hbImageUploader/hbUploader.html';
 
-    directive.controller = ['$scope', '$element', 'apiPrefix', function(
-      $scope, $element, apiPrefix) {
+    directive.controller = ['$scope', '$element', 'apiPrefix', '$rootScope', function(
+      $scope, $element, apiPrefix, $rootScope) {
 
       var $wrap = $('#uploader'),
 
@@ -365,7 +365,8 @@ angular.module('hbUploaderModule').directive('hbUploader', ['$rootScope',
           case 'finish':
             stats = uploader.getStats();
             if (stats.successNum) {
-              alert('上传成功');
+              $rootScope.$broadcast('onUploadFinished');
+              //alert('上传成功');
             } else {
               // 没有成功的图片，重设
               state = 'done';
