@@ -1,7 +1,7 @@
 ﻿
 'use strict';
 
-angular.module('fileModule').controller('FileImageUploadController', ['$scope',
+angular.module('fileModule').controller('FileUploadController', ['$scope',
   '$stateParams', '$state', '_fileServer', 'epModal',
   function($scope, $stateParams, $state, _fileServer, epModal) {
 

@@ -31,8 +31,8 @@
                 fileEntity.D_Upload = DateTime.Now;
                 fileEntity.C_OriginName = HttpContext.Current.Request.Files[0].FileName;
 
-                string fileUploadPath = ConfigurationManager.AppSettings["FileUpload"].ToString();
-
+                string fileUploadPath =  ConfigurationManager.AppSettings["FileUpload"].ToString();
+                
                 int index = fileEntity.C_OriginName.LastIndexOf('.');
                 if (index == -1) { index = 0; }
                 fileEntity.C_FileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + fileEntity.C_OriginName.Substring(index);
