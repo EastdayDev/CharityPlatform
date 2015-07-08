@@ -68,8 +68,16 @@
                     <tr>
                         <td class="td-project-audit-txt"></td>
                         <td class="td-project-audit-contral" colspan="5">
-                            <img ng-repeat="file in files" ng-src="{{file.C_FileName}}" width="200px" height="200px"/>
-                            <a class="btn-contral" style="width:220px;" ui-sref="imageUpload">添加图片</a>
+                            <table>
+                                <tr>
+                                    <td style="width: 80%;">
+                                        <img ng-repeat="file in files" ng-src="{{file.C_FileName}}" class="upload-imgs"/>
+                                    </td>
+                                    <td>
+                                        <div class="img-upload-bt" ui-sref="imageUpload">&nbsp;上&nbsp;&nbsp;传</div>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
