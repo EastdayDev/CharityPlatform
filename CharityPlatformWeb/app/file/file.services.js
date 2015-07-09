@@ -13,7 +13,7 @@ angular.module('fileModule').factory('_fileServer', ['apiPrefix', function(
     'docx', 'pptx', 'pdf', 'txt', 'chm'
   ];
   service.uploadParameter = {
-    I_Owner: -1
+    I_Owner: -1,
   };
   return service;
 }]);
@@ -27,10 +27,11 @@ angular.module('fileModule').factory('_file', ['_http',
 
 
 
-    service.Usp_File_List = function(owner, category, callback) {
+    service.Usp_File_List = function(owner, category, uploader, callback) {
       var param = {
         owner: owner,
-        category: category
+        category: category,
+        uploader: uploader
       };
       _http.ajaxGet(apiController, 'Usp_File_List', param, function(data) {
         var files = [];

@@ -101,9 +101,9 @@
 
 
         [HttpGet]
-        public DataTable Usp_File_List(int owner, int category)
+        public DataTable Usp_File_List(int owner, int category, int uploader)
         {
-            return DataHelper.FillDataTable("Usp_File_List", new { I_Owner = owner, I_Category = category });
+            return DataHelper.FillDataTable("Usp_File_List", new { I_Owner = owner, I_Category = category, I_Uploader = uploader });
         }
     }
 }

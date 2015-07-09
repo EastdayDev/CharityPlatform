@@ -744,7 +744,7 @@ a {
         border: none;
         height: 25px;
         width: 100%;
-        cursor: pointer;
+        /*cursor: pointer;*/
         border: 1px solid #128d59;
         padding-left: 5px;
     }

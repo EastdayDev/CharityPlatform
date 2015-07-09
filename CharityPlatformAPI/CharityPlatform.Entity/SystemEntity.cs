@@ -73,6 +73,7 @@ namespace CharityPlatform.Entity
         public int I_Owner;
         public int I_Category;
         public int I_Uploader;
+        public int I_Flag = 1;
         public DateTime D_Upload;
         public string C_OriginName;     //文件原名
         public string C_FileName;       //磁盘保存文件名

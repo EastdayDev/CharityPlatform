@@ -122,7 +122,7 @@
                                     <img ng-repeat="file in files | projectPhotoFilter:142" ng-src="{{file.C_FileName}}" class="upload-imgs"/>
                                 </td>
                                 <td>
-                                    <div class="img-upload-bt" ng-click="uploadImages()">&nbsp;上&nbsp;&nbsp;传</div>
+                                    <div class="img-upload-bt" ng-click="navToUpload(142)">&nbsp;上&nbsp;&nbsp;传</div>
                                 </td>
                             </tr>
                         </table>
@@ -142,9 +142,9 @@
                 </tr>
              </table>
              <div class="project-alpple-icon-div">
-                 <div class="project-alpple-icon-div-one" ng-click="uploadFile(1)"><img src="/images/sh.png" />上传项目申请书</div>
+                 <div class="project-alpple-icon-div-one" ng-click="navToUpload(145)"><img src="/images/sh.png" />上传项目申请书</div>
                  <div class="project-alpple-icon-div-one"><img src="/images/xz.png" />下载申请书模板</div>
-                 <div class="project-alpple-icon-div-one" ng-click="uploadFile(2)"><img src="/images/sh.png" />上传项目预算</div>
+                 <div class="project-alpple-icon-div-one" ng-click="navToUpload(150)"><img src="/images/sh.png" />上传项目预算</div>
                  <div class="project-alpple-icon-div-one"><img src="/images/xz.png" />下载项目预算模板</div>
              </div>
              <div class="myAccount-bt-line " style="padding-right:4%;">

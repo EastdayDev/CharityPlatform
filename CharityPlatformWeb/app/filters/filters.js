@@ -15,7 +15,7 @@ filterApp.filter('dictFilter', ['_sys', function(_sys) {
 filterApp.filter('projectPhotoFilter', [function() {
   return function(files, category) {
     var newFiles = [];
-    angular.forEach(filte, function(file) {
+    angular.forEach(files, function(file) {
       if (file.I_Category === category) {
         this.push(file);
       }
@@ -27,7 +27,7 @@ filterApp.filter('projectPhotoFilter', [function() {
 filterApp.filter('projectOtherFileFilter', [function() {
   return function(files) {
     var newFiles = [];
-    angular.forEach(filte, function(file) {
+    angular.forEach(files, function(file) {
       if (file.I_Category >= 145 && file.I_Category <= 150) {
         this.push(file);
       }

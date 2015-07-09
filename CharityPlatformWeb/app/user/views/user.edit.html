@@ -74,7 +74,7 @@
                                         <img ng-repeat="file in files" ng-src="{{file.C_FileName}}" class="upload-imgs"/>
                                     </td>
                                     <td>
-                                        <div class="img-upload-bt" ui-sref="imageUpload">&nbsp;上&nbsp;&nbsp;传</div>
+                                        <div class="img-upload-bt" ng-click="navToUpload()">&nbsp;上&nbsp;&nbsp;传</div>
                                     </td>
                                 </tr>
                             </table>
