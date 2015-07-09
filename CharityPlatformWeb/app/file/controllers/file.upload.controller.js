@@ -7,6 +7,10 @@ angular.module('fileModule').controller('FileUploadController', ['$scope',
 
     $scope._fileServer = _fileServer;
 
+    $scope.$on('onUploadFinished', function(v){
+        console.log('onUploadFinished');
+    });
+    
     //初始化
     $scope.$on('$viewContentLoaded', function() {
 

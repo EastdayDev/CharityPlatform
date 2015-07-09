@@ -14,8 +14,8 @@ angular.module('hbUploaderModule').directive('hbUploader', ['$rootScope',
 
     directive.templateUrl = '/hbUploader/hbImageUploader/hbUploader.html';
 
-    directive.controller = ['$scope', '$element', 'apiPrefix', function(
-      $scope, $element, apiPrefix) {
+    directive.controller = ['$scope', '$element', 'apiPrefix', '$rootScope', function(
+      $scope, $element, apiPrefix, $rootScope) {
 
       var $wrap = $('#uploader'),
 
