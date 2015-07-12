@@ -2,7 +2,6 @@
 'use strict';
 
 angular.module('fileModule').controller('FileImageUploadController', ['$scope',
-<<<<<<< HEAD
   '$stateParams', '$state', '$window', '_fileServer', '_user', 'epModal',
   function($scope, $stateParams, $state, $window, _fileServer, _user,
     epModal) {
@@ -11,15 +10,6 @@ angular.module('fileModule').controller('FileImageUploadController', ['$scope',
 
     $scope.$on('onUploadFinished', function() {
       $window.history.back();
-=======
-  '$stateParams', '$state', '$window', '_fileServer', 'epModal',
-  function($scope, $stateParams, $state, $window, _fileServer, epModal) {
-    $scope._fileServer = _fileServer;
-
-    $scope.$on('onUploadFinished', function(v){
-        console.log('onUploadFinished');
-        $window.history.back();
->>>>>>> d806c79fa582aaba438e52cb820c52e114e91dca
     });
     //初始化
     $scope.$on('$viewContentLoaded', function() {

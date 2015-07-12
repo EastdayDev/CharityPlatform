@@ -4,7 +4,7 @@ angular.module('userModule').controller('UserEditController', ['$scope',
 	'$stateParams', '_user', '_partner', '_app', '_file', '$state', '$window',
 	'epModal',
 	function($scope, $stateParams, _user, _partner, _app, _file, $state, $window,
-		epModalver) {
+		epModal) {
 		$scope.cancel = function() {
 			$window.history.back();
 		}

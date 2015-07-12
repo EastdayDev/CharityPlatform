@@ -2,154 +2,178 @@
     <div class="path-div"><span>&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;>&nbsp;&nbsp;用户中心&nbsp;&nbsp;>&nbsp;&nbsp;</span><span class="path-div-current-txt">项目申请</span></div>
     <div class="content-bg-white-div">
         <div class="userinfo-title">项目申请</div>
-        <div class="pa-div" style="min-height:220px;">
-            <div class="title-green">项目名称</div>
-                <table border="0" cellpadding="0" cellspacing="0" width="96%" style="margin-left:10px;">
+        <form role="form" ng-submit="save(project)">
+          <div class="pa-div" style="min-height:220px;">
+              <div class="title-green" ng-bind="project.C_Title"></div>
+                  <table border="0" cellpadding="0" cellspacing="0" width="96%" style="margin-left:10px;">
                     <tr>
-                        <td class="td-project-alpple-txt">机构名称</td>
-                        <td class="td-project-alpple-contral">
-                          <input class="input-contral-project" placeholder="">
-                        </td>
-                        <td class="td-project-alpple-txt">项目发布方</td>
-                        <td class="td-project-alpple-contral">
-                          <input class="input-contral-project" style="width:50%" placeholder="">
-                          <label style="font-weight: 100; width: 30% ;float:right">
-                            <input name="Fruit" type="checkbox" value="" />自有项目</label>
+                        <td class="td-project-alpple-txt">项目名称</td>
+                        <td class="td-project-alpple-contral" colspan="3">
+                          <input class="input-contral-project" ng-model="project.C_Title" required>
                         </td>
                     </tr>
+                      <tr>
+                          <td class="td-project-alpple-txt">机构名称</td>
+                          <td class="td-project-alpple-contral" ng-bind="org.C_Name">
+                          </td>
+                          <td class="td-project-alpple-txt">项目发布方</td>
+                          <td class="td-project-alpple-contral">
+                            <input class="input-contral-project" ng-model="project.C_Publisher" style="width:50%" required>
+                            <!-- <label style="font-weight: 100; width: 30% ;float:right">
+                              <input name="Fruit" type="checkbox" value="" />自有项目</label> -->
+                          </td>
+                      </tr>
+                      <tr>
+                          <td class="td-project-alpple-txt">成立时间</td>
+                          <td class="td-project-alpple-contral" ng-bind="org.D_Create | date: 'yyyy-MM-dd'">
+                          </td>
+                          <td class="td-project-alpple-txt">机构业务范围<br />及专注领域</td>
+                          <td class="td-project-alpple-contral" ng-bind="org.C_Business">
+                          </td>
+                      </tr>
+                      <tr>
+                          <td class="td-project-alpple-txt">机构负责人</td>
+                          <td class="td-project-alpple-contral">
+                            <input class="input-contral-project" ng-model="project.C_Org_Contacter" placeholder="">
+                          </td>
+                          <td class="td-project-alpple-txt">联系方式</td>
+                          <td class="td-project-alpple-contral">
+                            <input class="input-contral-project" ng-model="project.C_Org_Contacter_Mobile" placeholder="" />
+                          </td>
+                      </tr>
+                      <tr>
+                          <td class="td-project-alpple-txt">项目负责人</td>
+                          <td class="td-project-alpple-contral">
+                            <input class="input-contral-project" ng-model="project.C_Project_Contacter" required>
+                          </td>
+                          <td class="td-project-alpple-txt">联系方式</td>
+                          <td class="td-project-alpple-contral">
+                            <input class="input-contral-project" ng-model="project.C_Project_Contacter_Mobile" required />
+                          </td>
+                      </tr>
+                      <tr>
+                          <td class="td-project-alpple-txt">联系地址</td>
+                          <td class="td-project-alpple-contral">
+                            <input class="input-contral-project" ng-model="project.C_Address" placeholder="">
+                          </td>
+                          <td class="td-project-alpple-txt">邮箱</td>
+                          <td class="td-project-alpple-contral">
+                            <input class="input-contral-project" ng-model="project.C_Email" placeholder="" />
+                          </td>
+                      </tr>
+                  </table>
+                  <table border="0" cellpadding="0" cellspacing="0" width="96%" style="margin-left:10px;">
                     <tr>
-                        <td class="td-project-alpple-txt">成交时间</td>
-                        <td class="td-project-alpple-contral">
-                          <input class="input-contral-project" placeholder="">
-                        </td>
-                        <td class="td-project-alpple-txt">机构业务范围<br />及专注领域</td>
-                        <td class="td-project-alpple-contral">
-                          <input class="input-contral-project" placeholder="" />
+                        <td class="td-project-alpple-txt">募捐项目名称</td>
+                        <td class="td-project-alpple-contral" colspan="5">
+                          <input class="input-contral-project" ng-model="project.C_Donation_Name" required>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="td-project-alpple-txt">机构负责人</td>
-                        <td class="td-project-alpple-contral">
-                          <input class="input-contral-project" placeholder="">
-                        </td>
-                        <td class="td-project-alpple-txt">联系方式</td>
-                        <td class="td-project-alpple-contral">
-                          <input class="input-contral-project" placeholder="" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-project-alpple-txt">项目负责人</td>
-                        <td class="td-project-alpple-contral">
-                          <input class="input-contral-project" placeholder="">
-                        </td>
-                        <td class="td-project-alpple-txt">联系方式</td>
-                        <td class="td-project-alpple-contral">
-                          <input class="input-contral-project" placeholder="" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-project-alpple-txt">联系地址</td>
-                        <td class="td-project-alpple-contral">
-                          <input class="input-contral-project" placeholder="">
-                        </td>
-                        <td class="td-project-alpple-txt">邮箱</td>
-                        <td class="td-project-alpple-contral">
-                          <input class="input-contral-project" placeholder="" />
-                        </td>
-                    </tr>
-                </table>
-                <table border="0" cellpadding="0" cellspacing="0" width="96%" style="margin-left:10px;">
-                    <tr>
-                        <td class="td-project-audit-txt">募捐项目名称</td>
-                        <td class="td-project-audit-contral">
-                          <input class="input-contral-project" placeholder="">
-                        </td>
-                        <td class="td-project-audit-txt">计划募捐金额</td>
-                        <td class="td-project-audit-contral">
-                          <input class="input-contral-project" placeholder="">
-                        </td>
-                        <td class="td-project-audit-txt">募捐起止时间</td>
-                        <td class="td-project-audit-contral">
-                          <input class="input-contral-project" placeholder="">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-project-audit-txt">募捐项目名称</td>
-                        <td class="td-project-audit-contral" colspan="5">
-                            <label><input name="Fruit" type="checkbox" value="" />安老服务</label> &nbsp;&nbsp;&nbsp;
-                            <label><input name="Fruit" type="checkbox" value="" />扶幼服务</label>&nbsp;&nbsp;&nbsp;
-                            <label><input name="Fruit" type="checkbox" value="" />助学服务</label>&nbsp;&nbsp;&nbsp;
-                            <label><input name="Fruit" type="checkbox" value="" />济困服务</label>&nbsp;&nbsp;&nbsp;
-                            <label><input name="Fruit" type="checkbox" value="" />其&nbsp;&nbsp;他</label>
-                        </td>
-                    </tr>
-                </table>
-        </div>
+                      <tr>
+                          <td class="td-project-audit-txt">计划募捐金额</td>
+                          <td class="td-project-audit-contral">
+                            <input class="input-contral-project" ng-model="project.M_Plan" required>
+                          </td>
+                          <td class="td-project-audit-txt">募捐开始时间</td>
+                          <td class="td-project-audit-contral">
+                            <input class="input-contral-project" ng-model="project.D_Start" placeholder="">
+                          </td>
+                          <td class="td-project-audit-txt">募捐结束时间</td>
+                          <td class="td-project-audit-contral">
+                            <input class="input-contral-project" ng-model="project.D_End" placeholder="">
+                          </td>
+                      </tr>
+                      <tr>
+                          <td class="td-project-audit-txt">项目领域</td>
+                          <td class="td-project-audit-contral" colspan="5">
+                              <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'1'" />安老服务</label> &nbsp;&nbsp;&nbsp;
+                              <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'2'" />扶幼服务</label>&nbsp;&nbsp;&nbsp;
+                              <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'3'" />助学服务</label>&nbsp;&nbsp;&nbsp;
+                              <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'4'" />济困服务</label>&nbsp;&nbsp;&nbsp;
+                              <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'5'" />其&nbsp;&nbsp;他</label>
+                          </td>
+                      </tr>
+                  </table>
+          </div>
 
+          <div class="pa-div" style="min-height:220px;">
+              <table border="0" cellpadding="0" cellspacing="0" width="96%" style="margin-left:10px;">
+                  <tr>
+                      <td class="td-project-alpple-txt">项目简介</td>
+                      <td class="td-project-alpple-contral" colspan="3" style="width: 87%">
+                          <textarea name="yj" ng-model="project.C_Remark" style="width: 100%; height: 100px; border: 1px solid #128d56" rows="5"></textarea>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="td-project-alpple-txt">项目目标</td>
+                      <td class="td-project-alpple-contral" colspan="3" style="width: 87%">
+                        <input class="input-contral-project" ng-model="project.C_Target" required></td>
+                  </tr>
+                  <tr>
+                      <td class="td-project-alpple-txt">项目实施周期</td>
+                      <td class="td-project-alpple-contral" colspan="3" style="width: 87%">
+                        <input class="input-contral-project" ng-model="project.C_Cycle" placeholder=""></td>
+                  </tr>
+                  <tr>
+                      <td class="td-project-alpple-txt">项目实施地点</td>
+                      <td class="td-project-alpple-contral" colspan="3" style="width: 87%">
+                        <input class="input-contral-project" ng-model="project.C_Site" placeholder=""></td>
+                  </tr>
+                  <tr>
+                      <td class="td-project-alpple-txt">项目收益群体</td>
+                      <td class="td-project-alpple-contral" ><input ng-model="project.C_People" class="input-contral-project" placeholder=""></td>
+                      <td class="td-project-alpple-txt">预计收益人数</td>
+                      <td class="td-project-alpple-contral"><input ng-model="project.I_Person" class="input-contral-project" placeholder=""></td>
+                  </tr>
+                  <tr>
+                      <td class="td-project-alpple-txt">图片上传</td>
+                      <td class="td-project-alpple-contral" colspan="3" style="width: 87%">
+                          <table>
+                              <tr>
+                                  <td style="width: 80%;">
+                                      <img ng-repeat="file in files | projectPhotoFilter:142" ng-src="{{file.C_FileName}}" class="upload-imgs"/>
+                                  </td>
+                                  <td>
+                                      <div class="img-upload-bt" ng-click="navToUpload(142)">&nbsp;上&nbsp;&nbsp;传</div>
+                                  </td>
+                              </tr>
+                          </table>
+                      </td>
+                  </tr>
+              </table>
+          </div>
 
-        <div class="pa-div" style="min-height:220px;">
-            <table border="0" cellpadding="0" cellspacing="0" width="96%" style="margin-left:10px;">
-                <tr>
-                    <td class="td-project-alpple-txt">项目简介</td>
-                    <td class="td-project-alpple-contral" colspan="3" style="width: 87%">
-                        <textarea name="yj" style="width: 100%; height: 100px; border: 1px solid #128d56" rows="5"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="td-project-alpple-txt">项目目标</td>
-                    <td class="td-project-alpple-contral" colspan="3" style="width: 87%"><input class="input-contral-project" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td class="td-project-alpple-txt">项目实施周期</td>
-                    <td class="td-project-alpple-contral" colspan="3" style="width: 87%"><input class="input-contral-project" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td class="td-project-alpple-txt">项目实施地点</td>
-                    <td class="td-project-alpple-contral" colspan="3" style="width: 87%"><input class="input-contral-project" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td class="td-project-alpple-txt">项目收益群体</td>
-                    <td class="td-project-alpple-contral" ><input class="input-contral-project" placeholder=""></td>
-                    <td class="td-project-alpple-txt">预计收益人数</td>
-                    <td class="td-project-alpple-contral"><input class="input-contral-project" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td class="td-project-alpple-txt">图片上传</td>
-                    <td class="td-project-alpple-contral" colspan="3" style="width: 87%">
-                        <table>
-                            <tr>
-                                <td style="width: 80%;">
-                                    <img ng-repeat="file in files | projectPhotoFilter:142" ng-src="{{file.C_FileName}}" class="upload-imgs"/>
-                                </td>
-                                <td>
-                                    <div class="img-upload-bt" ng-click="navToUpload(142)">&nbsp;上&nbsp;&nbsp;传</div>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="pa-div" style="background-color:#ffffff;">
-             <div style="color:#128d59">上传文件</div>
-             <table border="1" cellpadding="1" cellspacing="1" width="100%" style="margin-top:10px;">
-                 <tr class="manage-table-tr-title"><td>类型</td><td>名称</td><td>操作</td></tr>
-                 <tr class="manage-table-tr-valus" ng-repeat="file in files | projectOtherFileFilter">
-                   <td ng-bind="file.I_Category | dictFilter"></td>
-                   <td ng-bind="file.C_FileName"></td>
-                   <td> <span class="manage-bt-update">下载</span></td>
-                </tr>
-             </table>
-             <div class="project-alpple-icon-div">
-                 <div class="project-alpple-icon-div-one" ng-click="navToUpload(145)"><img src="/images/sh.png" />上传项目申请书</div>
-                 <div class="project-alpple-icon-div-one"><img src="/images/xz.png" />下载申请书模板</div>
-                 <div class="project-alpple-icon-div-one" ng-click="navToUpload(150)"><img src="/images/sh.png" />上传项目预算</div>
-                 <div class="project-alpple-icon-div-one"><img src="/images/xz.png" />下载项目预算模板</div>
-             </div>
-             <div class="myAccount-bt-line " style="padding-right:4%;">
-               <div class="shenhe-bt"><div class="btn-contral" style="margin-left:20px;">取&nbsp;&nbsp;&nbsp;&nbsp;消</div></div><div class="shenhe-bt"><div class="btn-contral" style="">提&nbsp;&nbsp;&nbsp;&nbsp;交</div></div></div>
-         </div>
+          <div class="pa-div" style="background-color:#ffffff;">
+               <div style="color:#128d59">上传文件</div>
+               <table border="1" cellpadding="1" cellspacing="1" width="100%" style="margin-top:10px;">
+                   <tr class="manage-table-tr-title"><td>类型</td><td>名称</td><td>上传人</td><td>上传日期</td><td>操作</td></tr>
+                   <tr class="manage-table-tr-valus" ng-repeat="file in files | projectOtherFileFilter">
+                     <td ng-bind="file.I_Category | dictFilter"></td>
+                     <td ng-bind="file.C_OriginName"></td>
+                     <td ng-bind="file.C_Uploader"></td>
+                     <td ng-bind="file.D_Upload | date:'yyyy-MM-dd'"></td>
+                     <td> <span class="manage-bt-update"><a href="{{file.C_FileName}}"">下载</span></td>
+                  </tr>
+               </table>
+               <div class="project-alpple-icon-div">
+                   <div class="project-alpple-icon-div-one" ng-click="navToUpload(145)"><img src="/images/sh.png" />上传项目申请书</div>
+                   <div class="project-alpple-icon-div-one">
+                     <a href="/templates/tpl-form.doc"><img src="/images/xz.png" />下载申请书模板</a></div>
+                   <div class="project-alpple-icon-div-one" ng-click="navToUpload(150)"><img src="/images/sh.png" />上传项目预算</div>
+                   <div class="project-alpple-icon-div-one">
+                     <a href="/templates/tpl-budget.doc"><img src="/images/xz.png" />下载项目预算模板</a></div>
+               </div>
+               <div class="myAccount-bt-line " style="padding-right:4%;">
+                  <div class="shenhe-bt">
+                    <div class="btn-contral" style="margin-left:20px;" ng-click="cancel()">取&nbsp;&nbsp;&nbsp;&nbsp;消</div>
+                  </div>
+                  <div class="shenhe-bt">
+                    <!-- <div class="btn-contral" >提&nbsp;&nbsp;&nbsp;&nbsp;交</div> -->
+                    <button type="submit" class="btn-contral">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+                  </div>
+              </div>
+           </div>
+         </form>
     </div>
 
 </div>

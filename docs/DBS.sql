@@ -139,19 +139,21 @@ CREATE TABLE [dbo].[Project](
 	[C_Project_Contacter_Mobile] varchar(100) null,		-- 项目负责人联系方式
 	[C_Address] [varchar](200) NULL,					-- 联系地址
 	[C_Email] [varchar](100) NULL,						-- 邮箱	
+	[C_Donation_Name] varchar(200) null,				-- 募捐项目名称
 	[M_Plan] [money] null,								-- 计划募款金额
 	[D_Start] [datetime] null,							-- 开始时间
 	[D_End] [datetime] null,							-- 结束时间
-	[I_Field] int null,									-- 项目领域
+	[C_Field] varchar(50) null,							-- 项目领域
 	[C_Remark] [text] null,								-- 简介
 	[C_Target] varchar(300) null,						-- 目标
 	[C_Cycle] varchar(200) null,						-- 周期
 	[C_Site] varchar(300) null,							-- 实施地点
 	[C_People] varchar(200) null,						-- 受益群体
 	[I_Person] varchar(300) null,						-- 受益人数
+	[C_Publisher] varchar(200) null,					-- 项目发布方
 	[I_Publisher] int not null,							-- 发布人
 	[D_Publish] [datetime] null,						-- 发布时间
-	[I_State] int not null default(0)					-- 0 创建 1 已发布
+	[I_State] int not null default(0)					
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

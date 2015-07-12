@@ -1,8 +1,10 @@
-<div style="float: right; padding: 5px 1px 5px 0; cursor: pointer;font-size:15px; color:#159059" ui-sref="projectEdit({id:-1})">添加</div>
+<div style="float: right; padding: 5px 1px 5px 0; cursor: pointer;font-size:15px; color:#159059" ng-click="navToEdit()" >添加</div>
 ﻿<table ng-repeat="item in projects" border="1" cellpadding="1" cellspacing="1" class="myProjects-table">
     <tr>
         <td class="td-user-title " ng-bind="item.C_Title"></td>
-        <td class="td-myprojiect-value">划拨资金</td>
+        <td class="td-myprojiect-value">
+          <a ng-click="navToDonationOrEdit(item)" ng-bind="donationOrEditTitle"></a>
+        </td>
     </tr>
     <tr>
         <td class="td-user-title">发起机构</td>
@@ -10,14 +12,14 @@
     </tr>
     <tr>
         <td class="td-user-title ">完成动态</td>
-        <td class="td-user-value" ng-bind="I_Percent"></td>
+        <td class="td-user-value" ng-bind="item.M_Percent | number:2"></td>
     </tr>
     <tr>
         <td class="td-user-title">目前募集</td>
-        <td class="td-user-value" ng-bind="M_Donation"></td>
+        <td class="td-user-value" ng-bind="item.M_Donation"></td>
     </tr>
     <tr>
         <td class="td-user-title">募集目标</td>
-        <td class="td-user-value" ng-bind="M_Plan"></td>
+        <td class="td-user-value" ng-bind="item.M_Plan"></td>
     </tr>
 </table>

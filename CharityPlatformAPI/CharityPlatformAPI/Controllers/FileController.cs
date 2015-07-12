@@ -31,8 +31,8 @@
                 fileEntity.D_Upload = DateTime.Now;
                 fileEntity.C_OriginName = HttpContext.Current.Request.Files[0].FileName;
 
-                string fileUploadPath =  ConfigurationManager.AppSettings["FileUpload"].ToString();
-                
+                string fileUploadPath = ConfigurationManager.AppSettings["FileUpload"].ToString();
+
                 int index = fileEntity.C_OriginName.LastIndexOf('.');
                 if (index == -1) { index = 0; }
                 fileEntity.C_FileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + fileEntity.C_OriginName.Substring(index);
@@ -55,7 +55,7 @@
                 return -1;
             }
         }
-        
+
 
         [HttpGet]
         public void DownloadFile(int owner, string fileName, string token)
@@ -104,6 +104,26 @@
         public DataTable Usp_File_List(int owner, int category, int uploader)
         {
             return DataHelper.FillDataTable("Usp_File_List", new { I_Owner = owner, I_Category = category, I_Uploader = uploader });
+        }
+
+        /// <summary>
+        /// 初创项目时，项目保存后，修改原临时文件夹名称至最终的项目编号
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public int DirectoryRename(int oldProjectId, int newProjectId)
+        {
+            string fileUploadPath = ConfigurationManager.AppSettings["FileUpload"].ToString(); 
+
+            string srcPath = System.IO.Path.Combine(fileUploadPath, oldProjectId.ToString());
+            string targetPath = System.IO.Path.Combine(fileUploadPath, newProjectId.ToString());
+            if (Directory.Exists(srcPath))
+            {
+                Directory.Move(srcPath, targetPath);
+            }
+
+            return 1;
         }
     }
 }

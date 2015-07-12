@@ -13,10 +13,10 @@
         <tr class="manage-table-tr-valus" ng-repeat="item in items track by item.C_Login">
             <td ng-bind="item.C_Login"></td>
             <td ng-bind="item.C_Name"></td>
-            <td ng-bind="item.I_Category | dictFilter"></td>         
+            <td ng-bind="item.I_Category | dictFilter"></td>
             <td ng-bind="item.I_Flag | dictFilter"></td>
             <td><span class="manage-bt-update" ui-sref="userEdit({id: item.Id})">修改</span>&nbsp;&nbsp;<span class="manage-bt-role" ng-click="showUserRole(item)">角色</span></td>
-        </tr>       
+        </tr>
     </table>
     <div boot-strap-page page-index="_sys.hold.pageIndex" page-total="_sys.hold.total" />
 </div>

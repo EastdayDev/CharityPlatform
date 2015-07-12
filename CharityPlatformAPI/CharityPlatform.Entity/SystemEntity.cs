@@ -33,6 +33,7 @@ namespace CharityPlatform.Entity
         public Int32 I_Creater { get; set; } 
         public String C_Name { get; set; }
         public String C_Contact { get; set; }
+        public String C_Business { get; set; }
         public String C_Mobile { get; set; }
         public String C_Address { get; set; }
         public DateTime? D_Create { get; set; }

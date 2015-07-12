@@ -43,6 +43,14 @@ angular.module('fileModule').factory('_file', ['_http',
         if (callback) callback(files);
       });
     }
+
+    service.DirectoryRename = function(oldProjectId, newProjectId, callback) {
+      _http.ajaxGet(apiController, 'DirectoryRename', {
+        oldProjectId: oldProjectId,
+        newProjectId: newProjectId
+      }, callback);
+    };
+
     return service;
   }
 ]);
