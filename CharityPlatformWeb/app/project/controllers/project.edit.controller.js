@@ -2,13 +2,9 @@
 
 angular.module('projectModule').controller('ProjectEditController', ['$scope',
   '$state', '$stateParams', '$window', '_project', '_file', '_user',
-  '_partner',
-  '$rootScope',
-  'epModal', '_tool',
+  '_partner', '$rootScope', 'epModal', '_tool', '_audit',
   function($scope, $state, $stateParams, $window, _project, _file, _user,
-    _partner,
-    $rootScope,
-    epModal, _tool) {
+    _partner, $rootScope, epModal, _tool, _audit) {
 
     $scope.project = _project.editProjectItem;
 
@@ -22,7 +18,16 @@ angular.module('projectModule').controller('ProjectEditController', ['$scope',
       });
     }
 
-
+    $scope.submit = function(project) {
+      project.I_FlowType = 101;
+      _audit.submit(project, function(data) {
+        if (data === '-1') {
+          epModal.info('服务器操作发生异常, 请联系系统管理员!');
+        } else {
+          $window.history.back();
+        }
+      })
+    }
 
     $scope.save = function(project) {
       project.I_Creater = _user.userId;

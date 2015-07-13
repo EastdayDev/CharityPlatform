@@ -189,7 +189,7 @@ namespace Eastday.WorkFlow
         {
             string directory = string.Empty;
             string path = System.Configuration.ConfigurationManager.AppSettings["FlowPath"];
-            return string.Format("{0}/Flow_{2}.bin", path, owner);
+            return string.Format("{0}/Flow_{1}.bin", path, owner);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace Eastday.WorkFlow
         /// <returns></returns>
         private string GetTemplateFile(string name)
         {
-            string path = System.Configuration.ConfigurationManager.AppSettings["EastdayFlowPath"];
+            string path = System.Configuration.ConfigurationManager.AppSettings["FlowPath"];
             return string.Format("{0}.bin", System.IO.Path.Combine(path, "Template", name));
         }
 

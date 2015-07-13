@@ -5,12 +5,25 @@ angular.module('projectModule').controller('ProjectMineController', ['$scope',
   '$state', '$stateParams', '_project', '_user', '_tool', 'epModal',
   function($scope, $state, $stateParams, _project, _user, _tool, epModal) {
 
-    $scope.navToEdit = function() {
+    $scope._user = _user;
+
+    $scope.navToAdd = function() {
       _project.editProjectItem = {};
       _project.randomId = _tool.randomBy(81234567, 91234567);
       $state.go('projectEdit', {
         id: -1
       });
+    }
+
+    $scope.navToEdit = function(item) {
+      _project.randomId = item.Id;
+      $state.go('projectEdit', {
+        id: item.Id
+      });
+    }
+
+    $scope.navToPublish = function(item) {
+
     }
 
     $scope.navToDonationOrEdit = function(item) {
@@ -31,9 +44,6 @@ angular.module('projectModule').controller('ProjectMineController', ['$scope',
       _project.USP_Project_List(_user.userId, function(data) {
         $scope.projects = data;
       });
-
-      $scope.donationOrEditTitle = _user.user.I_Category === 105 ? '编辑' :
-        '划拨资金';
     });
 
   }

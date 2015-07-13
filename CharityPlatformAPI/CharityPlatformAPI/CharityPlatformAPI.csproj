@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BasicAuthorizeAttribute.cs" />
@@ -171,6 +172,14 @@
     <ProjectReference Include="..\CharityPlatform.Entity\CharityPlatform.Entity.csproj">
       <Project>{589a87bc-9579-4800-89a1-43218b88ef98}</Project>
       <Name>CharityPlatform.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eastday.WorkFlowEngine\Eastday.WorkFlowEngine.csproj">
+      <Project>{3fe6ea9e-d07e-4f0c-a0f8-723b00dd7eec}</Project>
+      <Name>Eastday.WorkFlowEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eastday.WorkFlow\Eastday.WorkFlow.csproj">
+      <Project>{1cb8ff61-9a1b-4fbc-b9fb-ef44beac1233}</Project>
+      <Name>Eastday.WorkFlow</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

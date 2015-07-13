@@ -40,7 +40,7 @@ namespace CharityPlatform.Entity
         public string C_Site;						// 实施地点
         public string C_People;						// 受益群体
         public int I_Person;						// 受益人数
-        public int C_Publisher;						// 项目发布方
+        public string C_Publisher;				    // 项目发布方
         public int I_Publisher;						// 发布人
         public DateTime? D_Publish;					// 发布时间
         public int I_State = 205;					        // 0 创建 1 已发布

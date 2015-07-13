@@ -51,8 +51,9 @@ namespace CharityPlatform.WorkFlow
 
                 FlowManager flowMgr = FlowManager.Instance();
                 FlowEngine flowEngine = flowMgr.TemplateLoad(flowKindEntity.C_Template);
+                flowEngine.Attachment = flowAttachment;
 
-                if (users.Any())
+                if (users != null && users.Any())
                 {
                     FunctionEntity funcEntry = null;
                     funcEntry = bll.GetDataItem<FunctionEntity>("Usp_Func_Get", new { Id = 10100 });
