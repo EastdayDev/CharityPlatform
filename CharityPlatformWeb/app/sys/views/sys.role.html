@@ -13,7 +13,7 @@
             <tr class="manage-table-tr-valus" ng-repeat="item in items">
                 <td ng-bind="item.C_Name" ng-click="pickRole(item)"></td>
                 <td ng-bind="item.C_Remark"></td>
-                <td ng-bind="item.I_Flag | dictFilter"></td>          
+                <td ng-bind="item.I_Flag | dictNameFilter"></td>          
                 <td>
                     <span class="manage-bt-update" ng-click="showEdit(item)">修改</span>&nbsp;&nbsp;
                     <span class="manage-bt-role" ng-click="showRoleAuth(item)">权限</span>

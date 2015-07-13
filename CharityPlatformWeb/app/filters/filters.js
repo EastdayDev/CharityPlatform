@@ -2,13 +2,23 @@
 'use strict'
 var filterApp = angular.module('filterModule');
 
-filterApp.filter('dictFilter', ['_sys', function(_sys) {
+filterApp.filter('dictNameFilter', ['_sys', function(_sys) {
   return function(value) {
     var length = _sys.words.length;
     for (var i = 0; i < length; i++) {
       if (_sys.words[i].Id == value) return _sys.words[i].C_Name;
     }
     return '未知';
+  }
+}]);
+
+filterApp.filter('dictFilter', ['_sys', function(_sys) {
+  return function(words, category) {
+    var newWords = [];
+    angular.forEach(words, function(item) {
+      if (item.I_Category === category) this.push(item);
+    }, newWords);
+    return newWords;
   }
 }]);
 
@@ -33,5 +43,17 @@ filterApp.filter('projectOtherFileFilter', [function() {
       }
     }, newFiles);
     return newFiles;
+  }
+}]);
+
+filterApp.filter('projectFieldFilter', [function() {
+  return function(projects, field) {
+    var newProjects = [];
+    angular.forEach(projects, function(item) {
+      if (item.C_Field.indexOf(field) > -1) {
+        this.push(item);
+      }
+    }, newProjects);
+    return newProjects;
   }
 }]);

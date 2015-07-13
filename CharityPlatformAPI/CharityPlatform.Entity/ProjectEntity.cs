@@ -48,16 +48,21 @@ namespace CharityPlatform.Entity
 
    
 
-    public class ProjectDonationEntity
+    public class DonationEntity
     {
         public int Id;
         public int I_Project;
-        public int I_Method;
         public int I_User;
+        public int I_Method;
         public decimal M_Money;
         public int I_From;
         public string C_Transaction;
-        public DateTime D_Create;
         public string C_Remark;
+        public int I_Flag;
+        public int I_RequiredReceipt;
+        public string C_ReceiptTitle;
+        public string C_ReceiptName;
+        public string C_ReceiptMobile;
+        public string C_ReceiptAddress;
     }
 }

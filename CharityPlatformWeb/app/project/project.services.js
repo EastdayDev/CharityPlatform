@@ -31,6 +31,13 @@ angular.module('projectModule').factory('_project', ['_http', '_cookie',
       }, callback);
     }
 
+    service.USP_Project_View = function(userId, id, callback) {
+      _http.ajaxGet(apiController, 'USP_Project_View', {
+        userId: userId,
+        id: id
+      }, callback);
+    }
+
     return service;
   }
 ]);

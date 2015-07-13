@@ -919,3 +919,8 @@ a {
        width: 25%;
        margin-top: 10px;
    }
+
+   .one-donation {
+       clear: both;
+       padding-top: 10px;
+   }

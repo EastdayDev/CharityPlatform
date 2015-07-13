@@ -7,5 +7,5 @@ angular.module('partnerModule').config(['$stateProvider', function ($stateProvid
             url: '/partner',
             templateUrl: '/app/partner/views/partner.index.html',
             controller: 'PartnerController'
-        })  
+        })
 }]);

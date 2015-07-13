@@ -148,11 +148,11 @@
                <table border="1" cellpadding="1" cellspacing="1" width="100%" style="margin-top:10px;">
                    <tr class="manage-table-tr-title"><td>类型</td><td>名称</td><td>上传人</td><td>上传日期</td><td>操作</td></tr>
                    <tr class="manage-table-tr-valus" ng-repeat="file in files | projectOtherFileFilter">
-                     <td ng-bind="file.I_Category | dictFilter"></td>
+                     <td ng-bind="file.I_Category | dictNameFilter"></td>
                      <td ng-bind="file.C_OriginName"></td>
                      <td ng-bind="file.C_Uploader"></td>
                      <td ng-bind="file.D_Upload | date:'yyyy-MM-dd'"></td>
-                     <td> <span class="manage-bt-update"><a href="{{file.C_FileName}}"">下载</span></td>
+                     <td> <span class="manage-bt-update"><a href="{{file.C_FileName}}">下载</span></td>
                   </tr>
                </table>
                <div class="project-alpple-icon-div">

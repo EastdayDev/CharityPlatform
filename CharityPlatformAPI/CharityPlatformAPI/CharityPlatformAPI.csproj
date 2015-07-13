@@ -140,6 +140,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BasicAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\DonationController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\PartnerController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />

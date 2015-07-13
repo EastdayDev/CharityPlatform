@@ -35,5 +35,11 @@ namespace CharityPlatformAPI.Controllers
         {
             return DataHelper.FillDataTable("USP_Project_List", new { userId = userId });
         }
+
+        [HttpGet]
+        public DataTable USP_Project_View(int userId, int id)
+        {
+            return DataHelper.FillDataTable("USP_Project_View", new { userId = userId, Id = id });
+        }
     }
 }
