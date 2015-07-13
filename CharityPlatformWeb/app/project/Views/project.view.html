@@ -156,8 +156,12 @@
               </div>
               <div class="juankuan-line-div"><input class="input-contral-project" ng-model="donation.M_Money" placeholder="捐款金额"></div>
               <div class="juankuan-line-div">
+                <label><input type="radio" ng-model="donation.I_From" value="115" />&nbsp;账户余额 </label>&nbsp;&nbsp;&nbsp;
                 <label><input type="radio" ng-model="donation.I_From" value="120" />&nbsp;网上支付-支付宝 </label>&nbsp;&nbsp;&nbsp;
                 <label><input type="radio" ng-model="donation.I_From" value="125" />&nbsp;银&nbsp;联 </label>
+              </div>
+              <div class="juankuan-line-div" style="width:80%">
+                <span style="color:#ff6a00" >账户余额：{{donation.M_Balance}}</span>
               </div>
               <div class="juankuan-line-div" style="width:80%">
                 <label><input name="Fruit" type="checkbox" ng-model="donation.I_RequiredReceipt" />&nbsp;我要发票</label>&nbsp;---&nbsp;

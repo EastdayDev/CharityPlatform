@@ -34,6 +34,24 @@ filterApp.filter('projectPhotoFilter', [function() {
   }
 }]);
 
+filterApp.filter('partnerProjectFilter', [function() {
+  return function(projects, partnerId) {
+    var newProjects = [];
+    angular.forEach(projects, function(project) {
+      if (project.I_Creater === partnerId) {
+        this.push(project);
+      }
+    }, newProjects);
+    return newProjects;
+  }
+}]);
+
+filterApp.filter('filePathFilter', [function() {
+  return function(item) {
+    return '/files/' + item.Id + '/' + item.C_Photo;
+  }
+}]);
+
 filterApp.filter('projectOtherFileFilter', [function() {
   return function(files) {
     var newFiles = [];

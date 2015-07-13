@@ -76,10 +76,19 @@ namespace CharityPlatformAPI.Controllers
                 {
                     return -1;
                 }
-            }
+            } 
+        }
 
+        [HttpGet]
+        public DataTable USP_Partner_Projects(int userId)
+        {
+            return DataHelper.FillDataTable("USP_Partner_Projects", new { userId = userId });
+        }
 
-
+        [HttpGet]
+        public DataTable Usp_Partner_List(int userId)
+        {
+            return DataHelper.FillDataTable("Usp_Partner_List", new { userId = userId });
         }
 
     }

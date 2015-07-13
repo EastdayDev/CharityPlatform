@@ -24,6 +24,11 @@ angular.module('projectModule').controller('ProjectViewController', ['$scope',
         return false;
       }
 
+      if (donation.I_From === '115' && donation.M_Balance < donation.M_Money) {
+        epModal.info('账户余额不足,请选择其他支付方式！');
+        return false;
+      }
+
       if (donation.I_RequiredReceipt === false) return true;
 
       if (!donation.C_ReceiptTitle) {
@@ -70,6 +75,7 @@ angular.module('projectModule').controller('ProjectViewController', ['$scope',
         data) {
         $scope.project = data[0];
         $scope.project.Fields = $scope.project.C_Field.split(',');
+        $scope.donation.M_Balance = $scope.project.M_Balance;
       });
 
       _file.Usp_File_List($stateParams.id, -1, _user.userId, function(

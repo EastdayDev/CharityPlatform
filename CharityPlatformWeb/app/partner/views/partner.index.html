@@ -3,81 +3,21 @@
     <div class="content-bg-white-div">
         <div class="index-c-down-div ">
             <div style="padding-left: 20px; font-size: 22px; width: 100%; color: #128d56"><img src="/images/p_icon.png" width="25px;" />合作伙伴</div>
-            <div class="partner-div">
+            <div class="partner-div" ng-repeat="partner in partners">
                 <div>
-                    <div class="partner-title">合作单位名称</div>
-                    <div class="partner-des ">壹基金是由李连杰先生于2007年发起成立的公益组织，是国内第一家民间公募基金会。2010年12月3日，深圳壹基金公益基金会在深圳市民政局的大力支持下正式注册成立，从事公募活动的法律资格。&nbsp; &nbsp; &nbsp;<span style="color: #128d56">>更多</span></div>
+                    <div class="partner-title" ng-bind="partner.C_Name"></div>
+                    <div class="partner-des" ng-bind="partner.C_Remark"><span style="color: #128d56">>更多</span> </div>
                 </div>
                 <div class="index-c-down-plist">
-                    <div class="partner-one">
+                    <div class="partner-one" ng-repeat="project in projects | partnerProjectFilter:partner.Id">
                         <div style="width:96%">
-                            <div><img src="/images/c01.png" /></div>
-                            <div>1.5亿善款支持10万个孩子</div>
-                            <div class="index-c-down-project-des">希望工程20年间累计捐助达到1.5亿元，帮助10万名贫困失学儿童摆脱贫困的处境</div>
-                        </div>
-                    </div>
-                    <div class="partner-one">
-
-                        <div style="width: 96%">
-                            <div><img src="/images/c02.png" /></div>
-                            <div>1.5亿善款支持10万个孩子</div>
-                            <div class="index-c-down-project-des">希望工程20年间累计捐助达到1.5亿元，帮助10万名贫困失学儿童摆脱贫困的处境，帮助10万名贫困失学儿童摆脱贫困的处境</div>
-                        </div>
-                    </div>
-                    <div class="partner-one">
-                        <div style="width: 96%">
-                            <div><img src="/images/c03.png" /></div>
-                            <div>1.5亿善款支持10万个孩子</div>
-                            <div class="index-c-down-project-des">希望工程20年间累计捐助达到1.5亿元，帮助10万名贫困失学儿童摆脱贫困的处境，帮助10万名贫困失学儿童摆脱贫困的处境，帮助10万名贫困失学儿童摆脱贫困的处境</div>
-                        </div>
-                    </div>
-                    <div class="partner-one">
-                        <div style="width: 96%">
-                            <div><img src="/images/c03.png" /></div>
-                            <div>1.5亿善款支持10万个孩子</div>
-                            <div class="index-c-down-project-des">希望工程20年间累计捐助达到1.5亿元，帮助10万名贫困失学儿童摆脱贫困的处境</div>
+                            <div><img ng-src="{{project | filePathFilter}}" /></div>
+                            <div ng-bind="project.C_Title"></div>
+                            <div class="index-c-down-project-des txt-ellipsis" ng-bind="project.C_Remark" title="{{project.C_Remark}}"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="partner-div">
-                <div>
-                    <div class="partner-title">合作单位名称</div>
-                    <div class="partner-des ">壹基金是由李连杰先生于2007年发起成立的公益组织，是国内第一家民间公募基金会。2010年12月3日，深圳壹基金公益基金会在深圳市民政局的大力支持下正式注册成立，从事公募活动的法律资格。&nbsp; &nbsp; &nbsp;<span style="color: #128d56">>更多</span> </div>
-                </div>
-                <div class="index-c-down-plist">
-                    <div class="partner-one">
-                        <div style="width:96%">
-                            <div><img src="/images/c01.png" /></div>
-                            <div>1.5亿善款支持10万个孩子</div>
-                            <div class="index-c-down-project-des">希望工程20年间累计捐助达到1.5亿元，帮助10万名贫困失学儿童摆脱贫困的处境</div>
-                        </div>
-                    </div>
-                    <div class="partner-one">
-
-                        <div style="width: 96%">
-                            <div><img src="/images/c02.png" /></div>
-                            <div>1.5亿善款支持10万个孩子</div>
-                            <div class="index-c-down-project-des">希望工程20年间累计捐助达到1.5亿元，帮助10万名贫困失学儿童摆脱贫困的处境，帮助10万名贫困失学儿童摆脱贫困的处境</div>
-                        </div>
-                    </div>
-                    <div class="partner-one">
-                        <div style="width: 96%">
-                            <div><img src="/images/c03.png" /></div>
-                            <div>1.5亿善款支持10万个孩子</div>
-                            <div class="index-c-down-project-des">希望工程20年间累计捐助达到1.5亿元，帮助10万名贫困失学儿童摆脱贫困的处境，帮助10万名贫困失学儿童摆脱贫困的处境，帮助10万名贫困失学儿童摆脱贫困的处境</div>
-                        </div>
-                    </div>
-                    <div class="partner-one">
-                        <div style="width: 96%">
-                            <div><img src="/images/c03.png" /></div>
-                            <div>1.5亿善款支持10万个孩子</div>
-                            <div class="index-c-down-project-des">希望工程20年间累计捐助达到1.5亿元，帮助10万名贫困失学儿童摆脱贫困的处境</div>
-                        </div>
-                    </div>
-                </div>
+                <div style="clear:both"></div>
             </div>
 
         </div>
