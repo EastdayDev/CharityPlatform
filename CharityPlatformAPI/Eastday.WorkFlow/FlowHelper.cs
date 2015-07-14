@@ -23,10 +23,10 @@ namespace CharityPlatform.WorkFlow
         /// <param name="depLevel2">中心下属部门</param>
         /// <param name="IsSubmit">1说明是提交流程，需要执行DeleteWorkFlow删除流程数据</param>
         /// <returns></returns>
-        public static void Commit(int id, int userId, IList<UserEntity> users, bool isSubmit)
+        public static void Commit(ProjectEntity projectEntity, FlowKinkEntity flowKinkEntity, int userId, bool isSubmit)
         {
-            FlowEngine flowEngine = FlowHelper.Build(id, userId, users);
-            if (isSubmit) FlowManager.Instance().Delete(id);
+            FlowEngine flowEngine = FlowHelper.Build(projectEntity, flowKinkEntity, userId);
+            if (isSubmit) FlowManager.Instance().Delete(projectEntity.Id);
             FlowManager.Instance().FlowSave(flowEngine);
         }
 
@@ -39,30 +39,19 @@ namespace CharityPlatform.WorkFlow
         /// <param name="depLevel1">中心及职能部门</param>
         /// <param name="depLevel2">中心下属部门</param>
         /// <returns>流程实例</returns>
-        public static FlowEngine Build(int id, int userId, IList<UserEntity> users)
+        public static FlowEngine Build(ProjectEntity projectEntity, FlowKinkEntity flowKinkEntity, int userId)
         {
-            using (AppBLL bll = new AppBLL())
-            {
-                //获取当前模板
-                int flowKindId = (int)bll.GetDataItem<ProjectEntity>("USP_Project_Get", new { Id = id }).I_FlowType;
-                FlowKinkEntity flowKindEntity = bll.GetDataItem<FlowKinkEntity>("USP_Flow_Template", new { Id = flowKindId });
-                FlowAttachment flowAttachment = new FlowAttachment() { Owner = id, Kind = flowKindEntity.id };
-                flowAttachment.Creater = userId;
+            //获取当前模板
+            FlowAttachment flowAttachment = new FlowAttachment() { Owner = projectEntity.Id, Kind = flowKinkEntity.id };
+            flowAttachment.Creater = userId;
 
-                FlowManager flowMgr = FlowManager.Instance();
-                FlowEngine flowEngine = flowMgr.TemplateLoad(flowKindEntity.C_Template);
-                flowEngine.Attachment = flowAttachment;
+            FlowManager flowMgr = FlowManager.Instance();
+            FlowEngine flowEngine = flowMgr.TemplateLoad(flowKinkEntity.C_Template);
+            flowEngine.Attachment = flowAttachment;
 
-                if (users != null && users.Any())
-                {
-                    FunctionEntity funcEntry = null;
-                    funcEntry = bll.GetDataItem<FunctionEntity>("Usp_Func_Get", new { Id = 10100 });
-                    FlowHelper.AddCountersign(flowEngine, funcEntry, users);
-                }
-                FlowHelper.Concat(id, flowEngine);
+            FlowHelper.Concat(flowAttachment.Owner, flowEngine);
 
-                return flowEngine;
-            }
+            return flowEngine;
         }
 
         /// <summary>

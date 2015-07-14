@@ -1,0 +1,39 @@
+<div class="manage-line-div">
+    <div class="manage-line-div">
+        <div class="search-div">
+            <input class="input-contral-back search-bt" placeholder="名称" ng-model="filterValue">
+            <img src="/images/search.png" style="cursor:pointer; width:25px;" ng-click="search(filterValue)" />
+        </div>
+    </div>
+</div>
+    <div class="manage-line-div">
+        <table border="1" cellpadding="1" cellspacing="1" width="100%" style="margin-top:10px;">
+            <tr class="manage-table-tr-title">
+              <td>项目名称</td>
+              <td>所属机构</td>
+              <td>计划募集</td>
+              <td>联系人</td>
+              <td>联系电话</td>
+              <td>操作</td>
+            </tr>
+            <tr class="manage-table-tr-valus" ng-repeat="project in projects">
+                <td ng-bind="project.C_Title"></td>
+                <td ng-bind="project.C_OrgName"></td>
+                <td ng-bind="project.M_Plan"></td>
+                <td ng-bind="project.C_Project_Contacter"></td>
+                <td ng-bind="project.C_Project_Contacter_Mobile"></td>
+                <td>
+                    <span class="manage-bt-update" ui-sref="projectView({id:project.Id})">查看</span>&nbsp;&nbsp;
+                    <span class="manage-bt-role" ng-click="showRoleAuth(item)">审核</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+<div class="manage-line-div">
+    <div class="checkbox">
+        <label style="margin-right:10px;" ng-repeat="item in funcs" title="{{item.C_Remark}}">
+            <input type="checkbox" checklist-value="1" checklist-model="roleFuncs" >{{item.C_Name}}
+        </label>
+    </div>
+</div>
+<div boot-strap-page page-index="_sys.hold.pageIndex" page-total="_sys.hold.total" />

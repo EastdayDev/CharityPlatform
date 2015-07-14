@@ -20,6 +20,7 @@ angular.module('projectModule').controller('ProjectEditController', ['$scope',
 
     $scope.submit = function(project) {
       project.I_FlowType = 101;
+      project.I_State = 160; /// 审核中
       _audit.submit(project, function(data) {
         if (data === '-1') {
           epModal.info('服务器操作发生异常, 请联系系统管理员!');

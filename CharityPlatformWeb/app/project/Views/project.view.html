@@ -3,7 +3,7 @@
     <div class="content-bg-white-div">
         <div class="p-detail-title">
             <div style=" float:left; margin-left:30px;">项目详情</div>
-            <div style=" float:right; margin-right:30px;">
+            <div style=" float:right; margin-right:30px;" ng-hide="project.I_State!==210">
                 <div class="shenhe-bt"><div class="btn-contral" style="height:28px;">我要捐款</div></div>
             </div>
         </div>
@@ -147,8 +147,8 @@
                </tr>
             </table>
         </div>
-        <div class="detail-title-green">我要捐款</div>
-          <div class="detail-content-hui" style="min-height: 250px; padding-bottom: 50px;">
+        <div class="detail-title-green" ng-hide="project.I_State!==210">我要捐款</div>
+          <div class="detail-content-hui" style="min-height: 250px; padding-bottom: 50px;" ng-hide="project.I_State!==210">
               <div class="juankuan-line-div">
                   <label ng-repeat="item in _sys.words | dictFilter:20" style="margin-right:20px;" >
                     <input name="Fruit" type="radio" ng-model="donation.I_Method" value="{{item.Id}}" />{{item.C_Name}}
