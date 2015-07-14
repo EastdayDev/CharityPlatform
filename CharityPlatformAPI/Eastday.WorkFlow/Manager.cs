@@ -269,7 +269,7 @@ namespace Eastday.WorkFlow
                 WorkFlowEntity workFlowEntity = workFlowBLL.Usp_Flow_ByOwner(flowEngine.Attachment.Owner);
                 if (workFlowEntity == null) workFlowEntity = new WorkFlowEntity();
                 workFlowEntity.I_Owner = flowEngine.Attachment.Owner;
-                workFlowEntity.I_State = (int)flowEngine.FlowState;
+                workFlowEntity.I_State = (int)flowEngine.FlowState; 
                 workFlowEntity.I_Flag = 1;
 
                 //ParticipantEntity
@@ -297,6 +297,7 @@ namespace Eastday.WorkFlow
                 if (workFlowBLL.Usp_Flow_Insert(workFlowEntity, participants) > 0)
                 {
                     workFlowBLL.DbContext.CommitTransaction();
+                    this.Save(flowEngine);
                 }
             }
         }
@@ -322,7 +323,7 @@ namespace Eastday.WorkFlow
                 IList<FunctionEntity> userFuncs = bll.FillList<FunctionEntity>("Usp_Funcs_ByUser", new { UserId = userId });
                 foreach (var userFunc in userFuncs)
                 {
-                    participant = new Participant() { Category = 1, Department = userId, Reference = (long)userFunc.Id };
+                    participant = new Participant() { Category = 1, Department = -1, Reference = (long)userFunc.Id };
                     conclusion = new Conclusion(auditType, (long)userId, DateTime.Now) { Description = auditDesc };
                     if (flowEngine.Audit(conclusion, participant))
                     {
@@ -401,10 +402,7 @@ namespace Eastday.WorkFlow
         private static void FlowFinished(object sender, EventArgs e)
         {
             FlowEngine flowEngine = (FlowEngine)sender;
-            using (WorkFlowBLL bll = new WorkFlowBLL())
-            {
-                bll.USP_Flow_Confirm(flowEngine.Attachment.Owner);
-            }
+            DataHelper.ExecuteNonQuery("USP_Flow_Confirm", new { I_Owner = flowEngine.Attachment.Owner });
         }
 
         #endregion

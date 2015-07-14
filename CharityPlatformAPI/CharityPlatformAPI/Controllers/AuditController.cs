@@ -1,6 +1,8 @@
 ﻿using CharityPlatform.Data;
 using CharityPlatform.Entity;
 using CharityPlatform.WorkFlow;
+using Eastday.WorkFlow;
+using Eastday.WorkFlowEngine;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -29,6 +31,35 @@ namespace CharityPlatformAPI.Controllers
             {
                 return -1;
             }
+        }
+
+        [HttpPost]
+        public int Audit(CheckObject entity)
+        {
+            try
+            {
+                FlowManager flowMgr = FlowManager.Instance();
+                FlowEngine flowEngine = flowMgr.Load(entity.Id);
+                if (flowEngine == null) return -1;
+                if (entity.AuditType == (int)AuditType.Passed)
+                {
+                    flowMgr.Audit(flowEngine, (AuditType)entity.AuditType, entity.AuditDesc, entity.UserId);
+                }
+                else
+                {
+                    flowMgr.Returned(flowEngine, (AuditType)entity.AuditType, entity.AuditDesc, entity.UserId);
+                    ProjectEntity project = DataHelper.GetDataItem<ProjectEntity>("Usp_Project_Get", new { Id = entity.Id });
+                    project.I_State = 165;
+                    DataHelper.ExecuteNonQuery("Usp_Project_Insert", project);
+                }
+                flowMgr.FlowSave(flowEngine);
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+
         }
 
         [HttpGet]

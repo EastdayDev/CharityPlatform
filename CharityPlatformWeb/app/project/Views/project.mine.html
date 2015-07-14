@@ -1,16 +1,17 @@
 <div style="float: right; padding: 5px 1px 5px 0; cursor: pointer;font-size:15px; color:#159059" ng-hide="_user.user.I_Category!==105"
 ng-click="navToAdd()" >添加</div>
 <table ng-show="_user.user.I_Category===105" border="1" cellpadding="1" cellspacing="1" width="100%" style="margin-top:10px;">
-    <tr class="manage-table-tr-title"><td>名称</td><td>募集目标</td><td>目前募集</td><td>完成动态</td><td>操作</td></tr>
+    <tr class="manage-table-tr-title"><td>名称</td><td>募集目标</td><td>目前募集</td><td>完成动态</td><td>状态</td><td>操作</td></tr>
     <tr class="manage-table-tr-valus" ng-repeat="item in projects">
       <td ng-bind="item.C_Title"></td>
       <td ng-bind="item.M_Plan"></td>
       <td ng-bind="item.M_Donation"></td>
       <td ng-bind="item.M_Percent | number:2"></td>
+      <td ng-bind="item.I_State | dictNameFilter"></td>
       <td>
         <span class="manage-bt-update">
           <button ng-click="navToEdit(item)" ng-disabled="item.I_State!==205 && item.I_State!==165">编辑</button>
-          <button ng-click="navToPublish(item)" ng-disabled="item.I_State!=='170'">发布</button>
+          <button ng-click="publish(item)" ng-disabled="item.I_State!==170" >发布</button>
         </span>
       </td>
    </tr>

@@ -1,0 +1,20 @@
+<div class="content-m-left-right">
+    <div class="path-div"><span>&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;>&nbsp;&nbsp;用户中心&nbsp;&nbsp;>&nbsp;&nbsp;</span><span class="path-div-current-txt">项目审核</span></div>
+    <div class="content-bg-white-div">
+        <div class="userinfo-title">项目审核</div>
+        <div class="pa-div">
+          <div style="padding-left:10px; width:100%;">
+            <div class="pa-radio">
+              <label><input name="YES" type="radio" ng-model="item.auditType" value="10"/>通&nbsp;过 </label>&nbsp;&nbsp;&nbsp;
+              <label><input name="NO" type="radio" ng-model="item.auditType" value="30" />退&nbsp;回 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div style=" width: 100px;float:left">
+              <div class="btn-contral" ng-click="audit(item)" style="height:25px;font-size:16px;padding-top:1px;">审&nbsp;&nbsp;核</div>
+            </div>
+          </div>
+           <div style="clear: both; padding-top: 10px; padding-left: 10px; width: 100%;">
+             <textarea name="yj" ng-model="item.auditDesc" style="width: 96%; height: 200px; border: 1px solid #128d56" rows="5"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

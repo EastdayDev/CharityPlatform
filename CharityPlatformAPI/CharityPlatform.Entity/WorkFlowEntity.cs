@@ -11,9 +11,10 @@ namespace CharityPlatform.Entity
     /// </summary>
     public class CheckObject
     {
-        public int Owner;
-        public int Category;
-        public int ProjectId;
+        public int Id;
+        public int AuditType = 10;
+        public int UserId = -1;
+        public string AuditDesc = "";
     } 
 
     public class TransferEntry

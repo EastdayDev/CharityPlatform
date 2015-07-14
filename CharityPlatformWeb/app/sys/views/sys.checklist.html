@@ -24,7 +24,7 @@
                 <td ng-bind="project.C_Project_Contacter_Mobile"></td>
                 <td>
                     <span class="manage-bt-update" ui-sref="projectView({id:project.Id})">查看</span>&nbsp;&nbsp;
-                    <span class="manage-bt-role" ng-click="showRoleAuth(item)">审核</span>
+                    <span class="manage-bt-role" ui-sref="audit({id:project.Id})">审核</span>
                 </td>
             </tr>
         </table>

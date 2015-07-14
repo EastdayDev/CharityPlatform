@@ -21,6 +21,16 @@ angular.module('auditModule').factory('_audit', ['_http',
       }, callback);
     }
 
+    service.audit = function(owner, userId, auditType, auditDesc, callback) {
+      var checkObject = {
+        Id: owner,
+        UserId: userId,
+        AuditType: auditType,
+        AuditDesc: auditDesc
+      };
+      _http.ajaxPost(apiController, 'Audit', checkObject, callback);
+    }
+
     return service;
   }
 ]);

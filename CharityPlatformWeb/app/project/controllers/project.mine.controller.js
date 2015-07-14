@@ -22,8 +22,15 @@ angular.module('projectModule').controller('ProjectMineController', ['$scope',
       });
     }
 
-    $scope.navToPublish = function(item) {
-
+    $scope.publish = function(item) {
+      item.I_State = 210;
+      _project.Usp_Project_Insert(item, function(data) {
+        if (data === '-1') {
+          epModal.info('服务器操作发生异常, 请联系系统管理员!');
+        } else {
+          epModal.info('项目已发布！');
+        }
+      });
     }
 
     $scope.navToDonationOrEdit = function(item) {
