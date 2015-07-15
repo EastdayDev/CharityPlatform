@@ -7,7 +7,7 @@
                 <div class="donation-one">
                     <div class="donation-title">安老服务</div>
                     <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:1">
-                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img src="/images/c01.png" /></a></div>
+                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img  ng-src="{{project | filePathFilter}}" /></a></div>
                         <div ng-bind="project.C_Title"></div>
                         <div class="index-c-down-project-des" ng-bind="project.C_Remark"></div>
                     </div>
@@ -15,7 +15,7 @@
                 <div class="donation-one">
                     <div class="donation-title">扶幼服务</div>
                     <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:2">
-                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img src="/images/c01.png" /></a></div>
+                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img  ng-src="{{project | filePathFilter}}" /></a></div>
                         <div ng-bind="project.C_Title"></div>
                         <div class="index-c-down-project-des" ng-bind="project.C_Remark"></div>
                     </div>
@@ -24,7 +24,7 @@
 
                     <div class="donation-title">助学服务</div>
                     <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:3">
-                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img src="/images/c01.png" /></a></div>
+                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img  ng-src="{{project | filePathFilter}}" /></a></div>
                         <div ng-bind="project.C_Title"></div>
                         <div class="index-c-down-project-des" ng-bind="project.C_Remark"></div>
                     </div>
@@ -32,7 +32,7 @@
                 <div class="donation-one">
                     <div class="donation-title">济困服务</div>
                     <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:4">
-                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img src="/images/c01.png" /></a></div>
+                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img  ng-src="{{project | filePathFilter}}" /></a></div>
                         <div ng-bind="project.C_Title"></div>
                         <div class="index-c-down-project-des" ng-bind="project.C_Remark"></div>
                     </div>
