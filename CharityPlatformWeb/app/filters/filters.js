@@ -75,3 +75,30 @@ filterApp.filter('projectFieldFilter', [function() {
     return newProjects;
   }
 }]);
+
+filterApp.filter('projectFieldNameFilter', [function() {
+  return function(fields) {
+    if (!fields) return;
+    var newFields = [];
+    var fieldIds = fields.split(',');
+    angular.forEach(fieldIds, function(item) {
+      switch (item) {
+        case '1':
+          this.push('安老');
+          break;
+        case '2':
+          this.push('扶幼');
+          break;
+        case '3':
+          this.push('助学');
+          break;
+        case '4':
+          this.push('济困');
+          break;
+        default:
+          this.push('其他');
+      }
+    }, newFields);
+    return newFields.join('、');
+  }
+}]);

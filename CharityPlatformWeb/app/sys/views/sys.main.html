@@ -3,11 +3,12 @@
     <div class="content-bg-white-div">
         <div class="manager-div">
             <div class="manager-left">
-                <div ng-class="{'manager-tree-select':$state.includes('sys.role'), 'manager-tree-unselect':!$state.includes('sys.role')}" ui-sref="sys.role">角色管理</div>
+                <div ng-class="{'manager-tree-select':$state.includes('sys.role'), 'manager-tree-unselect':!$state.includes('sys.role'), 'itemHide': _user.user.I_Category === 101}" ui-sref="sys.role">角色管理</div>
                <!--  <div ng-class="{'manager-tree-select':_sys.hold.tab===1, 'manager-tree-unselect':_sys.hold.tab!==1}" ng-click="nav(1)">权限管理</div> -->
-                <div ng-class="{'manager-tree-select':$state.includes('sys.partner'), 'manager-tree-unselect':!$state.includes('sys.partner')}" ui-sref="sys.partner">合作伙伴</div>
-                <div ng-class="{'manager-tree-select':$state.includes('sys.user'), 'manager-tree-unselect':!$state.includes('sys.user')}" ui-sref="sys.user">用户管理</div>
-                <div ng-class="{'manager-tree-select':$state.includes('sys.checklist'), 'manager-tree-unselect':!$state.includes('sys.checklist')}" ui-sref="sys.checklist">待审项目</div>
+                <div ng-class="{'manager-tree-select':$state.includes('sys.partner'), 'manager-tree-unselect':!$state.includes('sys.partner'), 'itemHide': _user.user.I_Category === 100}" ui-sref="sys.partner">合作伙伴</div>
+                <div ng-class="{'manager-tree-select':$state.includes('sys.user'), 'manager-tree-unselect':!$state.includes('sys.user'), 'itemHide': _user.user.I_Category === 101}" ui-sref="sys.user">用户管理</div>
+                <div ng-class="{'manager-tree-select':$state.includes('sys.checklist'), 'manager-tree-unselect':!$state.includes('sys.checklist'), 'itemHide': _user.user.I_Category === 100}" ui-sref="sys.checklist">待审项目</div>
+                <div ng-class="{'manager-tree-select':$state.includes('sys.password'), 'manager-tree-unselect':!$state.includes('sys.password')}" ui-sref="sys.password">变更密码</div>
             </div>
             <div class="manager-right" ui-view>
             </div>

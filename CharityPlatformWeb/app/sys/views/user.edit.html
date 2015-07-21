@@ -1,4 +1,4 @@
-<div class="content-m-left-right">    
+<div class="content-m-left-right">
     <div class="content-bg-white-div">
         <div class="userinfo-title"></div>
         <div class="pa-div" style="min-height:120px;">
@@ -6,21 +6,23 @@
             <table border="0" cellpadding="0" cellspacing="0" width="96%" style="margin-left:10px;">
                 <tr>
                     <td class="td-project-audit-txt">登录名</td>
-                    <td class="td-project-audit-contral" colspan="5">
+                    <td class="td-project-audit-contral" colspan="5" ng-show="_sys.editItem.Id > 0" ng-bind="_sys.editItem.C_Login">
+                    </td>
+                    <td class="td-project-audit-contral" colspan="5" ng-hide="_sys.editItem.Id > 0">
                         <input class="input-contral-project" ng-model="_sys.editItem.C_Login">
-                    </td>                                         
+                    </td>
                 </tr>
                 <tr>
                     <td class="td-project-audit-txt">姓名</td>
                     <td class="td-project-audit-contral" colspan="5">
                         <input class="input-contral-project" ng-model="_sys.editItem.C_Name">
-                    </td>                                         
-                </tr>               
+                    </td>
+                </tr>
                 <tr>
                     <td class="td-project-audit-txt">地址</td>
                     <td class="td-project-audit-contral" colspan="5">
                         <input class="input-contral-project" ng-model="_sys.editItem.C_Address">
-                    </td>                                         
+                    </td>
                 </tr>
                 <tr>
                     <td class="td-project-audit-txt">电话</td>
@@ -30,8 +32,8 @@
                     <td class="td-project-audit-txt">邮箱</td>
                     <td class="td-project-audit-contral"  colspan="2">
                         <input class="input-contral-project" ng-model="_sys.editItem.C_Email">
-                    </td>                     
-                </tr>                
+                    </td>
+                </tr>
             </table>
         </div>
 
@@ -40,7 +42,13 @@
                 <textarea name="yj" ng-model="_sys.editItem.C_Remark" style="width: 96%; height: 200px; border: 1px solid #128d56" rows="5" />
             </div>
             <div class="myAccount-bt-line " style="padding-right:4%;">
-                <div class="shenhe-bt" ng-click="close()"><div class="btn-contral" style="margin-left:20px;">取&nbsp;&nbsp;&nbsp;&nbsp;消</div></div><div class="shenhe-bt"><div class="btn-contral" ng-click="save()">确&nbsp;&nbsp;&nbsp;&nbsp;定</div></div></div>
+                <div class="shenhe-bt" ng-click="cancel()">
+                  <div class="btn-contral" style="margin-left:20px;">取&nbsp;&nbsp;&nbsp;&nbsp;消</div>
+                </div>
+                <div class="shenhe-bt">
+                  <div class="btn-contral" ng-click="save()">确&nbsp;&nbsp;&nbsp;&nbsp;定</div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -37,7 +37,7 @@ angular.module('userModule').controller('UserEditController', ['$scope',
 		}
 
 		$scope.navToUpload = function() {
-			var category = _user.user.I_Category === 105 ? 141 : 140;
+			var category = $scope.user.I_Category === 105 ? 141 : 140;
 			$state.go('imageUpload', {
 				owner: $stateParams.id,
 				category: category
@@ -45,8 +45,6 @@ angular.module('userModule').controller('UserEditController', ['$scope',
 		}
 
 		$scope.$on('$viewContentLoaded', function(e) {
-			var category = _user.user.I_Category === 105 ? 141 : 140;
-
 			_partner.Usp_Org_ById($stateParams.id, function(data) {
 				if (data && data.length > 0) {
 					$scope.org = data[0];

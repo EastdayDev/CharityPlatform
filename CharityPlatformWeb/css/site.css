@@ -929,3 +929,7 @@ a {
        overflow: hidden;
        text-overflow: ellipsis;
    }
+
+   .itemHide {
+     display: none;;
+   }

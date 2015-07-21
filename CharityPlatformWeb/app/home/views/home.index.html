@@ -13,7 +13,7 @@
         <div class="index-c-down-left">
             <div>
                 <div class="index-c-down-left-project-txt">我们的项目</div>
-                <div class="index-c-down-left-more-txt">更多...</div>
+                <div class="index-c-down-left-more-txt" ui-sref="donationList">更多...</div>
             </div>
             <div class="index-c-down-plist">
                 <div class="index-c-down-project-one" ng-repeat="project in projects">
@@ -29,7 +29,7 @@
                 <div class="index-c-down-right-greed-in">
                     <div class="index-c-down-right-txt-line" ui-sref="donationList"><span class="index-c-down-right-txt-line-left">月计划</span><span class="index-c-down-right-txt-line-right">></span></div>
                     <div class="index-c-down-right-txt-line" ui-sref="donationList"><span class="index-c-down-right-txt-line-left" >单次捐款活动</span><span class="index-c-down-right-txt-line-right">></span></div>
-                    <div class="index-c-down-right-txt-line" ui-sref="register"><span class="index-c-down-right-txt-line-left">注册</span><span class="index-c-down-right-txt-line-right">></span></div>
+                    <div ng-class="{'itemHide': logon}" class="index-c-down-right-txt-line" ui-sref="register"><span class="index-c-down-right-txt-line-left">注册</span><span class="index-c-down-right-txt-line-right">></span></div>
                 </div>
             </div>
         </div>

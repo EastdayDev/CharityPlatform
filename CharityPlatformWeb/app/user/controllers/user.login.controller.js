@@ -13,6 +13,9 @@ angular.module('userModule').controller('UserLoginController', ['$scope',
 					_app.user = _user.user;
 					if (_app.user.I_Category === 101) {
 						/// 基金会用户
+						$state.go('sys.checklist');
+					} else if (_app.user.I_Category === 100) {
+						/// 系统管理员
 						$state.go('sys.user');
 					} else {
 						var stateName = $scope.fromState.name || 'home';

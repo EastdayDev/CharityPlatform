@@ -2,8 +2,7 @@
 
 angular.module('homeModule').controller('HomeController', ['$scope',
 	'_donation', '_user',
-	function(
-		$scope, _donation, _user) {
+	function($scope, _donation, _user) {
 		var slides = $scope.slides = [];
 		// 添加轮播图源
 		slides.push({
@@ -18,6 +17,8 @@ angular.module('homeModule').controller('HomeController', ['$scope',
 			image: '/images/rollpic_3.png',
 			text: ''
 		});
+
+		$scope.logon = _user && _user.userId > 0;
 
 		$scope.$on('$viewContentLoaded', function() {
 			_donation.USP_Donation_Projects(_user.userId, function(data) {

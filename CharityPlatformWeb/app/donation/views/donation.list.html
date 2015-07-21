@@ -5,36 +5,35 @@
             <div class="index-c-down-plist">
                 <div><img src="/images/donation.png" width="100%" style=" padding-right:2%; padding-bottom:20px;" /></div>
                 <div class="donation-one">
-                    <div class="donation-title">安老服务</div>
-                    <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:1">
-                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img  ng-src="{{project | filePathFilter}}" /></a></div>
-                        <div ng-bind="project.C_Title"></div>
-                        <div class="index-c-down-project-des" ng-bind="project.C_Remark"></div>
+                    <div class="donation-title">安老</div>
+                    <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:1" ui-sref="projectView({id:project.Id})">
+                        <div><a style="cursor:pointer"><img  ng-src="{{project | filePathFilter}}" /></a></div>
+                        <div ng-bind="project.C_Title" style="cursor:pointer"></div>
+                        <div class="index-c-down-project-des" ng-bind="project.C_Remark" style="cursor:pointer"></div>
                     </div>
                 </div>
                 <div class="donation-one">
-                    <div class="donation-title">扶幼服务</div>
-                    <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:2">
-                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img  ng-src="{{project | filePathFilter}}" /></a></div>
-                        <div ng-bind="project.C_Title"></div>
-                        <div class="index-c-down-project-des" ng-bind="project.C_Remark"></div>
+                    <div class="donation-title">扶幼</div>
+                    <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:2" ui-sref="projectView({id:project.Id})">
+                        <div><a style="cursor:pointer"><img  ng-src="{{project | filePathFilter}}" /></a></div>
+                        <div ng-bind="project.C_Title" style="cursor:pointer"></div>
+                        <div class="index-c-down-project-des" ng-bind="project.C_Remark" style="cursor:pointer"></div>
                     </div>
                 </div>
                 <div class="donation-one">
-
-                    <div class="donation-title">助学服务</div>
-                    <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:3">
-                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img  ng-src="{{project | filePathFilter}}" /></a></div>
-                        <div ng-bind="project.C_Title"></div>
-                        <div class="index-c-down-project-des" ng-bind="project.C_Remark"></div>
+                    <div class="donation-title">助学</div>
+                    <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:3" ui-sref="projectView({id:project.Id})">
+                        <div><a style="cursor:pointer"><img  ng-src="{{project | filePathFilter}}" /></a></div>
+                        <div ng-bind="project.C_Title" style="cursor:pointer"></div>
+                        <div class="index-c-down-project-des" ng-bind="project.C_Remark" style="cursor:pointer"></div>
                     </div>
                 </div>
                 <div class="donation-one">
-                    <div class="donation-title">济困服务</div>
-                    <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:4">
-                        <div><a style="cursor:pointer" ui-sref="projectView({id:project.Id})"><img  ng-src="{{project | filePathFilter}}" /></a></div>
-                        <div ng-bind="project.C_Title"></div>
-                        <div class="index-c-down-project-des" ng-bind="project.C_Remark"></div>
+                    <div class="donation-title">济困</div>
+                    <div class="one-donation" ng-repeat="project in projects | projectFieldFilter:4" ui-sref="projectView({id:project.Id})">
+                        <div><a style="cursor:pointer"><img  ng-src="{{project | filePathFilter}}" /></a></div>
+                        <div ng-bind="project.C_Title" style="cursor:pointer"></div>
+                        <div class="index-c-down-project-des" ng-bind="project.C_Remark" style="cursor:pointer"></div>
                     </div>
                 </div>
                 <div style="clear:both"></div>

@@ -7,5 +7,5 @@ angular.module('donationModule').config(['$stateProvider', function ($stateProvi
             url: '/donationList',
             templateUrl: '/app/donation/views/donation.list.html',
             controller: 'DonationListController'
-        })  
+        })
 }]);

@@ -4,7 +4,7 @@
         <div class="p-detail-title">
             <div style=" float:left; margin-left:30px;">项目详情</div>
             <div style=" float:right; margin-right:30px;" ng-hide="project.I_State!==210">
-                <div class="shenhe-bt"><div class="btn-contral" style="height:28px;">我要捐款</div></div>
+                <div class="shenhe-bt"><div class="btn-contral" style="height:28px;" ng-click="toIdPay()">我要捐款</div></div>
             </div>
         </div>
         <div class="detail-title-green" ng-bind="project.C_Title"></div>
@@ -12,11 +12,11 @@
             <table border="0" cellpadding="0" cellspacing="0" class="detail-table-zt">
                 <tr>
                     <td><span class="detail-table-icon"><img src="/images/ad_bfb.png" /></span>
-                      <span ng-bind="project.M_Percent | number:2"></span></td>
+                      <span>捐款动态：{{project.M_Percent | number:2}}</span></td>
                     <td><span class ="detail-table-icon"><img src="/images/ad_qd.png" /></span>
-                      <span ng-bind="project.M_Donation"></span></td>
+                      <span>已经募集：{{project.M_Donation}}</span></td>
                     <td><span class="detail-table-icon"><img src="/images/ad_qd2.png" /></span>
-                      <span ng-bind="project.M_Plan"></span></td>
+                      <span>计划募集：{{project.M_Plan}}</span></td>
                     <td><span class="detail-table-icon"><img src="/images/ad_qd3.png" /></span>
                       <span>我已捐款：{{project.M_SelfDonation}}</span></td>
                 </tr>
@@ -94,11 +94,12 @@
             <div class="project-jj-line">
                 <div class="project-jj-title">项目领域：</div>
                 <div class="project-jg-content" style=" width:80%">
-                    <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'1'" />安老服务</label> &nbsp;&nbsp;&nbsp;
+                    <label ng-bind="project.C_Field | projectFieldNameFilter"></label>
+                    <!-- <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'1'" />安老服务</label> &nbsp;&nbsp;&nbsp;
                     <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'2'" />扶幼服务</label>&nbsp;&nbsp;&nbsp;
                     <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'3'" />助学服务</label>&nbsp;&nbsp;&nbsp;
                     <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'4'" />济困服务</label>&nbsp;&nbsp;&nbsp;
-                    <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'5'" />其&nbsp;&nbsp;他</label>
+                    <label><input name="Fruit" type="checkbox" checklist-model="project.Fields" checklist-value="'5'" />其&nbsp;&nbsp;他</label>  -->
                 </div>
             </div>
         </div>
@@ -147,37 +148,37 @@
                </tr>
             </table>
         </div>
-        <div class="detail-title-green" ng-hide="project.I_State!==210">我要捐款</div>
-          <div class="detail-content-hui" style="min-height: 250px; padding-bottom: 50px;" ng-hide="project.I_State!==210">
-              <div class="juankuan-line-div">
-                  <label ng-repeat="item in _sys.words | dictFilter:20" style="margin-right:20px;" >
-                    <input name="Fruit" type="radio" ng-model="donation.I_Method" value="{{item.Id}}" />{{item.C_Name}}
-                  </label>
-              </div>
-              <div class="juankuan-line-div"><input class="input-contral-project" ng-model="donation.M_Money" placeholder="捐款金额"></div>
-              <div class="juankuan-line-div">
-                <label><input type="radio" ng-model="donation.I_From" value="115" />&nbsp;账户余额 </label>&nbsp;&nbsp;&nbsp;
-                <label><input type="radio" ng-model="donation.I_From" value="120" />&nbsp;网上支付-支付宝 </label>&nbsp;&nbsp;&nbsp;
-                <label><input type="radio" ng-model="donation.I_From" value="125" />&nbsp;银&nbsp;联 </label>
-              </div>
-              <div class="juankuan-line-div" style="width:80%">
-                <span style="color:#ff6a00" >账户余额：{{donation.M_Balance}}</span>
-              </div>
-              <div class="juankuan-line-div" style="width:80%">
-                <label><input name="Fruit" type="checkbox" ng-model="donation.I_RequiredReceipt" />&nbsp;我要发票</label>&nbsp;---&nbsp;
-                <span style=" color:#ff6a00">请仔细填写发票快递地址,并请自负快递费用</span>
-              </div>
-              <div ng-hide="donation.I_RequiredReceipt===false">
-                <div class="juankuan-line-div"><input ng-model="donation.C_ReceiptTitle" class="input-contral-project" placeholder="发票抬头"></div>
-                <div class="juankuan-line-div"><input ng-model="donation.C_ReceiptName" class="input-contral-project" placeholder="收件人"></div>
-                <div class="juankuan-line-div"><input ng-model="donation.C_ReceiptMobile" class="input-contral-project" placeholder="联系方式"></div>
-                <div class="juankuan-line-div"><input ng-model="donation.C_ReceiptAddress" class="input-contral-project" placeholder="联系地址"></div>
-              </div>
-              <div class="juankuan-line-div" style="width:100%" >
-                   <div style="width:120px;float:right;">
-                     <button type="submit" class="btn-contral" ng-click="pay(donation)">支&nbsp;&nbsp;&nbsp;&nbsp;付</button>
-                  </div>
-              </div>
-          </div>
+        <div id="idPay" name="idPay" class="detail-title-green" ng-hide="project.I_State!==210 || hidePay">我要捐款</div>
+        <div class="detail-content-hui" style="min-height: 250px; padding-bottom: 50px;" ng-hide="project.I_State!==210 || hidePay">
+            <div class="juankuan-line-div">
+                <label ng-repeat="item in _sys.words | dictFilter:20" style="margin-right:20px;" >
+                  <input name="Fruit" type="radio" ng-model="donation.I_Method" value="{{item.Id}}" />{{item.C_Name}}
+                </label>
+            </div>
+            <div class="juankuan-line-div"><input class="input-contral-project" ng-model="donation.M_Money" placeholder="捐款金额"></div>
+            <div class="juankuan-line-div">
+              <label><input type="radio" ng-model="donation.I_From" value="115" />&nbsp;账户余额 </label>&nbsp;&nbsp;&nbsp;
+              <label><input type="radio" ng-model="donation.I_From" value="120" />&nbsp;网上支付-支付宝 </label>&nbsp;&nbsp;&nbsp;
+              <label><input type="radio" ng-model="donation.I_From" value="125" />&nbsp;银&nbsp;联 </label>
+            </div>
+            <div class="juankuan-line-div" style="width:80%">
+              <span style="color:#ff6a00" >账户余额：{{donation.M_Balance}}</span>
+            </div>
+            <div class="juankuan-line-div" style="width:80%">
+              <label><input name="Fruit" type="checkbox" ng-model="donation.I_RequiredReceipt" />&nbsp;我要发票</label>&nbsp;---&nbsp;
+              <span style=" color:#ff6a00">请仔细填写发票快递地址,并请自负快递费用</span>
+            </div>
+            <div ng-hide="donation.I_RequiredReceipt===false">
+              <div class="juankuan-line-div"><input ng-model="donation.C_ReceiptTitle" class="input-contral-project" placeholder="发票抬头"></div>
+              <div class="juankuan-line-div"><input ng-model="donation.C_ReceiptName" class="input-contral-project" placeholder="收件人"></div>
+              <div class="juankuan-line-div"><input ng-model="donation.C_ReceiptMobile" class="input-contral-project" placeholder="联系方式"></div>
+              <div class="juankuan-line-div"><input ng-model="donation.C_ReceiptAddress" class="input-contral-project" placeholder="联系地址"></div>
+            </div>
+            <div class="juankuan-line-div" style="width:100%" >
+                 <div style="width:120px;float:right;">
+                   <button type="submit" class="btn-contral" ng-click="pay(donation)">捐&nbsp;&nbsp;&nbsp;&nbsp;款</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

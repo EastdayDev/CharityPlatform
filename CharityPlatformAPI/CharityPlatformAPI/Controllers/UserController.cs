@@ -14,6 +14,7 @@ namespace CharityPlatformAPI.Controllers
 {
     public class UserController : BaseController
     {
+        static string DefaultPWD = "12345678";
         /// <summary>
         /// 普通用户注册
         /// </summary>
@@ -32,9 +33,10 @@ namespace CharityPlatformAPI.Controllers
                     /// 手机号码已经注册
                     if (table.Rows.Count > 0) return -2;
 
+                    user.I_Flag = 1;
                     user.D_Create = DateTime.Now;
                     user.C_Login = user.C_Mobile;
-                    user.I_Flag = 1;
+                    user.C_Password = SHA256(user.C_Password);
                     return bll.ExecuteNonQuery("Usp_User_Insert", user);
                 }
             }
@@ -66,10 +68,17 @@ namespace CharityPlatformAPI.Controllers
         {
             return DataHelper.FillDataTable("Usp_User_Login", new { C_Login = loginName, C_Password = SHA256(password) });
         }        
+                        
 
         [HttpPost]
         public int Usp_User_Insert(UserEntity user)
         {
+            if (user.Id <= 0)
+            {
+                ///默认密码
+                user.C_Password = SHA256(DefaultPWD);
+                user.D_Create = DateTime.Now;
+            }
             return DataHelper.ExecuteNonQuery("Usp_User_Insert", user);
         }
 
@@ -120,6 +129,12 @@ namespace CharityPlatformAPI.Controllers
         public DataTable Usp_UserInfo_ById(int userId)
         {
             return DataHelper.FillDataTable("Usp_UserInfo_ById", new { userId = userId });
+        }
+
+        [HttpGet]
+        public DataTable Usp_UserInfo_ByLogin(string loginName)
+        {
+            return DataHelper.FillDataTable("Usp_UserInfo_ByLogin", new { C_Login = loginName});
         }
 
         [HttpGet]

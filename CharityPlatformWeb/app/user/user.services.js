@@ -30,7 +30,7 @@ angular.module('userModule').factory('_user', ['_http', '_cookie', 'appKey',
     }
 
     service.register = function(user, callback) {
-      user.I_Category = user.isOrganization === 0 ? 105 : 110;
+      user.I_Category = user.isOrganization === 1 ? 105 : 110;
       _http.ajaxPost(apiController, 'Usp_User_Register', user, callback);
     }
 
@@ -75,6 +75,12 @@ angular.module('userModule').factory('_user', ['_http', '_cookie', 'appKey',
     service.Usp_UserInfo_ById = function(userId, callback) {
       _http.ajaxGet(apiController, 'Usp_UserInfo_ById', {
         userId: userId
+      }, callback);
+    }
+
+    service.Usp_UserInfo_ByLogin = function(loginName, callback) {
+      _http.ajaxGet(apiController, 'Usp_UserInfo_ByLogin', {
+        loginName: loginName
       }, callback);
     }
 

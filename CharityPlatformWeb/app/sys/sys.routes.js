@@ -14,6 +14,11 @@ angular.module('sysModule').config(['$stateProvider', function($stateProvider) {
       templateUrl: '/app/sys/views/sys.user.html',
       controller: 'SysUserController'
     })
+    .state('sys.userEdit', {
+      url: '/userEdit/id',
+      templateUrl: '/app/sys/views/user.edit.html',
+      controller: 'SysUserEditController'
+    })
     .state('sys.role', {
       url: '/role',
       templateUrl: '/app/sys/views/sys.role.html',
@@ -29,9 +34,19 @@ angular.module('sysModule').config(['$stateProvider', function($stateProvider) {
       templateUrl: '/app/sys/views/sys.partner.html',
       controller: 'SysPartnerController'
     })
+    .state('partnerEdit', {
+      url: '/partner/edit/:id',
+      templateUrl: '/app/sys/views/partner.edit.html',
+      controller: 'PartnerEditController'
+    })
     .state('sys.checklist', {
       url: '/checklist',
       templateUrl: '/app/sys/views/sys.checklist.html',
       controller: 'SysCheckListController'
+    })
+    .state('sys.password', {
+      url: '/pwd',
+      templateUrl: '/app/user/views/user.passwd.html',
+      controller: 'UserPwdController'
     })
 }]);

@@ -7,6 +7,8 @@ angular.module('userModule').controller('UserCenterController', ['$scope',
 			$state.go('login');
 		}
 
+		$scope._user = _user;
+
 		$scope.$on('$viewContentLoaded', function() {
 			_user.Usp_User_Balance(_user.userId, function(data) {
 				$scope.M_Balance = data[0].M_Balance;

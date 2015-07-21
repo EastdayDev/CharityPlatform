@@ -2,13 +2,16 @@
 'use strict';
 
 angular.module('projectModule').controller('ProjectViewController', ['$scope',
-  '$stateParams', '$window', '_project', '_file', '_donation', '_sys',
-  '_user',
-  '$state', 'epModal',
-  function($scope, $stateParams, $window, _project, _file, _donation, _sys,
-    _user,
-    $state,
-    epModal) {
+  '$stateParams', '$window', '$timeout', '$location', '$anchorScroll',
+  '_project',
+  '_file', '_donation',
+  '_sys',
+  '_user', '$state', 'epModal',
+  function($scope, $stateParams, $window, $timeout, $location,
+    $anchorScroll,
+    _project, _file,
+    _donation, _sys,
+    _user, $state, epModal) {
 
     $scope._sys = _sys;
 
@@ -17,6 +20,19 @@ angular.module('projectModule').controller('ProjectViewController', ['$scope',
       I_From: 120,
       I_RequiredReceipt: false
     }
+
+    $scope.hidePay = true;
+
+    $scope.toIdPay = function() {
+      $scope.hidePay = false;
+      var outPromise = $timeout(function() {
+        $location.hash('idPay');
+        $anchorScroll();
+        $timeout.cancel(outPromise);
+      }, 10);
+    }
+
+
 
     var verifyDonation = function(donation) {
       if (!donation.M_Money || donation.M_Money <= 0) {
