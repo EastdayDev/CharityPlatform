@@ -3,11 +3,11 @@
     <div class="content-bg-white-div" style="min-height:500px;">
         <div class="myAccount-title">
             <div style="margin-left:20px; float:left">
-                <img src="/images/ad_qd2.png" /><span>&nbsp;&nbsp;账户余额：￥</span><span>5000000</span>
+                <img src="/images/ad_qd2.png" /><span>&nbsp;&nbsp;账户余额：</span><span ng-bind="M_Balance"></span>
             </div>
             <div style="float:right;">
                 <div class="shenhe-bt" style="margin-left:20px;"><div class="btn-contral">使用记录</div></div>
-                <div class="shenhe-bt"><div class="btn-contral">我要捐款</div></div>
+                <div class="shenhe-bt" ui-sref="donationList"><div class="btn-contral">我要捐款</div></div>
             </div>
         </div>
         <div class="userinfo-detail-div">

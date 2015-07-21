@@ -78,6 +78,12 @@ angular.module('userModule').factory('_user', ['_http', '_cookie', 'appKey',
       }, callback);
     }
 
+    service.Usp_User_Balance = function(userId, callback) {
+      _http.ajaxGet(apiController, 'Usp_User_Balance', {
+        userId: userId
+      }, callback);
+    }
+
     return service;
   }
 ]);

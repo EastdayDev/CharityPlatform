@@ -121,5 +121,11 @@ namespace CharityPlatformAPI.Controllers
         {
             return DataHelper.FillDataTable("Usp_UserInfo_ById", new { userId = userId });
         }
+
+        [HttpGet]
+        public DataTable Usp_User_Balance(int userId)
+        {
+            return DataHelper.FillDataTable("Usp_User_Balance", new { userId = userId }); 
+        }
     }
 }
