@@ -4,7 +4,7 @@ angular.module('userModule').controller('UserLoginController', ['$scope',
 	'_user', '_app', '$state', 'epModal',
 	function($scope, _user, _app, $state, epModal) {
 
-		$scope.userName = 'JG01';
+		$scope.userName = 'admin';
 		$scope.password = '123';
 
 		$scope.login = function(userName, password) {

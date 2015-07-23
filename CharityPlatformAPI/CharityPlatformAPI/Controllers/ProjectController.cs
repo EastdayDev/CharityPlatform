@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace CharityPlatformAPI.Controllers
 {
-    public class ProjectController : ApiController
+    public class ProjectController : BaseController
     {
         [HttpPost]
         public int Usp_Project_Insert(ProjectEntity entity)
@@ -19,6 +19,7 @@ namespace CharityPlatformAPI.Controllers
             {
                 if (entity.D_Create.Year == 1) entity.D_Create = DateTime.Now;
                 DataHelper.ExecuteNonQuery("Usp_Project_Insert", entity);
+                WriteLog("修改项目", entity);
                 return entity.Id;
             }
             catch { return -1; }

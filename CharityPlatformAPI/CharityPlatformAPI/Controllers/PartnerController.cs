@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace CharityPlatformAPI.Controllers
 {
-    public class PartnerController : ApiController
+    public class PartnerController : BaseController
     {
         [HttpGet]
         public DataTable Usp_Org_List(int userId, string filterValue, int pageIndex, int pageSize)
@@ -32,6 +32,7 @@ namespace CharityPlatformAPI.Controllers
                 ///设置审核日期
                 entity.D_Confirm = DateTime.Now;
             }
+            WriteLog("机构修改", entity);
             DataHelper.ExecuteNonQuery("Usp_Org_Insert", entity);
             return entity.Id;
         }
@@ -42,6 +43,7 @@ namespace CharityPlatformAPI.Controllers
             OrganizationEntity orgEntity = DataHelper.GetDataItem<OrganizationEntity>("Usp_Org_ById", new { Id = Id });
             orgEntity.D_Submit = DateTime.Now;
             orgEntity.I_Audited = 195;
+            WriteLog("机构提交审核", orgEntity);
             return DataHelper.ExecuteNonQuery("Usp_Org_Insert", orgEntity);
         }
 
@@ -68,6 +70,7 @@ namespace CharityPlatformAPI.Controllers
                             entity.Org.Id = entity.User.Id;
                         }
                         DataHelper.ExecuteNonQuery("Usp_Org_Insert", entity.Org);
+                        WriteLog("用户及机构资料编辑", entity);
                     }
                     bll.DbContext.CommitTransaction();
                     return 1;

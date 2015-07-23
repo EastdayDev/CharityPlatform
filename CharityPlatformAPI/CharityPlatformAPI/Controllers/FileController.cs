@@ -16,7 +16,7 @@
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Http;
-    public class FileController : ApiController
+    public class FileController : BaseController
     {
         [HttpPost]
         public int UploadFiles()
@@ -31,6 +31,7 @@
                 fileEntity.D_Upload = DateTime.Now;
                 fileEntity.C_OriginName = HttpContext.Current.Request.Files[0].FileName;
 
+                InfoLog.Info(string.Format("登录名：{0}, 上传文件：{1}", SessionState["C_Login"].ToString(), Newtonsoft.Json.JsonConvert.SerializeObject(fileEntity)));
                 string fileUploadPath = ConfigurationManager.AppSettings["FileUpload"].ToString();
 
                 int index = fileEntity.C_OriginName.LastIndexOf('.');

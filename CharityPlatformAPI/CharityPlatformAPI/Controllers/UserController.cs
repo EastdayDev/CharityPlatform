@@ -37,6 +37,7 @@ namespace CharityPlatformAPI.Controllers
                     user.D_Create = DateTime.Now;
                     user.C_Login = user.C_Mobile;
                     user.C_Password = SHA256(user.C_Password);
+                    WriteLog("用户注册", user);
                     return bll.ExecuteNonQuery("Usp_User_Insert", user);
                 }
             }
@@ -56,6 +57,7 @@ namespace CharityPlatformAPI.Controllers
         [HttpPost]
         public int Usp_Org_Register(OrganizationEntity user)
         {
+            WriteLog("机构注册", user);
             return DataHelper.ExecuteNonQuery("Usp_Org_Insert", user);
         }
 
@@ -66,9 +68,15 @@ namespace CharityPlatformAPI.Controllers
         [HttpGet]
         public DataTable Usp_User_Login(string loginName, string password)
         {
-            return DataHelper.FillDataTable("Usp_User_Login", new { C_Login = loginName, C_Password = SHA256(password) });
-        }        
-                        
+            DataTable table = DataHelper.FillDataTable("Usp_User_Login", new { C_Login = loginName, C_Password = SHA256(password) });
+            if (table.Rows.Count > 0)
+            {
+                SessionState["C_Login"] = loginName;
+                InfoLog.Info(string.Format("登录名：{0}, 登录时间：{1}", SessionState["C_Login"].ToString(), DateTime.Now));
+            }
+            return table;
+        }
+
 
         [HttpPost]
         public int Usp_User_Insert(UserEntity user)
@@ -78,6 +86,7 @@ namespace CharityPlatformAPI.Controllers
                 ///默认密码
                 user.C_Password = SHA256(DefaultPWD);
                 user.D_Create = DateTime.Now;
+                WriteLog("用户信息变更", user);
             }
             return DataHelper.ExecuteNonQuery("Usp_User_Insert", user);
         }
@@ -85,6 +94,7 @@ namespace CharityPlatformAPI.Controllers
         [HttpPost]
         public int Usp_Org_Update(OrganizationEntity org)
         {
+            WriteLog("机构信息变更", org);
             return DataHelper.ExecuteNonQuery("Usp_Org_Update", org);
         }
 
@@ -93,6 +103,7 @@ namespace CharityPlatformAPI.Controllers
         {
             entity.C_OldPwd = SHA256(entity.C_OldPwd);
             entity.C_NewPwd = SHA256(entity.C_NewPwd);
+            WriteLog("修改密码", entity);
             DataHelper.ExecuteNonQuery("Usp_Change_Pwd", entity);
             return entity.Result;
         }
@@ -134,13 +145,13 @@ namespace CharityPlatformAPI.Controllers
         [HttpGet]
         public DataTable Usp_UserInfo_ByLogin(string loginName)
         {
-            return DataHelper.FillDataTable("Usp_UserInfo_ByLogin", new { C_Login = loginName});
+            return DataHelper.FillDataTable("Usp_UserInfo_ByLogin", new { C_Login = loginName });
         }
 
         [HttpGet]
         public DataTable Usp_User_Balance(int userId)
         {
-            return DataHelper.FillDataTable("Usp_User_Balance", new { userId = userId }); 
+            return DataHelper.FillDataTable("Usp_User_Balance", new { userId = userId });
         }
     }
 }

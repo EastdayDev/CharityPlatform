@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace CharityPlatformAPI.Controllers
 {
-    public class AuthController : ApiController
+    public class AuthController : BaseController
     {
         [HttpGet]
         public DataTable Usp_Role_List(int userId, string filterValue, int pageIndex, int pageSize)
@@ -21,6 +21,7 @@ namespace CharityPlatformAPI.Controllers
         [HttpPost]
         public int Usp_Role_Insert(RoleEntity entity)
         {
+            WriteLog("角色修改", entity);
             DataHelper.ExecuteNonQuery("Usp_Role_Insert", entity);
             return entity.Id;
         }
@@ -34,6 +35,7 @@ namespace CharityPlatformAPI.Controllers
             {
                 DataHelper.ExecuteNonQuery("Usp_RoleFunc_Insert", entity); 
             }
+            WriteLog("角色权限修改", entities);
             return true;
         }
 
@@ -46,6 +48,7 @@ namespace CharityPlatformAPI.Controllers
             {
                 DataHelper.ExecuteNonQuery("Usp_UserRole_Insert", entity);
             }
+            WriteLog("用户角色修改", entities);
             return true;
         } 
 

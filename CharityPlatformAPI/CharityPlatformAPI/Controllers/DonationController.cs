@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace CharityPlatformAPI.Controllers
 {
-    public class DonationController : ApiController
+    public class DonationController : BaseController
     {
 
         [HttpGet]
@@ -24,6 +24,7 @@ namespace CharityPlatformAPI.Controllers
         {
             try
             {
+                WriteLog("捐款", entity);
                 return DataHelper.ExecuteNonQuery("Usp_Donation_Insert", entity);
             }
             catch (Exception ex)

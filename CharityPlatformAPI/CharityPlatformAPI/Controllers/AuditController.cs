@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace CharityPlatformAPI.Controllers
 {
-    public class AuditController : ApiController
+    public class AuditController : BaseController
     {
 
         [HttpPost]
@@ -24,6 +24,7 @@ namespace CharityPlatformAPI.Controllers
                 entity.D_Submit = DateTime.Now;
                 FlowKinkEntity flowKinkEntity = DataHelper.GetDataItem<FlowKinkEntity>("Usp_Flow_Template", new { Id = entity.I_FlowType });
                 FlowHelper.Commit(entity, flowKinkEntity, entity.I_Creater, true);
+                WriteLog("流程提交", entity);
                 DataHelper.ExecuteNonQuery("Usp_Project_Insert", entity);
                 return 1;
             }
@@ -52,6 +53,7 @@ namespace CharityPlatformAPI.Controllers
                     project.I_State = 165;
                     DataHelper.ExecuteNonQuery("Usp_Project_Insert", project);
                 }
+                WriteLog("流程审核", flowEngine);
                 flowMgr.FlowSave(flowEngine);
                 return 1;
             }
