@@ -1,0 +1,17 @@
+<div class="detail-content-hui" style="min-height: 250px; padding-bottom: 50px;">
+    <div class="juankuan-line-div" style="width:80%">
+      <span style="color:#ff6a00" >账户余额：{{M_Balance}}</span>
+    </div>
+    <div class="juankuan-line-div">
+      <input class="input-contral-project" ng-model="donation.M_Money" placeholder="充值金额">
+    </div>
+    <div class="juankuan-line-div">
+      <label><input type="radio" ng-model="donation.I_From" value="120" />&nbsp;网上支付-支付宝 </label>&nbsp;&nbsp;&nbsp;
+      <label><input type="radio" ng-model="donation.I_From" value="125" />&nbsp;银&nbsp;联 </label>
+    </div>
+    <div class="juankuan-line-div" style="width:100%" >
+       <div style="width:120px;float:right;">
+         <button class="btn-contral" ng-click="pay(donation)">充&nbsp;&nbsp;&nbsp;&nbsp;值</button>
+       </div>
+    </div>
+</div>

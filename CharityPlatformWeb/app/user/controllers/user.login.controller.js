@@ -19,7 +19,11 @@ angular.module('userModule').controller('UserLoginController', ['$scope',
 						$state.go('sys.user');
 					} else {
 						var stateName = $scope.fromState.name || 'home';
-						$state.go(stateName);
+						if (stateName === 'login' || stateName === 'register') {
+							$state.go('home')
+						} else {
+							$state.go(stateName);
+						}
 					}
 				} else {
 					epModal.info('用户名密码错误！');

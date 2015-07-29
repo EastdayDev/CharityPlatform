@@ -32,5 +32,21 @@ namespace CharityPlatformAPI.Controllers
                 return -1;
             }
         }
+
+        [HttpPost]
+        public int Usp_UserFund_Insert(UserFundEntity entity)
+        {
+            try
+            {
+                WriteLog("充值", entity);
+                DataHelper.ExecuteNonQuery("Usp_UserFund_Insert", entity);
+                return entity.Id;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
     }
 }

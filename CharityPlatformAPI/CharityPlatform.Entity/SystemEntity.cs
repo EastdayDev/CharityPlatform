@@ -16,21 +16,21 @@ namespace CharityPlatform.Entity
         public String C_Password { get; set; }
         public String C_Remark { get; set; }
         public DateTime D_Create { get; set; }
-        public int I_Category { get; set; }        
+        public int I_Category { get; set; }
         public String C_Mobile { get; set; }
         public String C_Email { get; set; }
         public String C_Address { get; set; }
-        public TokenModel Token { get; set; } 
+        public TokenModel Token { get; set; }
         public override bool Equals(object obj)
         {
             return this.Id == ((UserEntity)obj).Id;
         }
     }
-    public class OrganizationEntity 
+    public class OrganizationEntity
     {
         public int Id { get; set; }
         public Int32 I_Flag { get; set; }
-        public Int32 I_Creater { get; set; } 
+        public Int32 I_Creater { get; set; }
         public String C_Name { get; set; }
         public String C_Contact { get; set; }
         public String C_Business { get; set; }
@@ -38,9 +38,9 @@ namespace CharityPlatform.Entity
         public String C_Address { get; set; }
         public DateTime? D_Create { get; set; }
         public DateTime? D_Submit { get; set; }
-        public DateTime? D_Confirm{ get; set; }
+        public DateTime? D_Confirm { get; set; }
         public Int32? I_Audited { get; set; }
-        public Int32? I_Auditer { get; set; } 
+        public Int32? I_Auditer { get; set; }
         public String C_Remark { get; set; }
     }
 
@@ -81,7 +81,7 @@ namespace CharityPlatform.Entity
         public string C_Remark;
     }
     public class RoleEntity
-    { 
+    {
         public Int32 Id { get; set; }
         public String C_Name { get; set; }
         public Int32? I_Flag { get; set; }
@@ -93,7 +93,7 @@ namespace CharityPlatform.Entity
         {
             return this.Id == ((RoleEntity)obj).Id;
         }
-    } 
+    }
 
     public class FunctionEntity
     {
@@ -157,5 +157,18 @@ namespace CharityPlatform.Entity
         /// 传阅对象类别： "DEPT" or "PERSON"
         /// </summary>
         public string Category { get; set; }
+    }
+
+    public class UserFundEntity
+    {
+        public int Id;
+        public int I_User;
+        public decimal M_Money;
+        public int I_Category;
+        public int I_From;
+        public string C_Transaction;
+        public DateTime? D_Create;
+        public int I_Flag = 1;
+        public string C_Remark;
     }
 }

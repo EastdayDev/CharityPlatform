@@ -18,6 +18,11 @@ angular.module('partnerModule').factory('_donation', ['_http', '_cookie',
       _http.ajaxPost(apiController, 'Usp_Donation_Insert', donation,
         callback);
     }
+
+    service.Usp_UserFund_Insert = function(donation, callback) {
+      _http.ajaxPost(apiController, 'Usp_UserFund_Insert', donation,
+        callback);
+    }
     return service;
   }
 ]);
