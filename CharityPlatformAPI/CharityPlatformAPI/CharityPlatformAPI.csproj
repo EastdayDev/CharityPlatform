@@ -171,6 +171,26 @@
       <Project>{589a87bc-9579-4800-89a1-43218b88ef98}</Project>
       <Name>CharityPlatform.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Eastday.Ali\Eastday.Ali.csproj">
+      <Project>{00052775-39ed-4ebf-8ff6-e2ae76078d53}</Project>
+      <Name>Eastday.Ali</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eastday.Net\Eastday.Net.csproj">
+      <Project>{2c2d0e5d-94f2-43b0-af09-35e9bfceacc7}</Project>
+      <Name>Eastday.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eastday.PayCommon\Eastday.PayCommon.csproj">
+      <Project>{faeca3c2-eca5-4093-89ed-d6788a61dfda}</Project>
+      <Name>Eastday.PayCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eastday.PayNotify\Eastday.PayNotify.csproj">
+      <Project>{b00668b4-bf25-4b7e-96d4-b010f0bb7871}</Project>
+      <Name>Eastday.PayNotify</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eastday.Upmp\Eastday.Upmp.csproj">
+      <Project>{d9a8de44-c811-47b2-8c57-6dd24ffc7107}</Project>
+      <Name>Eastday.Upmp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eastday.WorkFlowEngine\Eastday.WorkFlowEngine.csproj">
       <Project>{3fe6ea9e-d07e-4f0c-a0f8-723b00dd7eec}</Project>
       <Name>Eastday.WorkFlowEngine</Name>

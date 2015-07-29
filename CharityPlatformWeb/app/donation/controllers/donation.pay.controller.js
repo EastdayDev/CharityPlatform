@@ -11,6 +11,7 @@ angular.module('donationModule').controller('DonationPayController', ['$scope',
     $scope.pay = function(donation) {
       donation.I_User = _user.userId;
       donation.I_Category = 130;
+      donation.I_Result = 245;
       _donation.Usp_UserFund_Insert(donation, function(data) {
         if (data !== '-1') {
           $state.history.back();
